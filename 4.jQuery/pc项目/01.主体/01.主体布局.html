@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<!--外部容器-->
+<div class="wrap">
+    <!--头部-->
+    <header id="header">
+        <!--头部内容容器-->
+        <div class="headerMain">
+            <!--logo-->
+            <h1 class="logo">
+                <a href="javascript:;"><img src="img/logo.png" alt=""></a>
+            </h1>
+            <!--nav-->
+            <nav class="nav">
+                <ul>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up"><img src="img/home_gruen.png" alt=""></div>
+                            <div class="down"><img src="img/home.png" alt=""></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up">Course</div>
+                            <div class="down">Course</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up">Works</div>
+                            <div class="down">Works</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up">About</div>
+                            <div class="down">About</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up">Team</div>
+                            <div class="down">Team</div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="arrow"></div>
+    </header>
+    <!--内容区-->
+    <section id="content">
+        <ul class="list">
+            <li><div class="home">home</div></li>
+            <li><div class="course">Course</div></li>
+            <li><div class="works">Works</div></li>
+            <li><div class="about">About</div></li>
+            <li><div class="team">Team</div></li>
+        </ul>
+    </section>
+</div>
+</body>
+<script type="text/javascript">
+    window.onload = function () {
+        // 获取元素
+        var arrow = document.querySelector('#header .arrow');
+        var upNodes = document.querySelectorAll('#header .headerMain .nav ul li .up');
+        var liNodes = document.querySelectorAll('#header .headerMain .nav ul li');
+        var content = document.getElementById('content');
+        var header = document.getElementById('header');
+        var contentLi = document.querySelectorAll('#content .list li');
+//        主体布局
+        function contentBind() {
+            content.style.height = document.documentElement.clientHeight - header.offsetHeight + 'px';
+            for (var i = 0; i < contentLi.length; i++) {
+               contentLi[i].style.height = document.documentElement.clientHeight - header.offsetHeight + 'px';
+
+            }
+        }
+        contentBind()
+        function headerBind() {
+
+            //    第一个up 的宽度
+            upNodes[0].style.width = '100%';
+            //    初始化小三角的位置
+            arrow.style.left = liNodes[0].getBoundingClientRect().left +
+                liNodes[0].offsetWidth/2 - arrow.offsetWidth/2 +'px';
+            for (var i = 0; i < liNodes.length; i++) {
+//       给所有的li添加index属性
+                liNodes[i].index = i;
+//        给所有的li 绑定单击事件
+                liNodes[i].onclick = function () {
+//          清空所有up的宽度
+                    for (var j = 0; j < upNodes.length; j++) {
+                        upNodes[j].style.width = '';
+                    }
+                    upNodes[this.index].style.width = '100%';
+                    arrow.style.left = liNodes[this.index].getBoundingClientRect().left +
+                        liNodes[this.index].offsetWidth/2 - arrow.offsetWidth/2 +'px';
+                }
+
+            }
+        }
+        headerBind();
+    }
+</script>
+</html>

@@ -1,0 +1,115 @@
+4.原型对象和原型链????
+		原型对象
+			什么是原型对象:console.dir()查看
+			任何的函数对象在定义的时候都会伴随着一个原型对象出现，原型对象默认是Object的实例对象
+			原型对象的作用：公共区域，节省资源
+
+			只有函数才有prototype 叫做显示原型对象，__proto__ 被叫做隐式原型对象
+			
+		原型链
+			对象在查找属性或者方法的过程:
+			对象在调用方法或属性的时候，首先会从自己对象的空间当中去找，如果找到就直接用了；
+			如果没有找到，然后去自己的原型对象空间去找（自己的构造函数的原型对象），如果找到就用，如果没有找到，
+			就去自己的原型对象的原型对象的空间当中去找（自己的构造函数的原型对象的构造函数的原型对象当中去找），如果找到就用，
+			如果找不到继续向上，直到找到Object的原型对象为止，找到就用，找不到报错；我们把这个对象找属性的过程形象的描述为原型链。
+			（object是老祖宗）
+
+5.apply和call  可以让一个对象使用另外一个对象的方法；
+	让一个实例对象去调用window的方法（也就是我们所说的函数）
+	函数或者方法.apply(对象=改变的执行者，[函数的参数])； 
+	函数或者方法.call(对象，函数的参数1，函数的参数2)；
+	apply与call的区别在第二个参数，一个是数组，另一个直接写
+			
+6.对象是哪个构造函数的实例判断 instanceof
+	console.log(typeof a);
+	typeof 应用的场景：基本数据类型的四种（除了null）和function，区分不了对象的。
+
+	console.log(a instanceof Object/Array);
+	instanceof 应用的场景：区分判断是一个数组对象还是一个其他构造函数的实例对象，
+	通过判断这个对象是哪个构造函数的实例对象，可以区分数组还是其他的对象。
+
+	null 区分的办法：console.log(a == null);  ==专门用来判断null，如果相等就是null
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+
+		// 继承
+		/*
+		1. 继承属性: apply,call
+		2. 继承原型链: prototype赋值
+		3. 更改Construtor为自身: 自身赋予
+		*/
+		function Animal(name,age,gender){   // 动物类
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+			this.fn = function (params) {
+				console.log(params);
+			}
+		}
+
+		Animal.prototype.run = function(){
+			console.log('跑的贼快');
+		}
+		Animal.prototype.shout = function(){
+			console.log('叫喊');
+		}
+
+		// var cat1 = new Cat('TOM', 1, 'male');
+
+		// 属性   ...arguments（形参不用写，直接接收所有参数）, ...[], 数组展平：把数组分割成各个字符
+		function Dog(name,age,gender) {
+			// Animal.call(this, ...arguments);
+			Animal.call(this,name,age,gender);   //写了参数就要在形参传参数
+		}
+
+		// 原型链
+		Dog.prototype = Animal.prototype;
+
+		// 更改constructor
+		Dog.prototype.constructor = Dog;
+
+		var dog = new Dog('二哈',10,'母狗');
+		console.log(dog);
+		console.log(dog.run());
+
+
+		// apply call
+		function Singer(name,age,country){
+			this.name = name;
+			this.age = age;
+			this.country = country;
+		}
+
+		Object.prototype.style = function(){
+			// console.log('浪漫型歌手'); 
+		}
+
+		singer1 = new Singer('jay',35,'China');
+		singer2 = new Singer('jfdkslj',30,'jfkdlj');
+		singer1.style();
+
+		function add(a,b){
+			return a + b;
+		}
+		// window.add(10,20);   // 实际是用window里的其中一个函数
+
+		var result = add.apply(singer1,[10,10]);
+		// console.log(result);
+		var result1 = add.call(singer2,10,20);
+		// console.log(result1);
+
+	</script>
+
+
+</body>
+</html>

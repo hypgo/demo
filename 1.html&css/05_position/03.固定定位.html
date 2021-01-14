@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1{
+      width: 200px;
+      height: 200px;
+      background-color: #fba;
+    }
+    .box2{
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      /* 
+        固定定位：
+            属性值 fixed，也是一种绝对定位
+            大部分特点也跟绝对定位一样，是一种特殊的绝对定位：
+                唯一不同的是固定定位永远参照于浏览器的视口进行定位（可视窗口）
+            
+        就是广告！！！不会碎网页的滚动条滚动！
+      */
+      position: fixed;
+      bottom: 0;
+      right: 0;
+    }
+
+    .box3{
+      width: 200px;
+      height: 1000px;
+      background-color: orange;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="box1"></div>
+  <div class="box2">222</div>
+  <div class="box3"></div>
+
+</body>
+</html>

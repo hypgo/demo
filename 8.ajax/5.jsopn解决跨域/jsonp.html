@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jsonp</title>
+</head>
+
+<body>
+  <button id="btn">点我测试jsonp</button>
+  <script>
+
+    /*关于jsonp解决跨域 （把这几点说的出来即可）
+    1、原理：利用script标签发请求不受同源策略的限制。所以不会产生跨域问题
+    2、套路：动态构建script节点，利用节点的src属性，发出get请求，从而绕开ajax引擎
+    3、弊端：（1）只能解决get请求跨域的问题。（2）后端工程师必须配合前端
+    4、有这样一种感觉：前端定义函数，后端“调用”、后端返回的数据，前端以js格式解析，并且运行
+    */
+
+    let btn = document.getElementById('btn')
+    btn.onclick = function () {
+      // 1.提前定义好一个等待被调用的函数
+      // 往body身上发节点，调用是找window身上的节点
+      window.demo = function (result){
+        console.log(result);
+      }
+      // 2.创建一个script节点
+      let scriptNode = document.createElement('script')
+      // 3.为节点指定src地址
+      scriptNode.src = 'http://localhost:3000/test?callback=demo'
+      // 4.将节点插入页面
+      document.body.appendChild(scriptNode)
+    }
+
+    /* 
+    缺点：如果函数名为demo，前后端要一致，但是工作中，一旦前后端要更改函数名，则涉及分工会造成推脱。
+    为了保证工作效率，服务器采用查询字符串格式获取函数名。必须传回callback=demo这种方式
+    scriptNode.src = 'http://localhost:3000/test?callback=demo'
+    服务器端用结构赋值获取函数名
+    */
+
+  </script>
+</body>
+
+</html>

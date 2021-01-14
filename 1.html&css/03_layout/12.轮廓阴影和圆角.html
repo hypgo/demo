@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1{
+      height: 200px;
+      width: 200px;
+      background-color: #bfa;
+      
+      /* outline: 10px red solid */
+      /* 
+        outline 设置元素的轮廓线，用法和border一模一样
+          轮廓和边框不同的点，就是轮廓不会影响到可见框的大小，不会把下面的元素往下撑
+       */
+
+      box-shadow: 10px 10px 50px rgb(73, 73, 78);
+      /* 
+        box-shadow 设置元素的阴影效果，阴影不会影响页面布局
+          第一个值 水平偏移值，正值向右(阴影往右移动)，负值向左
+          第二个值 垂直偏移值，正值向下，负值向上
+          第三个值 阴影的模糊半径
+          第四个值 阴影的颜色
+       */
+
+      /* 无论宽和高多少，都将元素设置为一个圆圈
+      border-radius: 50%; */
+
+      /*  从左上开始的顺时针，其他用对角去记忆
+        四个值：左上  右上  左下  右下
+        三个值：
+        两个值：
+        一个值：四个角都一样
+       */
+      border-radius: 10px;
+
+    }
+
+  </style>
+
+
+</head>
+<body>
+  <div class="box1"></div>
+</body>
+</html>

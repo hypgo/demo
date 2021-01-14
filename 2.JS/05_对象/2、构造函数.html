@@ -1,0 +1,75 @@
+二、构造函数创建特定实例对象
+1.构造函数的基本概念，使用，作用
+		构造函数：本质上也是一个函数，只不过通常把构造函数的名字写成大驼峰；
+			在js当中，没有类的概念（es5版本）,构造函数可以理解为类；
+			构造函数用法和普通的函数用法是一样的，直接可以调用，只不过它比普通函数多了一种用法
+			在函数前加一个 new
+		
+2.对this的讲解
+		不同场合this的指向不同
+		window对象简介  
+			浏览器窗口对象，代码执行的时候所有的一切都是包含在窗口对象下的.
+		
+3.new关键字实例化对象的过程
+		1、开辟内存空间
+		2、this指向该内存
+		3、执行函数
+		4、生成对象实例
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// 构造函数
+		function Person(name,age,gender){
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+			this.eat = function(){
+				console.log('吃饭');
+			}
+			// console.log(this);
+		}
+		// 构造函数当普通函数执行，那么this代表的是window，构造函数的意思是为了给window队形添加属性和方法
+		
+		// 但构造函数通常是用*实例化对象*用的，所以不会被当成普通函数执行
+		var per1 = new Person('小王',23,'meal');
+		console.log(per1);
+
+		// this，其实通常在任何函数中都会有this这个关键字，它本质是一个对象，代表着调用这个函数或方法的对象（执行者）
+		// 在函数当中，函数也可以叫做是window对象的方法，this永远代表window
+		// 在事件（回调函数）中，回调当中的this，代表的是事件对象
+		// 在对象的方法中，this代表的是这个对象
+		// 在构造函数中，代表的是实例化出来的对象
+
+
+		//实例化2个实力派歌手
+		function Singer(name,gender,age){
+			this.name = name;
+			this.gender = gender;
+			this.age = age;
+			this.sing = function(){
+				console.log('实力派唱将 '+ name);
+			}
+		}
+		var singer1 = new Singer('邓紫棋','female',28);
+		// console.log(singer1);
+		singer1.sing();
+		console.log(singer1.name);
+		console.log(singer1['age']);
+
+		var singer2 = new Singer('汪峰','male',40);
+		singer2.sing();
+		console.log(singer2.name);
+		console.log(singer2.age);
+
+
+
+	</script>
+</body>
+</html>

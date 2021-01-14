@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      list-style:none;
+    }
+ 
+    /* flex 弹性盒子 伸缩盒子
+      - 是CSS中的又一种布局手段，它主要用来代替浮动来完成页面的不觉
+      - flex可以使元素具有弹性，让元素可以跟随页面的大小的改变而改变
+      - 弹性容器：
+        1、要使用弹性盒，必须先将一个元素设置为弹性容器
+        2、通过display来设置弹性容器
+            display：flex  设置为块级弹性容器
+            display：inline-flex  设置行内的弹性容器
+
+      - 弹性元素：
+        1、弹性容器的子元素是弹性元素（直接子元素==后代元素）
+        2、一个元素可以同时是弹性容器和弹性元素  */
+
+    .box{
+      width: 200px;
+      background-color: #bfa;
+      border: 5px red solid;
+      display: flex;
+      flex-direction: row;
+      
+    }
+    
+    li{
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      line-height: 100px;
+      font-size: 50px;
+      flex-shrink:0;
+
+      /* 弹性元素的属性：
+          flex-grow  指定弹性元素的伸展/增长系数
+          - 当父元素有多余空间时，子元素如何伸展
+          - 当父元素的剩余空间，子元素会按照比例进行分配
+         
+          flex-grow:1 2 3 按比例分配
+          flex-grow:0 按子元素的大小，不占满
+
+          flex-shrink 指定弹性元素的收缩系数
+          当父元素的空间不足以容纳所有的子元素时，对子元素进行收缩
+      */
+      
+    }
+
+    li:nth-child(1){
+      background-color: pink;
+      /* flex-grow: 0; */
+      
+    }
+
+    li:nth-child(2){
+      background-color: green;
+      /* flex-grow: 1; */
+    }
+
+    li:nth-child(3){
+      background-color: blue;
+    }
+
+    /* flex-direction 指定容器中弹性元素的排列方式
+        可选值：
+          row  默认值，弹性元素在容器中水平排列  从左向右
+          row-reverse  弹性元素在容器中反向水平排列  自右向左
+          column 弹性元素纵向排列  自上向下
+          column-reverse  自下向上排列
+
+        主轴：弹性元素的排列方向称为主轴
+        侧轴：与主轴垂直方向的称为侧轴
+     */
+
+  </style>
+</head>
+
+<body>
+
+  <ul class="box">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.f1,.f2{
+  /* margin: 0 auto;
+  width: 1000px; */
+  height: 48px;
+  background-color: rgba(0,0,0,0.8);
+  text-align: center;
+  
+}
+
+.f2{
+  background-color:white ;
+}
+
+.f3{
+  height: 350px;
+  background-color: rgba(0, 0, 0, 0.973);
+  text-align: center;
+}
+
+.f4{
+  height: 350px;
+  background-color:white ;
+  text-align: center;
+}
+.asdasd{
+  font-size: 0;
+}
+
+.f5,.f6{
+  vertical-align: top;
+  height: 400px;
+  width: 48%;
+  margin-right: 20px;
+  font-size: 16px;
+  display: inline-block;
+  background-color:rgba(209, 203, 203, 0.767) ;
+  text-align: center;
+}
+
+.box,.box1,.box2,.box3,.box4,.box5,.box6{
+  display: inline-block;
+  padding: 0 10px;
+  line-height: 48px;
+  margin: 0 40px;
+  color:white;
+  font-size: 14px;
+}
+
+.box6{
+  display: inline-block;
+  line-height: 48px;
+  margin: 0 40px;
+  color:black;
+  font-size: 12px;
+}
+
+.box7{
+  color: orange;
+  font-size: 20px;
+}
+
+.box8,.box9,.box10{
+  color: white;
+}
+
+.box12{
+  color: rgb(12, 12, 216);
+}
+
+.box13{
+  display: inline-block;
+  margin: 50px 0 0 0;
+  color: black;
+}
+
+.box15,.box16,.box17{
+  padding-top:60px ;
+  color: black;
+  font-size: 30px;
+}
+
+.box16{
+  padding-top:20px ;
+}

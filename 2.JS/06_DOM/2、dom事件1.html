@@ -1,0 +1,161 @@
+<!-- 
+第二节:  获取DOM对象，操作DOM对象，事件绑定，操作元素属性
+	1.document.getElementById
+		这个是document下的一个方法，通过id获取到相关元素，封装为dom对象返回
+		如果没有id没办法获取
+
+	2.点击事件
+    事件三要素：事件源（承受事件的对象）、事件类型、事件处理（回调函数）
+    事件处理三大步：获取事件源DOM对象、添加事件监听、书写处理回调
+    事件写好之后可以重复触发执行；
+    
+    简单案例：点击按钮实现一个数字增加
+
+	3.案例驱动: 【修改元素的属性】
+		1. 点击按钮修改图片的路径
+		2. 点击按钮修改a标签的路径
+		3. 点击按钮修改多选框选中
+		4. setAttribute和getAttribute的用法
+		5、点击按钮修改p标签的背景颜色（通过改变类名实现）
+
+			.语法和他们有啥区别？？
+			在操作元素属性的时候，.语法只能操作元素天生具有的属性，如果是自定义的属性，.语法无法操作的；
+			只能通过 setAttribute和getAttribute去操作；无论元素天生的还是自定义的都可以操作；
+
+
+第三节： 强化练习
+	1.	点击图片切换图片显示
+	2. 	点击小图显示对应的大图
+
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+
+		a{
+			text-decoration: none;
+		}
+
+		input{
+			outline:none;
+		}
+
+		img{
+			display: block;
+		}
+
+		#img{
+			width: 500px;
+			height: 300px;
+		}
+
+		p{
+			width: 200px;
+			height: 100px;
+			background-color:hotpink;
+		}
+		
+		p.sb{
+			background-color: blue;
+		} 
+
+
+	</style>
+
+<body>
+
+	<img src="img/01.jpg" id="img" str='dididi'>
+	<a href="https://www.baidu.com" id="aa">百度一下</a>
+	<br />
+	
+	<p id='ppp'>hello world</p>
+	<input type="button" value='点击换' id="btn">
+
+	<input type="checkbox" id="check">
+
+
+	<script>
+		// 入门案例：点击按钮实现一个数字增加
+		// 1. 点击按钮修改图片的路径
+		// 2. 点击按钮修改a标签的路径
+		// 3. 点击按钮修改多选框选中
+		// 4. setAttribute和getAttribute的用法
+		// 5. 点击按钮修改p标签的背景颜色（通过改变类名实现）
+
+		/*
+		var btn = document.getElementById('btn');
+		var num = 0;
+		btn.onclick = function () {
+			num++;
+			alert(num);
+		}
+		*/
+
+		/*
+		var btn = document.getElementById('btn');
+		var img = document.getElementById('img');
+
+		btn.onclick = function () {
+			img.src = 'img/02.jpg';
+		}
+		*/
+
+		/*
+		window.onload = function(){
+			var btn = document.getElementById('btn');
+			var aa = document.getElementById('aa');
+			btn.onclick = function(){
+				aa.href = 'https://www.bilibili.com/';
+			}
+		}
+		*/
+
+		/*
+		window.onload = function(){
+			var btn = document.getElementById('btn');
+			var check = document.getElementById('check');
+			btn.onclick = function(){
+				//在JS中，我们操作元素属性类似 checked = checked的时候，属性值一概使用Boolean替换，
+				//true代表选中，false代表未选中
+				check.checked = true;
+			}
+		}
+		*/
+
+		/*
+		window.onload = function(){
+			var btn = document.getElementById('btn');
+			var img = document.getElementById('img');
+			btn.onclick = function(){
+				// 自定义属性不能使用.方法获取或更改
+				// img.aa = 'ksdjflksj';
+				img.setAttribute('str','fskjfl');
+				console.log(img.getAttribute('str'));
+			}
+		}
+		*/
+
+		window.onload = function(){
+			var btn = document.getElementById('btn');
+			var p = document.getElementById('ppp');
+			btn.onclick = function(){
+				// p.class是不合法的，因为class是JS的保留字，不能占用
+				// 因此只要以后操作class属性全部使用className
+				p.className = 'sb';
+			}
+		}
+
+	</script>
+</body>
+</html>
+

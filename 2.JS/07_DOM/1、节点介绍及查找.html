@@ -1,0 +1,120 @@
+第一节:  节点的概念和操作(Node)
+  什么是节点?
+  文档树所有包含的东西都可以称作节点；
+	节点的分类12种，重点了解3-4种：元素(重点)、文本、属性、注释#comment
+	查找节点是相对的操作；如果你拿html的子节点，就是html当中所有的节点但是不包含后代节点，只是子节点
+
+第二节:  子节点和子元素（父节点和父元素）
+	子节点和子元素
+		childNodes  拿到的是某个元素的子节点：包括元素子节点和文本子节点，如果有注释还有注释节点； 
+    nodeType == 1，代表元素节点
+    nodeType == 3，代表文本节点
+		nodeType == 8，代表注释节点
+		
+    children
+			子节点:childNodes (儿子节点):
+			高级浏览器: 元素,文本(文本,空格,换行),注释
+			低版本浏览器: 元素,文本(不包括空格和换行),注释
+
+			子元素:children(儿子元素):
+			高级浏览器:元素
+			低版本浏览器:元素,注释 
+
+		案例：封装函数获取元素的子节点和子元素
+
+	父节点和父元素
+		parentNode
+		parentElement
+			父节点:parentNode 其实就是父元素(标签) 所有浏览器都能使用
+		 	父元素:parentElement 父标签   所有浏览器都能用
+
+第三节:  兼容性封装获取其它节点的方式
+	获取其它节点：
+		第一个子节点       高级低级浏览器都认识   firstChild
+		第一个子元素节点   只有高级浏览器可以使用  firstElementChild
+		最后一个节点       都认识   lastChild
+		最后一个元素节点   只有高级浏览器可以使用  lastElementChild
+
+		上一个兄弟节点     都认识  previousSibling  (Sibling：兄弟)
+		上一个兄弟元素节点 只有高级浏览器可以使用 previousElementSibling
+		下一个兄弟节点     都认识 nextSibling
+		下一个兄弟元素节点 只有高级浏览器可以使用  nextElementSibling
+		高级浏览器可用：子元素节点--Element
+
+		案例：封装获取第一个元素节点
+				 封装获取最后一个元素节点
+      
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 认识子节点、子元素、父节点、父元素 -->
+	<div id="box">
+		<!-- 哈哈哈哈哈哈 -->
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+	</div>
+
+  <script>
+		var box = document.getElementById('box');
+		console.log(box.childNodes); //子节点
+		// div到ul之间的空白区域，被当做是text，即文本节点
+		console.log(box.children); //子元素
+
+		console.log(box.parentNode);  //获取父元素
+		console.log(box.parentElement); //获取父节点
+
+		// 获取元素两个特殊的节点，HTML和body
+		var htmlNode = document.documentElement; //不用获取id什么的
+		var bodyNode = document.body;
+		console.log(htmlNode);
+		console.log(bodyNode);
+
+		// html节点拿到的不包含第一个和最后一个 文本节点；（比如打开这个网页，上面的笔记是不会显示的）
+		// 在body中写的子元素会带上第一个和最后一个文本节点；
+
+		// 获取子节点的元素 封装
+	
+
+		// 封装获取第一个元素节点
+		function getFirstEle(obj) {
+			if (obj.firstChildElement) {
+				// 高级浏览器
+				return obj.firstChildElement;
+			} else{
+				// 低级浏览器
+				var testNode = obj.firstChild;
+				// 要获取的是元素，所以排除当前节点后查找下一个元素，再继续循环判断
+				while (testNode && testNode.nodeType != 1) { 
+					testNode = obj.nextSibling;
+				}
+				return testNode;
+			}
+		}
+
+		// 封装获取最后一个元素节点
+		function getLastEle(obj) {
+			if (obj.lastElementChild) {
+				// 高级浏览器
+				return obj.lastElementChild;
+			} else{
+				// 低级浏览器
+				var testNode = obj.lastChild;
+				while (testNode && testNode.nodeType != 1) {
+					testNode = obj.previousSibling;
+				}
+				return testNode;
+			}
+		}
+
+  </script>
+</body>
+</html>

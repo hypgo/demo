@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box{
+      width:100px;
+      height:100px;
+      background:red;
+      animation:myfirst 2s;
+      /* 延时开始时间 */
+      animation-delay: 1s;
+      animation-timing-function: ease-in-out;
+      /* animation-iteration-count: 2; 动画播放次数，
+      可选值:
+        默认是1, infinite 无限次 */
+      animation-iteration-count: 2;
+
+      /* animation-duration: 动画是否在下一周期逆向地播放，默认是normal */
+      animation-duration: alternate;
+
+      /* animation-play-state: 设置动画是否正在运行或暂停
+        可选值：
+        - running 默认值 动画执行
+        - paused 动画暂停 */
+      animation-play-state: running;
+
+      /* 规定对象动画时间之外的状态
+        可选值： 
+        - none 默认值 ，动画执行完毕回到原来的位置
+        - forwards 动画执行完毕停止在动画结束的位置
+        - backwards 动画延时等待时，元素就回处于开始位置
+        - both 结合了forwards 和 backwards 
+        */
+      animation-fill-mode:forwards ;
+
+      }
+
+    /* 当您在 @keyframes 中创建动画时，请把它捆绑到某个选择器，否则不会产生动画效果。
+        通过规定至少以下两项 CSS3 动画属性，即可将动画绑定到选择器：
+        animation: name time
+        - 规定动画的名称
+        - 规定动画的时长
+
+      用关键词 "from" 和 "to"，等同于 0% 和 100%。
+        0% 是动画的开始，100% 是动画的完成。
+        @keyframes name{
+          0% {background:red;}
+          100% {background:green;}
+        }
+
+        为了得到最佳的浏览器支持，您应该始终定义 0% 和 100% 选择器。 */
+    @keyframes myfirst{
+      from{
+        background: yellow;
+        left: 0;
+      }
+
+      to{
+        background-color: green;
+        margin-left:100px;
+      }
+      /* 0%   {background: red; left:0px; top:0px;}
+      100% {background: yellow; margin-left:300px; top:0px;} */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+</body>
+
+</html>

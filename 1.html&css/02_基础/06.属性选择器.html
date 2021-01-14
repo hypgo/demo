@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 
+            [属性名] 选择含有指定属性的元素
+            [属性名=属性值] 选择含有指定属性和指定属性值的元素
+            [属性名^=属性值] 选择属性值以指定值开头的元素
+            [属性名$=属性值] 选择属性值以指定值结尾的元素
+            [属性名*=属性值] 选择属性值中含有某值的元素
+         */
+
+        /* p[title] */
+        /* p[title=abc] */
+        /* p[title^=h] */
+        /* p[title$=e] */
+        /* p[title*=a] */
+
+        p[title*=a]{
+                color: red;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <!-- p里面的title 光标移动到特定位置则会显示出title的内容 -->
+    <p title="abc">今天是2020年8月23日，天气晴朗</p>
+    <p title="abcde">今天是2020年8月23日，天气晴朗</p>
+    <p title="hello  world">今天是2020年8月23日，天气晴朗</p>
+    <p >今天是2020年8月23日，天气晴朗</p>
+
+</body>
+</html>

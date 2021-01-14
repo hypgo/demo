@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三级联动</title>
+</head>
+<body>
+  <script src="./jquery-1.12.4.js"></script>
+
+  省份：<select id="province">
+    <option value="">请选择省份</option>
+  </select>
+
+  市：<select id="city">
+    <option value="">请选择市</option>
+  </select>
+
+  区县：<select id="county">
+    <option value="">请选择区县</option>
+  </select>
+
+  <script>
+    // 获取三个选择框节点
+    let $province = $('#province')
+    let $city = $('#city')
+    let $county = $('#county')
+
+    $(()=>{
+      // 一上来就请求中国所有省份信息，放入省份选择框
+      $.get('http://localhost:3000/get_all_province',function (result){
+        let {status,data,err} = result
+        // console.log(data);   // result的结果是一个对象，key为data，值为全国省份
+        // 判断并获得省份名称
+        if (status === 1) {
+          // 把data里面的省份一个个增加到option选择器里面，形成下拉可选择的效果
+          let html = ''
+          data.forEach(item => {
+            html += `<option value="${item.province}">${item.name}</option>`
+          })
+          // append(content) :返回一个HTML字符串，用于追加到每一个匹配元素的里边。
+          $province.append(html) 
+        } else{
+          alert(err)
+        }
+      })
+
+      // 当省份选择框变化时，1、获取所选省份编码  2、发请求
+      $province.change(function (){
+        // 1.获取所选省份编码 = let province = $province.val()
+        let province = this.value
+        // 当省份选择框发生改变时，不管有无值，对应的市和区县选择框都要重置
+        $city.html('<option value="">请选择市</option>')
+        $county.html('<option value="">请选择区县</option>')
+        // 发请求前判断有无数据，当选择“请选择省份”时，禁止发送请求
+        if (!province) {
+          return
+        }
+
+        // 2.发请求
+        $.get('http://localhost:3000/get_cities_by_province',{province},function (result){
+          let {status,data,err} = result
+          if (status === 1) {
+            let html = ''
+            data.forEach((item)=>{
+              html += `<option value='${item.city}'>${item.name}</option>`
+            })
+            $city.append(html)
+          } else{
+            alert(err) 
+          }
+        })
+      })
+
+      // 当市选择框变化时，1、获取所选省份编码和市编码  2、发请求
+      $city.change(function (){
+        // 1.获取省份和市的编码
+        let province = $province.val()
+        let city = this.value
+        // 点击区县，当市改变后，要重置区县的内容
+        $county.html('<option value="">请选择区县</option>')
+        // 与上述省份取消请求同理
+        if (!city) {
+          return
+        }
+
+        // 2.发请求
+        $.get('http://localhost:3000/get_counties_by_province_and_city',{province,city},function (result){
+          let {status,data,err} = result
+          if (status === 1) {
+            let html = ''
+           /*  data.forEach(item => {
+              html += `<option value='${item.county}'>${item.name}</option>`
+            }) */
+            data.map((item) => {
+              html += `<option value='${item.county}'>${item.name}</option>`
+            })
+            $county.append(html)
+          } else {
+            alert(err)
+          }
+        })
+      })
+
+    })
+
+  </script>
+</body>
+</html>

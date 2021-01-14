@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .img-list img{
+      width: 590px;
+      height: 470px;
+    }
+
+    /* 设置图片容器 */
+    .img-list{
+      width: 590px;
+      height: 470px;
+      margin: 100px auto;
+      list-style:none;
+
+      /* pointer的祖先是img-list，使pointer可以相对ul定位，
+          而不是相对于初始包含块 */
+      position: relative; 
+    }
+
+    /* 设置li 开启定位，全部脱离文档流往一个地方 */
+    .img-list li{
+          position: absolute;
+        }
+
+    /* 通过修改元素的层级来显示指定的图片 */
+    .img-list li:nth-child(1){
+      z-index: 1;
+    }
+
+    /* 设置导航栏的样式 */
+    .pointer{
+      position: absolute;
+      z-index: 9999;
+      bottom: 20px;
+      left: 35px;
+    }                 /* 给pointer开定位，设置高层级9999 永远在最上面*/
+
+    /* 设置超链接样式，开启浮动水平排列 */
+    .pointer a{
+      float: left;
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      border-radius: 10px;
+      background-color: rgba(255,255,255,.4);  
+      
+       /*将背景颜色值设置到内容区，边框和内边距不在有背景颜色*/
+      background-clip: content-box; 
+      border: 2px solid transparent;
+    }
+
+    .pointer a.active,
+    .pointer a:hover{
+      background-color: #fff;
+      border: 2px solid rgba(255,255,255,.3);
+    }
+
+  </style>
+</head>
+<body>
+   <ul class="img-list">
+    <li><a href="javascript:;"><img src="../exercise/img/jd轮播图1.jpg"></a></li>
+    <li><a href="javascript:;"><img src="../exercise/img/jd轮播图2.jpg"></a></li>
+    <li><a href="javascript:;"><img src="../exercise/img/jd轮播图3.jpg"></a></li>
+    <li><a href="javascript:;"><img src="../exercise/img/jd轮播图4.jpg"></a></li>
+    <li><a href="javascript:;"><img src="../exercise/img/jd轮播图5.jpg"></a></li>
+    <li><a href="javascript:;"><img src="../exercise/img/jd轮播图6.jpg"></a></li>
+    
+    <div class="pointer">
+      <a class='active' href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+    </div>
+  </ul>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul class="list">
+    <li>你的酒馆</li>
+    <li>画</li>
+    <li>起风了</li>
+  </ul>
+  <!-- 
+  * 以下方法都是父元素调用,操作子元素
+	* 插入节点: insertBefore(新节点,参照节点);
+	* 替换节点: replaceChild(新节点,被替换的节点);
+	* 删除节点: removeChild(被删除的节点);
+	* 追加节点：appendChild(被追加的节点)；
+	  节点.remove（pc端 ie不支持） 
+	  案例：使用列表演示节点的增删改查
+   -->
+  <script>
+
+    /* 插入节点: insertBefore(新节点,参照节点); */
+    // 拿到父元素
+    var listNode = document.querySelector('.list');
+    // 拿到你要插入的参照节点
+    var lastLi = document.querySelector('.list li:last-child');
+
+    // 创建新的li
+    var liNode1 = document.createElement('li');
+    // 给新的li添加内容
+    liNode1.innerText = '温柔';
+    // 把新的li插入到指定位置
+    listNode.insertBefore(liNode1 , lastLi);
+
+
+
+    /* 替换节点: replaceChild(新节点,被替换的节点); */
+    var firstLi = document.querySelector('.list li:first-child');
+    var liNode2 = document.createElement('li');
+    liNode2.innerText = '十年';
+    listNode.replaceChild(liNode2 , firstLi);
+
+
+    /* 删除节点: removeChild(被删除的节点); */
+    var secLi = document.querySelector('.list li:nth-child(2)');
+    listNode.removeChild(secLi);
+    // 上面是在父元素上操作删除
+    firstLi.remove();  //被删除的元素直接调用，IE浏览器不能用
+
+
+    /* 追加节点：appendChild(被追加的节点)； */
+    var songs = ['单车','飞云之下','富士山下'];
+    for(var i = 0; i < songs.length; i++){
+      var newLi = document.createElement('li');
+      newLi.innerText = songs[i];
+      listNode.appendChild(newLi);
+    }
+
+    // 节点的增伤改查总结：
+    // 1、必须要拿到父元素。2、创建新的元素。3、为新元素添加内容。4、执行增伤改查操作
+
+  </script>
+
+</body>
+
+</html>

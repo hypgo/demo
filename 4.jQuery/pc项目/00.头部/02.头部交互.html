@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div class="wrap">
+    <!--头部-->
+    <header id="header">
+        <section class="headerMain">
+            <!--logo-->
+            <h1 class="logo">
+                <a href="javascript:;">
+                    <img src="img/logo.png" alt="">
+                </a>
+            </h1>
+            <!--导航区域-->
+            <nav>
+                <ul>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up"><img src="img/home_gruen.png" alt=""></div>
+                            <div class="down"><img src="img/home.png" alt=""></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up">Course</div>
+                            <div class="down">Course</div>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up">Works</div>
+                            <div class="down">Works</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up">About</div>
+                            <div class="down">About</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up">Team</div>
+                            <div class="down">Team</div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+        <img src="img/arrow.png" alt="" id="arrow" class="arrow">
+    </header>
+    <div id="content">
+
+    </div>
+</div>
+
+</body>
+<script type="text/javascript">
+    window.onload = function () {
+        var liNodes = document.querySelectorAll('#header .headerMain nav ul li');
+        var upNodes = document.querySelectorAll('#header .headerMain nav ul li .up');
+        var arrow = document.querySelector('#header .arrow');
+//      头部交互逻辑
+        headerBind();
+        function headerBind() {
+            //    默认第一个li里边up的宽度为100%
+            upNodes[0].style.width = '100%';
+//      小尖尖的位置
+//        getBoundingClientRect()
+//        console.log(liNodes[0].getBoundingClientRect());
+            arrow.style.left = liNodes[0].getBoundingClientRect().left+liNodes[0].offsetWidth/2-arrow.offsetWidth/2+'px';
+//        头部交互
+            for (var i = 0; i < liNodes.length; i++) {
+                liNodes[i].index = i;
+                liNodes[i].onclick = function () {
+                    for (var j = 0; j < liNodes.length; j++) {
+                        upNodes[j].style.width = '';
+                    }
+                    upNodes[this.index].style.width = '100%';
+//          小尖尖位置  = 当前点击li距离视口左边的距离+当前点击li的宽度的一半-小尖尖宽度的一半
+                    arrow.style.left = liNodes[this.index].getBoundingClientRect().left+
+                        liNodes[this.index].offsetWidth/2-arrow.offsetWidth/2+'px';
+                }
+
+            }
+        }
+    }
+
+</script>
+</html>

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>jQuery 练习</title>
+
+		<link rel="stylesheet" href="index.css">
+		<style>
+			.todo-main li button {
+				display: none;
+			}
+		</style>
+	</head>
+		
+	<body>
+		<div id="root">
+			<div class="todo-container">
+				<div class="todo-wrap">
+					<div class="todo-header">
+						<input id="newTodo" type="text" placeholder="请输入你的任务名称，按回车键确认" />
+					</div>
+					<ul class="todo-main">
+
+					</ul>
+					<div class="todo-footer">
+						<label>
+          <input id="checkAll" type="checkbox"/>
+        </label>
+						<span>
+          已完成<span id="allCompletedTodos">0</span> / 全部<span id="allTodos">2</span>
+						</span>
+						<button id="removeAllCompleted" class="btn btn-danger">清除已完成任务</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+    
+  <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+  <script type="text/javascript">
+  $(function(){
+    // 给数据
+    var dataJson = [
+      {'content':'敲代码'},
+      {'content':'上班'},
+      {'content':'吃饭'},
+      {'content':'睡觉'}
+    ];
+    // 获取ul元素
+    var $todoMain = $('.todo-main');
+    // 获取全选框
+    var $checkAll = $('#checkAll');
+    // 获取任务总数
+    var $allTask = $('#allTodos');
+    
+
+    // 定义获取数据的函数
+    function bindData(data) {
+      // 渲染获取数据，添加到任务栏todo-main
+      for (let i = 0; i < data.length; i++) {
+        $todoMain.append('<li class="todoItem" style="background: rgb(255, 255, 255);"><label><input type="checkbox"><span>'+data[i].content+'</span></label><button class="btn btn-danger" style="display: none;">删除</button></li>');
+      }
+      // 更新任务总数
+      allToDo();
+    }
+    // 数据绑定
+    bindData(dataJson);
+
+    // 更新任务总数
+    function allToDo (){
+      // 有多少个li就有多少的任务长度
+      $allTask.html($todoMain.children('li').length);
+    } 
+
+    // 更新已完成任务数-获取数值，因为要复用，所以写成函数
+    function allCompletedTodos(){
+      // 所有选中checked的个数。用children要找很多层，所以用find从父级元素里找后代元素
+      $('#allCompletedTodos').html($todoMain.find(':checkbox:checked').length);
+    }
+
+    // 判断任务是否全选中
+    $todoMain.delegate('.todoItem input','click',function(){
+      // 更新选中的任务数(为什么写到外面无法调用？放外面没人调用啊。。那还怎么执行更新)
+      allCompletedTodos();
+      // 判断是否全选
+      // $checkAll.prop('checked',$todoMain.find(':checkbox:not(:checked)').length == 0);
+      // 第二种写法，选中的==总长度
+      // $checkAll.prop('checked',$todoMain.find(':checkbox:checked').length == $todoMain.find(':checkbox').length);
+      // 第三种写法，总长度=全部的任务数
+      $checkAll.prop('checked',$todoMain.find(':checkbox:checked').length == $('.todo-main li').length);
+    })
+
+    // 全选功能：全选和取消全选
+    $checkAll.click(function () {
+      // 让所有任务的li复选框与全选按钮的复选框状态一致
+      $todoMain.find(':checkbox').prop('checked',this.checked);
+      // （为什么this.checked的结果是布尔？）
+      console.log(this.checked);
+      // 更新已完成任务数
+      allCompletedTodos();
+    })
+
+    // 删除功能
+    // 移入显示删除
+    $todoMain.delegate('.todoItem','mouseenter',function(){
+      $(this).css('background','#ccc');
+      $(this).find('button').show();
+    })
+    // 移出则不显示
+    $todoMain.delegate('.todoItem','mouseleave',function(){
+      $(this).css('background','#fff');
+      $(this).find('button').hide();
+    })
+    // 任务上的点击删除(btn btn-danger是指同级的类名。下面写的时候要写成.todoItem .btn.btn-danger )
+    $todoMain.delegate('.todoItem button','click',function(){
+      $(this).parent().remove();  // 这里的button是TODOItem的子元素，只有一层
+      // 删除之后要更新任务总数
+      allToDo();
+      // 还要更新已完成数
+      allCompletedTodos();
+      // 可能会删除未完成的任务，且删除之后其余任务都是已完成，最终全选状态不正确。再把已完成的也删除完，最终复选框却被选上了
+      // 解决办法就是再执行一次全选复选框，全选复选框状态与各li复选框状态一致
+      $checkAll.prop('checked',$todoMain.children('li').length != 0 && $todoMain.find(':checkbox:checked').length == $('.todo-main li').length);
+      // &&前面为真,整个表达式的值是后面的值；前面如果是假，整个表达式的值是前面的值
+    })
+
+    // 清除已完成任务
+    $('#removeAllCompleted').click(function () {
+      $todoMain.find(':checkbox:checked').parent().parent().remove();
+      // 删除之后又要更新已完成和所有任务总数，此时总数可以写成0
+      allToDo();
+      allCompletedTodos();
+      // 全部删除之后要改变全选的状态
+      $checkAll.prop('checked',false);
+    })
+    
+    //新增任务
+    $('#newTodo').keydown(function(event){
+      if (event.keyCode == '13') {
+        if ($.trim($(this).val())) {
+          var data = [
+            {'content':$(this).val()}
+          ];
+          bindData(data);
+          // 当全选后，新增了任务，复选框默认为非选中，所以一定不可能为全选中
+          $checkAll.prop('checked',false)
+        
+        }  else{
+          alert('请输入正确信息');
+        }
+        // 无论输入是否成功，都需要清空输入框
+        $(this).val('');
+      }
+    }) 
+
+  })
+  </script>
+  </body>
+</html>
+
+<!-- 
+一 拼接数据
+1、获取数据：写一段假数据数组对象dataJson，content
+2、处理数据，创建对应的结构渲染页面，执行函数bindData调用
+3、接收数据要循环拼装节点，拼装到ul下，获取$ul,append添加
+二、更新任务总数
+1、定义函数，有多少li就有多少任务的总数
+2、找内容html()从ul的儿子中找
+3、在哪里调用，实现实时更新
+三、判断是否全选
+1、注意新增的节点，要用委托绑定delegate
+2、每点击一次选中和删除，都要实时更新已完成数，通过ul查选中的节点的数目，写进html
+3、要判断所有任务是否都被选中。所有未选中的复选框为0 或 所有复选框选中==任务长度。prop()
+4、点击事件，更新已完成任务，取消全选，让所有复选框的状态与全选状态一致this.checked
+四、删除功能remove
+1、移入要显示删除按钮，因为li会新增，要用事件委托移入移出
+2、移入后当前的背景色变灰色，让删除按钮显示出来，移出后就要对应改变
+3、删除事件，要委托。任务总数改变，删除的是已完成的，任务数和已完成数要改变。
+4、删除按钮，可能会删除未完成的任务，且删除之后其余任务都是已完成，最终全选状态不正确。
+解决办法就是再执行一次，全选复选框状态与各li复选框状态一致
+5、全部删除完，全选复选框仍然被选中，与字符&&，要让任务li不等于0 
+五、清除已完成任务按钮
+1、点击删除事件，找到已完成的复选框，分析它的层级，一层层去找他爹，然后删除li
+2、全部已完成，全部删除后，全选框仍然勾上了，这时因为已经全部清除了，必然是false
+六、新增任务
+1、找输入框id，keydown事件
+2、所有创建相关的逻辑，都要在按下回车的前提之下，判断是否按下回车 参数event
+3、判断有无内容，空格 trim，正确-创建逻辑，else-执行输入框修改，要清空
+4、创建的逻辑，参照前面bindData函数，创建完成要清空输入框。
+5、当全选中后，新增内容默认是未完成，全选状态一定是未完成的
+ -->

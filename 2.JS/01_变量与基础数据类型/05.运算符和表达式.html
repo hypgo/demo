@@ -1,0 +1,60 @@
+四、 运算符和表达式
+	什么是运算符  什么是表达式   
+
+	运算符：参与运算的符号
+	表达式：由变量或常量和运算符组成的式子   表达式是*有值*的（数值）
+
+	1、算术  算术表达式
+		+ - * / %(取余)
+
+		取余的作用：△
+			1、可以拿到余数
+			2、可以拿到一个范围
+			任何的一个数对18取余，余数永远是在0~17之间  包含0和17 （num）%18 + 1
+	
+		++ -- 作用及注意事项
+		自增自减运算符，这个运算符只能和 变量 组成表达式
+	  ++在后，先赋值（先把a的值赋值给表达式），后++ （后让变量a的值+1）
+		++在前，先++(先让a的值+1) ，后赋值（后把变量a的值赋值给表达式）
+    
+    --同理。
+
+七、晚自习强化练习至少3题
+3、运算符： 计算前++和后++的表达式的值
+    var a = 7;
+    var b = 9;
+
+    var c = a + b++;
+    c = ++a + b++;
+    c = b + a++;
+    c = ++a + b++;
+    c = --a + b;
+    c = a + b--;
+    问：c的值；
+    
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var a = 5;
+    var b = 9;
+    // var sum = 0;
+    // sum = a + b;
+
+    // a %2
+    console.log(a %2); // 取余（取模）的结果是 余数！
+
+    // a++  a的值，自增1
+    // console.log(a++)   a = 5,a++ = 5
+    console.log(a++);
+    console.log(a);
+
+  </script>
+</body>
+</html>

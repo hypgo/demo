@@ -1,0 +1,74 @@
+怎么去玩
+
+1、定义变量，先定义后使用， 变量的初始化（var和不写的区别）   
+**变量的本质，内存的结构图，先开辟一个内存空间，再赋值进去。  
+定义变量使用 var关键字，先定义后使用，定义好之后，可以给变量赋值（存值）
+  如果定义变量不使用var，那么变量必须要赋值，不赋值报错未定义；
+  那么我们在使用的时候，都带上var去定义变量。
+
+2、变量的命名规范
+  变量的名字由：数字、字母、下划线以及 $ 组成
+          不能以数字开头
+          不能和关键字以及保留字同名（往下看）
+
+          △变量名我们一般要见名思意
+
+  组成：大驼峰，小驼峰，下划线
+  大驼峰：变量名所有的单词首字母大写                var ClassNumber        
+  小驼峰：变量名第一个单词首字母小写，其它的大写	   var classNumber  前端人员最常用的是这个，只有特定情况用大驼峰；
+  下划线：单词和单词之间用下划线连接（小写）	       var class_number	
+
+3、关键字和保留字
+  javascript的关键字：
+  break   case   catch   continue   default   delete   do
+  else   finally   for   function   if   in   instanceof
+  new   return   switch   this   throw   try   typeof
+  var   void   while   with
+
+  javascript的保留字：
+  abstract   boolean   byte   char   class   const   debugger   double
+  enum     export    extends       final   float   goto       implements
+  import     int       interface     long    native  package    private
+  protected  public    short         static  super   synchronized
+  throws    transient  volatile
+
+面试题：
+两种方式交换两个变量的值
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 先用var 定义，再赋值
+    // var age;
+    // age = 18;
+    // console.log(age);
+
+    // 变量初始化：定义变量的同时给变量赋值。两种方式一样，只是过程不同。
+    // var age = 18;
+
+    // 运用第三方变量实现两个值的交换
+    var a = 1;
+    var b = 2;
+    var temp;
+
+    // temp = a;
+    // a = b;
+    // b = temp;
+
+    //  使用求和
+    a = a + b;  //3
+    b = a - b;  //1
+    a = a - b;  //a = a - 1  这个1是上一步计算的结果
+
+    console.log(a);
+    console.log(b);
+
+  </script>
+</body>
+</html>

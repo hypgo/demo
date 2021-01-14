@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <!--外部容器-->
+  <div class="wrap">
+		<!-- 头部内容容器 -->
+		<div id="header">
+			<!-- 头部 -->
+			<header class="headerMain">
+					<!-- logo -->
+					<h1 class="logo">
+							<a href="javascript:;">
+									<img src="/pc项目/00.头部/img/logo.png" alt="at guigu">
+							</a>
+					</h1>
+					<!-- 导航条 -->
+					<nav class="nav">
+							<ul>
+								<li>
+									<a href="javascript:;">
+										<div class="up"><img src="/pc项目/00.头部/img/home_gruen.png" alt="home"></div>
+									</a>
+									<a href="javascript:;">
+										<div class="down"><img src="/pc项目/00.头部/img/home.png" alt="home"></div>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+										<div class="up">Course</div>
+									</a>
+									<a href="javascript:;">
+										<div class="down">Course</div>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+										<div class="up">Works</div>
+									</a>
+									<a href="javascript:;">
+										<div class="down">Works</div>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+										<div class="up">About</div>
+									</a>
+									<a href="javascript:;">
+										<div class="down">About</div>
+									</a>
+								</li>
+								<li>
+									<a href="javascript:;">
+										<div class="up">Team</div>
+									</a>
+									<a href="javascript:;">
+										<div class="down">Team</div>
+									</a>
+								</li>
+							</ul>
+          </nav>
+        <div class="arrow"></div>
+			</header>
+		</div>
+    <!-- 内容区 -->
+    <section id="content">
+      <ul class="list">
+        <li><div class="Home">Home</div></li>
+        <li><div class="Course">Course</div></li>
+        <li><div class="Works">Works</div></li>
+        <li><div class="About">About</div></li>
+        <li><div class="Team">Team</div></li>
+      </ul>
+    </section>
+  </div>
+</body>
+<script type="text/javascript">
+  window.onload = function(){
+    // 获取元素
+    var arrow = document.querySelector('#header .arrow');
+    var upNodes = document.querySelectorAll('#header .headerMain .nav ul li .up');
+    var liNodes = document.querySelectorAll('#header .headerMain .nav ul li');
+    var content = document.getElementById('content');
+    var header = document.getElementById('header');
+    var contentLi = document.querySelectorAll('#content .list li');
+    var contentList = document.querySelector('#content .list');
+    var now = 0;
+
+    // 滚轮降频定时器（由于鼠标无论滚多少下，都能触发生效，所以要设置滚一次，只滑动一次）
+    var timer = null;
+
+    // 通过滚轮事件翻页。（原理不是把顶部固定，而是通过类似轮播图的方式）
+    // ie/chrome
+    document.onmousewheel = function() {
+      clearTimeout(timer); //先清除定时器。启动一次，就禁止它一次
+      timer  = setTimeout(function(){
+        fun(event);
+      },200) //200ms 确保清除的时候还没执行
+    };
+    // firefox
+    if (document.addEventListener) {
+      document.addEventListener("DOMMouseScroll",function(event){
+        clearTimeout(timer);
+        timer = setTimeout(function() {
+          fun(event);
+        },200)
+      })
+    }
+
+    function fun(event){
+      event = event || window.event;
+
+      // 定义标识标量
+      var flag = '';
+      if (event.wheelDelta) {
+        // ie chrome
+        if (event.wheelDelta > 0) {
+          // 向上
+          flag = 'up';
+        }else{
+          // 向下
+          flag = 'down';
+        }
+      }else if(event.detail){
+        // firefox
+        if (event.detail < 0) {
+          // 向上
+          flag = 'up';
+        } else{
+          // 向下
+          flag = 'down';
+        }
+      }
+        switch (flag){
+          case 'up':
+            // 执行向上的逻辑
+            if (now > 0) {
+              now--;
+            }
+            move(now);
+            break;
+          case 'down':
+            // 执行向下的逻辑
+            if (now < liNodes.length -1) {
+              now++;
+            }
+            move(now);
+            break;
+        }
+        // 取消默认行为
+        // event.preventDefault && event.preventDefault();
+        // return false;
+
+    }
+
+    // 主体布局
+    function contentBind() {
+      content.style.height = document.documentElement.clientHeight - header.offsetHeight + 'px';
+      for (let i = 0; i < contentLi.length; i++) {
+        contentLi[i].style.height = document.documentElement.clientHeight - header.offsetHeight + 'px';
+      }
+    }
+    contentBind();
+
+    function headerBind(){
+      // 设置第一个up默认为 黑色
+      upNodes[0].style.width = '100%';
+      // 小三角的位置在第一个up最下方（初始化）
+      arrow.style.left = liNodes[0].getBoundingClientRect().left + 
+          liNodes[0].offsetWidth/2 - arrow.offsetWidth/2 + 'px';
+      for (let i = 0; i < liNodes.length; i++) {
+        // 为每一个li添加index属性
+        liNodes[i].index  = i;
+        // 为所有li添加单击事件
+        liNodes[i].onclick = function(){
+          // 清空所有up的宽度
+          for (let j = 0; j < liNodes.length; j++) {
+            // 需要操作css，状态影响权重问题。最优雅的是不要把样式写到CSS，而要用js来控制
+            upNodes[j].style.width = '';   /*伪类hover处理的是。。？ 跟行内区别*/
+          }
+          // 保留为黑色状态
+          upNodes[this.index].style.width = '100%';
+          arrow.style.left = liNodes[this.index].getBoundingClientRect().left+
+            liNodes[this.index].offsetWidth/2 - arrow.offsetWidth/2  + 'px';
+          }
+        }
+    }
+    headerBind();
+    
+    //屏幕滑动函数
+    function move(now){
+      // 导航部分：高亮、小三角
+      // up's width
+      for (let i = 0; i < upNodes.length; i++) {
+        upNodes[i].style.width = '';
+      }
+      upNodes[now].style.width = '100%';
+      // 小三角的位置同步改变
+      arrow.style.left = liNodes[now].getBoundingClientRect().left + 
+          liNodes[now].offsetWidth/2 - arrow.offsetWidth/2 + 'px';
+      // 页面的滚动是通过list 的top值，所以也要修改
+      // 屏幕切换 当前所在第几层 * 视口-header的高度 top要往上走，最大值为0
+      contentList.style.top = -now*(document.documentElement.clientHeight - header.offsetHeight + 'px');
+
+    }
+  }
+</script>
+</html>

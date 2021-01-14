@@ -1,0 +1,15 @@
+1.offset()和position()有什么区别
+
+2.jQuery对象dom对象如何互转
+
+3.说一下jQuery对象使用特点，分别有什么特性
+
+4.写出基于当前位置向右移动200px的动画
+
+5.onload与document.ready的区别
+
+6.给$的工具对象添加新的方法，给$对象添加新的方法（手动添加插件）
+
+7.如何处理多库共存
+
+8.区别mouseover与mouseenter

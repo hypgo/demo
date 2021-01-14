@@ -1,0 +1,36 @@
+.box {
+  width: 200px;
+  height: 200px;
+  background-color: #bfa;
+  overflow: hidden;
+}
+.box .box1 {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  margin: 50px auto;
+}
+.box .box1:hover {
+  background-color: blue;
+}
+.p1 {
+  width: 200px;
+  height: 200px;
+  background-color: #bfa;
+  overflow: hidden;
+  margin-top: 100px;
+}
+.p1 .box1 {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  margin: 50px auto;
+}
+.p1 .box1:hover {
+  background-color: blue;
+}
+.p3 {
+  width: 200px;
+  height: 200px;
+  background-color: #000;
+}

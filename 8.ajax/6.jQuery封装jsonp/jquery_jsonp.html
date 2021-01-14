@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="js/jquery-1.12.4.js"></script>
+  <button id="btn"> 点我测试jQuery封装jsonp </button>
+  <script>
+    // 以下全部有jQuery底层全部完成
+    // 1.提前定义好一个等待被调用的函数
+    // 2.创建一个script节点
+    // 3.为节点指定src地址
+    // 4.将节点插入页面
+
+    $('#btn').click(function(){
+      // 完整版写法
+      $.ajax({
+        url:'http://localhost:3000/test',
+        method:'get',
+        dataType:'jsonp',  //该属性控制上面的四个步骤
+        data:{name:'mike',age:40},
+        success:function(resule){
+          console.log(result)
+        },
+        error:function(err){
+          console.log(err)
+        }
+      })
+
+      // 简写版 ----  不建议用简写版
+     /*  $.getJSON('http://localhost:3000/test?callback=?',{name:'mike',age:40},function(data){
+        console.log(data); 
+      })*/
+
+    })
+
+
+  </script>
+</body>
+</html>

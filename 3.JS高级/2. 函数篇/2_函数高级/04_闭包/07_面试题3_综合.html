@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>面试题_综合</title>
+</head>
+<body>
+<script type="text/javascript">
+  // fucntion getName
+  // var getName = function(){}
+  // Foo() -> 暴露 getName 到 window 覆盖
+  function Foo() {
+    getName = function () { alert (1); };  // 函数内部没有用var，自动上升为全局变量
+    return this;
+  }
+  Foo.getName = function () { alert (2);};
+  Foo.prototype.getName = function () { alert (3);};
+  var getName = function () { alert (4);};
+  function getName() { alert (5);}
+
+  //请写出以下输出结果：
+  Foo.getName();   //2 
+  getName();      //4
+  Foo().getName(); //1
+  getName(); //1   13行的代码变量提升到预解析的最下面，覆盖
+  new Foo.getName(); // 2  new去找离它最近的()，中间部分是一个整体（函数）
+  new Foo().getName();// 3  
+  // new foo()把foo()变成一个实例化对象，return的不是window了。
+  // .getName()是实例化对象的属性，先在自身找，找this，没有就去原型找
+  new new Foo().getName(); // 3
+</script>
+</body>
+</html>

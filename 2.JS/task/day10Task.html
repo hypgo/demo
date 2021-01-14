@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  input {
+    outline: none;
+  }
+
+  img {
+    display: block;
+  }
+
+  ul,
+  li {
+    list-style: none;
+  }
+
+  /* #img {
+    width: 500px;
+    height: 300px;
+    margin: 50px auto;
+  } */
+
+  #big {
+    width: 600px;
+    height: 400px;
+    margin: 50px auto 0;
+  }
+
+  #big img {
+    width: 100%;
+    height: 100%;
+  }
+
+  #smallList {
+    width: 600px;
+    height: 150px;
+    margin: 5px auto;
+  }
+
+  #smallList li {
+    float: left;
+    width: 200px;
+    height: 100%;
+  }
+
+  #smallList li img {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<body>
+  <!-- <img src="../06_DOM/img/1.jpg" alt="" id="img"> -->
+
+
+  <div id="big">
+    <img src="../06_DOM/img/2.jpg" alt="" id="bigImg">
+  </div>
+
+  <ul id="smallList">
+    <li>
+      <img src="../06_DOM/img/2.jpg" alt="">
+    </li>
+    <li>
+      <img src="../06_DOM/img/3.jpg" alt="" id="smallImg1">
+    </li>
+    <li>
+      <img src="../06_DOM/img/4.jpg" alt="" id="smallImg2">
+    </li>
+  </ul>
+
+
+
+  <!-- 
+    强化练习
+    1.	点击图片切换图片显示
+    2. 	点击小图显示对应的大图
+ -->
+  <script>
+    // 思路
+    // 1、把图片地址全部放一个数组；2、点击图片处理？点击图片1就进入图片2，需要抓图片2的路径，采取计数器方式
+    // 3、点击1次，加1，使img的路径=路径数组索引；4、用取余方式一直循环路径
+
+    /*
+    window.onload = function(){
+      var imgArr = ['../06_DOM/img/1.jpg','../06_DOM/img/2.jpg','../06_DOM/img/3.jpg','../06_DOM/img/4.jpg','../06_DOM/img/5.jpg','../06_DOM/img/6.jpg','../06_DOM/img/7.jpg',]
+      var img = document.getElementById('img');
+      var num = 0;
+      img.onclick = function(){
+        num++;
+        img.src = imgArr[num % imgArr.length];
+      }
+    }
+    */
+
+    // 关键点：在事件（回调函数）中，回调当中的this，代表的是事件对象
+    window.onload = function () {
+      var smallImg1 = document.getElementById('smallImg1');  //不能共用id，不然程序无法执行
+      var smallImg2 = document.getElementById('smallImg2');
+      var bigImg = document.getElementById('bigImg');
+      smallImg1.onclick = function () {
+        bigImg.src = this.src;
+      }
+      smallImg2.onclick = function () {
+        bigImg.src = this.src;
+      }
+    }
+
+
+  </script>
+
+</body>
+
+</html>

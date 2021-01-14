@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网易新闻右侧导航</title>
+    <style>
+        *{
+            padding:0;
+            margin: 0;
+        }
+
+        /* body{
+            background-color:rgb(180, 175, 175) ;
+        } */
+
+        a{
+            text-decoration:none;
+        }
+
+       .sport_news{
+            height: 370px;
+            width: 300px;
+            /* margin-top: 27px; */
+            border-top: 1px solid #ddd;
+            margin: 20px auto;
+            background-color:#fff;
+       }
+
+       .sport_news .sn_title{
+            display: inline-block;
+            height: 40px;
+            border-top:1px solid red;
+            line-height: 40px;
+            margin-top: -1px;  
+       }
+
+       .sn_title a{
+            color:rgb(64, 64, 64);
+            text-decoration:none;
+            font-weight: bold; 
+       }
+
+       .sport_news a:hover{
+           color: red;
+       }
+
+       .sport_news .sn_img{
+            height: 150px;
+       }
+
+       .sport_news .sn_list{
+            margin-top: 15px;
+            /* padding-left: 10px; */
+       }
+
+       .sn_list li{
+           /* overflow 隐藏溢出元素框的内容 */
+           overflow:hidden;
+           /* 规定文本不进行换行。 */
+           white-space: nowrap;
+           margin-bottom: 10px;
+       }
+
+       .sn_list li a{
+           font-size: 14px;
+           color: #666;
+       }
+
+       .sn_list li::before{
+            content: '■';
+            color: rgb(160, 158, 158);
+            font-size: 16px;
+            margin-right: 4px;
+       }
+
+       .sn_img .sn_img-tittle{
+            margin-top: -30px;
+            padding-left: 20px;  /* margin-left */
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+       }
+
+    </style>
+
+</head>
+
+<body>
+    <div class="sport_news">
+        <h2 class="sn_title">
+            <a href="#">体育</a>
+        </h2>
+
+        <div class="sn_img">
+            <a href="#">
+                <img src="./img/网易新闻体育图片.webp" alt="苏宁">
+                <h3 class="sn_img-tittle">苏宁5-2建业 桑蒂尼帽子戏法</h3>
+            </a>
+        </div>
+
+        <ul class="sn_list">
+            <li>
+                <a href="#">从八一铁军到八一围城，再到八一超市…</a>
+            </li>
+            <li>
+                <a href="#">1日罢赛秀给谁看？复横跳的LBJ们比前辈差远了</a>
+            </li>
+            <li>
+                <a href="#">罗塞尔和巴托梅乌，是如何毁掉巴萨的？</a>
+            </li>
+            <li>
+                <a href="#">保罗-乔治的"心结"</a>
+            </li>
+        </ul>
+
+        </a>
+    </div>
+
+
+
+</body>
+</html>

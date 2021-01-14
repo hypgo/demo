@@ -1,0 +1,89 @@
+三、  switch....case分支语句（其实就是if多分支的变种，为了代码可读性更好一些）；
+
+	语法：
+		switch(有值的东西，最后这里面是一个值，不会进行转化){
+//case是代表的标号，它不是我们的代码语句，只是用来做对比用的；
+      case 值： 
+//真正的代码是在这的，如果switch括号当中的值和case标号后面的值相等，
+//那么就会执行对应的代码块，注意;switch里面的判等 用的是严格判等 ===；
+        代码块；
+               
+
+				break;  //有两个作用，只会出现在switch 和 循环语句当中，  在switch当中代表跳出switch语句，
+					      // 在循环当中，代表跳出离它最近的那一层循环
+			case 值：
+				代码块；
+				break;
+			default:
+				代码块；
+				break;
+		}
+
+switch 语句执行过程：先求出小括号当中的值，接着会拿着这个值从上到下和所有的标号后面的值进行对比，如果对比成功就执行
+
+	1.	输入一个数字，判断是星期几
+  2.	输入分数，判定优良差和不及格
+  
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var score = parseInt(prompt('请输入你的分数'))
+
+    switch(true){
+      case score >=90 && score<= 100:
+        alert('A');
+        break;
+      case score >=80 && score< 90:
+        alert('B');
+        break;
+      case score >=70 && score< 80:
+        alert('C');
+        break;
+      case score >=60 && score< 70:
+        alert('D');
+        break;
+      case score < 0 || score > 100:
+        alert('请输入正确的分数');
+        break;
+      default:
+        alert('不及格了，重修去吧！');
+    }
+
+    // 一般情况下用的都是直接带值的，不是上面那种
+    switch(true){
+      case 1:
+        alert('星期一');
+        break;
+      case 2:
+        alert('星期二');
+        break;
+      case 3:
+        alert('星期三');
+        break;
+      case 4:
+        alert('星期四');
+        break;
+      case 5:
+        alert('星期五');
+        break;
+      case 6:
+        alert('星期六');
+        break;
+      case 7:
+        alert('星期日');
+        break;
+      default:
+        alert('不及格了，重修去吧！');
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+五、 数组案例
+数组求和
+求数组最大值，最小值，平均值
+根据班级人数输入每个人的分数，求平均值
+反转数组
+
+晚自习强化练习
+数组练习两个
+找出数组中的所有偶数打印，奇数生成新数组
+有一个从小到大排好序的数组。现输入一个数，要求按原来的规律将它插入数组中
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 数组求和
+    var arr = [1, 2, 3, 4, 5];
+    // var sum = 0;
+    // for(var i = 0; i < arr.length; i++){
+    //   sum += arr[i];
+    // }
+    // console.log(sum);
+
+    // 求数组最大值，最小值，平均值
+    var max = arr[0];
+    var min = arr[0];
+    var sum = 0;
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] > max) {
+        max = arr[i];
+      }
+      if (arr[i] < min) {
+        min = arr[i];
+      }
+      sum += arr[i];
+    }
+
+    console.log(max, min, sum / arr.length);
+
+    // 根据班级人数输入每个人的分数，求平均值
+    // var arr1 = [];   //声明一个空数组
+    // var sum1 = 0;
+    // for(var i = 0; i < 5; i++){
+    //   arr1[i] = parseInt(prompt('请输入第'+(i+1)+'位的分数'));
+    //   sum1 += arr1[i];
+    // }
+    // console.log(arr1,sum1/arr1.length);
+
+    // 翻转数组使用新数组  12345，变成54321
+    // var newArr = [];
+    // for(var i = arr.length - 1; i >= 0 ; i--){
+    //   newArr[newArr.length] = arr[i]; 
+    // }
+    // console.log('newArr:',newArr);
+
+    // 翻转数组不用新数组，在原数组基础上进行翻转； 先遍历前一半的数值
+    for (var i = 0; i < arr.length / 2; i++) {
+      var temp = arr[i];                 //定义一个新变量（中间变量）
+      arr[i] = arr[arr.length - 1 - i];  //让新变量的下标从0开始赋值
+      arr[arr.length - 1 - i] = temp;    //将得到的值重新给回temp数组
+    }
+    console.log('新翻转数组', arr);
+
+
+    // 找出数组中的所有偶数打印，奇数生成新数组
+    var arr3 = [1, 3, 8, 4, 5, 6, 7];
+    var oddArr = [];
+    for (var i = 0; i < arr3.length; i++) {
+      if (arr3[i] % 2 == 0) {
+        console.log(arr3[i]);
+      } else {
+        oddArr[oddArr.length] = arr3[i];
+      } 1
+    }
+    console.log('奇数数组:', oddArr);
+
+
+    // 有一个从小到大排好序的数组。现输入一个数，要求按原来的规律将它插入数组中
+    var num = parseInt(prompt('请输入要插的数'));
+    var arr = [10, 20, 30, 40, 55, 60, 70];
+    var index = 0;
+
+    // 求出最大值
+    if (num > arr[arr.length - 1]) {
+      index = arr.length;
+      arr[index] = num;
+      // 求出最小值
+    } else if (num < arr[0]) {
+      index = 0;
+      for (var i = arr.length - 1; i >= 0; i--) {
+        arr[i + 1] = arr[i];
+      }
+      arr[index] = num;
+      // 求出中间的值
+    } else {
+      for (var i = 0; i < arr.length; i++) {
+        if (num >= arr[i] && num <= arr[i + 1]) {
+        //获得插入的值索引位置，因为插入的值肯定比左边的大或者相等，所以就要占到后面的位置
+          index = i + 1;  
+        }
+      }
+      // 获得插入值的索引后，再以它为基础，开始向后移动位置插入
+      for (var i = arr.length - 1; i >= index; i--) {
+        arr[i + 1] = arr[i];
+      }
+      arr[index] = num;
+    }
+
+    console.log('结果：', arr);
+
+
+  </script>
+</body>
+
+</html>

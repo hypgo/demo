@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    var fn = function (){
+      console.log(fn);
+    }
+    fn() // function 定义
+
+    var obj = {
+      fn2:function (){
+        // console.log(fn2); // 当前作用域没有，去找外部，外部没有，找全局，全局没有，就报错
+        console.log(this.fn2); 
+      }
+    }
+    obj.fn2()   //  function函数
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+第七节 事件绑定和解绑（要对应）
+  1、DOM的版本： 0   1  2  3 
+  dom 0 和 dom2   有自己独立的事件绑定和解绑方式
+  dom0事件所有的浏览器都可以使用
+
+  dom2事件 addEventListener()  高级浏览器可以使用   
+  ie10以下的不能使用，IE10以下给出了另外一种绑定方式；
+
+  dom1和dom3 没有
+
+  2、Dom0事件绑定和解绑 
+	dom0事件解绑，本质上就是把事件函数和事件对象的事件属性断开指向；
+  box.onclick = null;
+
+  了解一下， dom0 不能对一个元素同时添加相同事件2次
+
+  3、Dom2事件绑定和解绑
+  可以添加同一类事件多次，如果被同个元素添加相同事件，不会覆盖，会按照添加顺序依次执行
+  高级浏览器和ie绑定方式（兼容封装）
+  解绑的时候一定要和绑定时候绑定的参数一致
+
+第八节:  事件流（事件传播）
+	1. 捕获事件流（网景）  最终很少用几乎不用
+	2. 冒泡事件流（ie）    最终我们所用的事件传播都是冒泡
+  3. 标准DOM事件流
+  //这个是我们现用的最标准的事件流，里面包含三个阶段：有捕获、再去获取元素、最后冒泡
+	//这个三个阶段当中的捕获和冒泡可以由程序员自己选择，但是通常情况我们都是使用默认（冒泡）；
+
+第九节:  事件冒泡和事件委派
+  阻止事件冒泡  stopPropagation()
+  事件冒泡的好处就是可以进行事件委派（事件委托，事件代理）
+
+  事件委托用法（上一节移动变色按钮）
+    什么时候用：出现新添加的东西，并且新添加的东西要和老的拥有同样的行为。此时我们就想事件委派；
+    事件委派做法：给爹添加事件，不给元素本身添加，事件发生后通过爹去找，真正发生事件的元素进行处理；
+    event.target; （键盘事件案例）
+
+  onmouseenter onmouseleave（没有子元素）
+  如果是一个父子元素模型，对父元素添加移入和移出，当鼠标移入父元素里面的子元素的时候，
+  事件并没有移出然后再移入。也就是说事件元素没有切换；
+
+  onmouseover onmouseout （有子元素）
+  这两对之间的区别：**事件委派的时候，必须使用这一对**
+  如果是一个父子元素模型，对父元素添加移入和移出，当鼠标移入父元素里面的子元素的时候，
+  事件会移出然后再移入。也就是说事件元素会有切换；
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+
+    .no1{
+      width: 400px;
+      height: 400px;
+      background-color: #bfa;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: 50px auto;
+    }
+
+    .no1 .no2{
+      width: 300px;
+      height: 300px;
+      background-color: red;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: 50px auto;
+    }
+    
+    .no1 .no2 .no3{
+      width: 200px;
+      height: 200px;
+      background-color: blue;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: 50px auto;
+      line-height: 200px;
+      text-align: center;
+      color: white;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="no1">
+    <div class="no2">
+      <div class="no3">
+        我是三弟
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var NO1 = document.querySelector('.no1');
+    var NO2 = document.querySelector('.no1 .no2');
+    var NO3 = document.querySelector('.no1 .no2 .no3');
+    // true 从外往里面找；false从里往外面找
+    NO1.addEventListener('click', function(){
+      console.log('我是老大');
+    },false )
+
+    NO2.addEventListener('click', function(){
+      console.log('我是老二');
+    },false )
+
+    NO3.addEventListener('click', function(event){
+      // event事件的兼容处理
+      // 逻辑运算符：高级浏览器拿event，IE低版本浏览器拿window.event
+      var event = event || window.event
+
+      console.log('我是老三');
+      // 阻止冒泡。false从里往外面找，点击老三，只打印出“我是老三”
+      event.stopPropagation();
+    },false )
+
+  </script>
+
+</body>
+</html>
+

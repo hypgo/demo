@@ -1,0 +1,104 @@
+/*cssreset*/
+html,body{height: 100%;overflow: hidden;}
+html,body,h1,h2,h3,h4,h5,h6,p,ul,li{margin: 0px;padding: 0px;font: 14px "微软雅黑";}
+a{text-decoration: none;display: block;}
+li{list-style: none;}
+img{display: block;}
+
+/*清除浮动*/
+.clearfix{*zoom: 1;}
+.clearfix:after{content: "";display: block;clear: both;}
+/*头部*/
+#header{
+    width: 100%;
+    height:80px;
+    position: relative;
+}
+.headerMain{
+    margin: 0 auto;
+    width: 1100px;
+    height: 80px;
+    /*background: pink;*/
+}
+#header .headerMain .logo{
+    float: left;
+    margin-top: 15px;
+}
+#header .headerMain .nav{
+    float: right;
+    margin-top: 50px;
+}
+#header .headerMain .nav ul li{
+    position: relative;
+    float: left;
+    margin-left: 40px;
+}
+#header .headerMain .nav ul li .up{
+    position: absolute;
+    top:0;
+    left:0;
+    color: #000;
+    width: 0;
+    overflow: hidden;
+    transition: 1s width;
+}
+#header .headerMain .nav ul li:hover .up{
+    width: 100%;
+}
+#header .arrow{
+    position: absolute;
+    left:50%;
+    bottom: -11px;
+    width: 21px;
+    height: 11px;
+    background-image: url("../img/arrow.png");
+    background-repeat: no-repeat;
+    transition: 1s left;
+    z-index: 9;
+}
+#content{
+    width: 100%;
+    position: relative;
+    background: skyblue;
+}
+#content .list{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+#content .list li{
+    position: relative;
+}
+#content .list li>div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin:  auto;
+    width: 1100px;
+    height: 520px;
+    background: #ccc;
+}
+#content .list>li:nth-child(1){
+    background-image: url("../img/bg1.jpg");
+}
+#content .list>li:nth-child(2){
+    background-image: url("../img/bg2.jpg");
+}
+#content .list>li:nth-child(3){
+    background-image: url("../img/bg3.jpg");
+}
+#content .list>li:nth-child(4){
+    background-image: url("../img/bg4.jpg");
+}
+#content .list>li:nth-child(5){
+    background-image: url("../img/bg5.jpg");
+}
+
+
+
+
+
+

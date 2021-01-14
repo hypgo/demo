@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+
+    div{
+      width: 200px;
+      height: 100px;
+      background-color: black;
+      margin: 100px 0 auto ;
+    }
+
+  </style>
+
+</head>
+<body>
+    <!-- 
+    开关状态改变div背景色：点一下，变颜色，再点一下，又变颜色
+    思路：
+    用标志位，先判断，点一下修改颜色，改变标志位，再点一下按不同的标志位来执行
+  -->
+
+  <div></div>
+
+
+  <script>
+    var box = document.querySelector('div');
+    var flag = true;
+    box.onclick = function(){
+      if(flag){
+        box.style.backgroundColor = 'green';
+        // flag = false;
+      } else {
+        box.style.backgroundColor = 'black';
+        // flag = true;
+      }
+      flag = !flag
+
+    }
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+
+    body,html{
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .box{
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: #fba;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+
+  <script>
+    var box = document.querySelector('.box');
+
+    box.onmousedown = function(event){
+      event = event || window.event;
+
+      // 获取元素的初始位置，拿的是元素定位的left值
+      var eleX = box.offsetLeft;
+      var eleY = box.offsetTop;
+
+      // 获取鼠标的初始位置
+      // 拿的是鼠标相对视口的（眼睛所看的范围）,
+      // 水平距离和垂直距离,相对的是视口的左上角（以视口左上角为原点）
+      var startX = event.clientX;
+      var startY = event.clientY;
+
+      //当鼠标点击元素之后，把鼠标的后序事件全部捕获到该元素身上。（全局捕获）
+      box.setCapture && box.setCapture();
+
+      // 鼠标拖拽移动事件
+      document.onmousemove = function(event){
+        event = event || window.event;
+        // 拿到鼠标结束位置
+        var endX = event.clientX;
+        var endY = event.clientY;
+
+        // 求鼠标的距离差
+        var disX = endX - startX;
+        var disY = endY - startY;
+
+        // 拿到元素最终的位置
+        var lastX = eleX  + disX;
+        var lastY = eleY  + disY;
+
+        // 赋值给元素，实现拖拽移动
+        box.style.left = lastX + 'px';
+        box.style.top = lastY + 'px';
+      }
+
+      // 解绑move事件
+      document.onmouseup = function(){
+        document.onmousemove = document.onmouseup = null;
+        
+        // 鼠标的事件全局捕获，有添加就要有释放，否则后序点击任何地方都相当于在点击box
+        box.releaseCapture&& box.releaseCapture(); 
+      }
+      // dom0取消默认行为:事件末尾加return false
+      // dom2取消默认行为:event.preventDefault()
+      return false;
+    }
+    
+    //坑1：pc端的box.onmousemove = function(event)事件不会自动清除
+    //坑2：box.onmousemove快速移动时，鼠标跑出来了（计算机的算力跟不上），box不动了。此时相当于在document或body身上跑的，box感应不到。
+    //document.onmousemove 冒泡原理。移出来之后事件发生在document||body身上，用document能感知到这个事件的存在，冒泡冒到box上
+
+
+  </script>
+</body>
+</html>

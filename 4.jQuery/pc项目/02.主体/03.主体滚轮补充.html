@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<div id="wrap">
+    <!--头部-->
+    <header id="header">
+        <section class="headerMain">
+            <!--logo-->
+            <h1 class="logo">
+                <a href="javascript:;">
+                    <img src="img/logo.png" alt="">
+                </a>
+            </h1>
+            <!--nav-->
+            <nav class="nav">
+                <ul class="clearfix">
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up"><img src="img/home_gruen.png" alt=""></div>
+                            <div class="down"><img src="img/home.png" alt=""></div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up">Course</div>
+                            <div class="down">Course</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up">Works</div>
+                            <div class="down">Works</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up">About</div>
+                            <div class="down">About</div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <div class="up">Team</div>
+                            <div class="down">Team</div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!--小尖尖-->
+            <div class="arrow"></div>
+        </section>
+    </header>
+    <!--内容区-->
+    <section id="content">
+        <ul class="list">
+            <li class="home">
+                <div>home</div>
+            </li>
+            <li class="course">
+                <div>Course</div>
+            </li>
+            <li class="works">
+                <div>Works</div>
+            </li>
+            <li class="about">
+                <div>About</div>
+            </li>
+            <li class="team">
+                <div>Team</div>
+            </li>
+        </ul>
+    </section>
+</div>
+
+
+</body>
+<script type="text/javascript">
+    window.onload = function () {
+        //获取元素
+        var header = document.getElementById('header')
+        var liNodes = document.querySelectorAll('#header .headerMain .nav ul li')
+        var upNodes = document.querySelectorAll('#header .headerMain .nav ul li .up')
+        var arrow = document.querySelector('#header .headerMain .arrow')
+
+        var content = document.getElementById('content');
+        var contentLi = document.querySelectorAll('#content .list li');
+        var contentList = document.querySelector('#content .list');
+        //li索引下标
+        var now = 0;
+        //定时器
+        var timer = null;
+
+
+        window.onresize = function () {
+            //小尖尖位置
+//            arrow.style.left = liNodes[0].getBoundingClientRect().left+liNodes[0].offsetWidth/2-arrow.offsetWidth/2 + 'px';
+
+            contenBind();
+
+            //小尖尖位置
+            arrow.style.left = liNodes[now].getBoundingClientRect().left+liNodes[now].offsetWidth/2-arrow.offsetWidth/2 + 'px';
+
+            //屏幕切换
+            contentList.style.top = -now*(document.documentElement.clientHeight-header.offsetHeight) + 'px'
+
+
+        }
+        
+
+
+        //滚轮
+        //ie/chrome
+        document.onmousewheel = function (event) {
+
+            clearTimeout(timer)
+            timer = setTimeout(function () {
+
+                fun(event);
+
+            },200);
+
+
+        }
+        //firefox
+        if(document.addEventListener){
+            document.addEventListener('DOMMouseScroll',function (event) {
+                clearTimeout(timer)
+                timer = setTimeout(function () {
+                    fun(event);
+                },200);
+            });
+        };
+
+
+
+        function fun(event) {
+            event = event || window.event;
+
+            var flag = '';
+            if(event.wheelDelta){
+                //ie/chrome
+                if(event.wheelDelta > 0){
+                    //上
+                    flag = 'up';
+                }else {
+                    //下
+                    flag = 'down'
+                }
+            }else if(event.detail){
+                //firefox
+                if(event.detail < 0){
+                    //上
+                    flag = 'up';
+                }else {
+                    //下
+                    flag = 'down'
+                }
+            }
+
+            switch (flag){
+                case 'up':
+                    if(now > 0){
+                        now--;
+                    }
+                    move(now);
+                    break;
+                case 'down':
+                    if(now < liNodes.length-1){
+                        now++;
+                    }
+                    move(now);
+                    break;
+            }
+
+
+            //取消默认行为
+            event.preventDefault && event.preventDefault();
+            return false;
+        }
+
+
+
+
+        
+        contenBind();
+        function contenBind() {
+            //设置内容区高
+            content.style.height = document.documentElement.clientHeight-header.offsetHeight+'px';
+            for (var i = 0; i < contentLi.length; i++) {
+                contentLi[i].style.height = document.documentElement.clientHeight-header.offsetHeight+'px';
+            };
+
+
+        }
+
+        headerBind();
+        function headerBind() {
+            //第一个up宽度
+            upNodes[0].style.width = '100%';
+
+            //小尖尖位置
+            arrow.style.left = liNodes[0].getBoundingClientRect().left+liNodes[0].offsetWidth/2-arrow.offsetWidth/2 + 'px';
+
+            //
+            for (var i = 0; i < liNodes.length; i++) {
+                liNodes[i].index = i;
+
+                liNodes[i].onclick = function () {
+                    now = this.index;
+                    move(now)
+                }
+
+            }
+        }
+
+
+        function move(now) {
+            //1.up宽度 == 0
+            for (var j = 0; j < upNodes.length; j++) {
+//                    upNodes[j].style.width = '0';
+                upNodes[j].style.width = '';
+            };
+            //2. this 下 up宽度 == 100%
+            upNodes[now].style.width = '100%';
+
+            //小尖尖位置
+            arrow.style.left = liNodes[now].getBoundingClientRect().left+liNodes[now].offsetWidth/2-arrow.offsetWidth/2 + 'px';
+
+            //屏幕切换
+            contentList.style.top = -now*(document.documentElement.clientHeight-header.offsetHeight) + 'px'
+
+
+        }
+
+
+
+    };
+
+</script>
+</html>

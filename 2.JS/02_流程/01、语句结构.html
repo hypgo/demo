@@ -1,0 +1,90 @@
+语句结构分类：顺序结构  分支结构   循环结构
+    
+一、  if判断
+	单分支
+  if{
+		代码块；
+	}
+
+	双分支（三元表达式:当if语句每个分支只有一行代码时，就要使用三元表达式，代码更少更简洁）
+	if(一般都是一个表达式，但是最终只要有值就行，并且这个值最终会转化为boolean){
+		代码块；
+	}else{
+		代码块；
+	}
+
+	单分支和双分支其实都可以理解为双分支，也就是把一件事分成两种情况去处理，符合条件和不符合条件
+	单分支只是处理了符合条件的，不符合条件的不管。
+	双分支是都要处理；
+
+	多分支:多分支是把一件事分成多种情况去考虑，每一种情况都要去处理；
+
+	if(){
+		
+	}else if(){
+
+	}else if(){
+
+	}else{
+
+  }
+  
+
+   
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var a = 10;
+    var b = 20;
+
+    if(a > 11){
+      a += 5;
+    } else{
+      a = a - 1;
+    }
+
+    console.log(a);
+
+    // var money = parseFloat(prompt('你有多少钱？'));
+    // if(money > 1000000){
+    //   alert('带你去北京游故宫');
+    // } else{
+    //   alert('在家看电视');
+    // }
+
+    // if后面的小括号里，最终要把括号里的值转化为Boolean，所以判断时不用显现转化
+    // 双分支
+		// 天气好就去看电影，不好就写代码.输入一个数，这个数如果大于0干啥，不大于0干啥
+    
+    var action = parseInt(prompt('2输入一个数字？'));
+    if(action){
+      alert('去看电视啦！！');
+    } else{
+      alert('老实写代码吧');
+    }
+
+    var weight = parseInt(prompt('你体重多少?'));
+
+    if(weight >= 70 && weight < 90){
+      alert('骨感美');
+    } else if(weight >= 90 && weight <120){
+      alert('性感美');
+    } else if(weight >= 120 && weight <140){
+      alert('丰满美');
+    } else if(weight >= 140 && weight <160){
+      alert('肉感美');
+    } else if(weight >= 160 && weight <200){
+      alert('该减肥了');
+    } else{
+      alert('请输入合法体重');
+    }
+
+  </script>
+</body>
+</html>

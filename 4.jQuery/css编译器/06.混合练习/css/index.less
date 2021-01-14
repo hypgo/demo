@@ -1,0 +1,77 @@
+@zero:0;
+// 文件夹不能叫less，不可以拖到koala
+//在less里面封装一个混合 mixin
+//定义混合 mixin .混合名称+(参数){}
+//如果定义很合适，声明了默认值，在调用不传递设置了默认值的参数
+//就会使用默认值，如果传递，就是用传递的值
+//使用混合，结尾一定要加分号
+//商品列表布局
+
+// 先写混合名（函数）
+.hideBox(@box,@num,@w,@h,@mr){
+//  @box  父容器选择器
+//  @num  每行的列数、商品个数
+//  @w    商品容器宽度
+//  @h    商品容器高度
+//  @mr   商品容器右边距
+  .@{box}{   //只是一个选择器的名字
+    width: (@w*@num)+( @num - 1)*@mr;
+    border: 1px solid #000;
+    margin: 0 auto;
+    overflow: hidden;
+    .hideBox{
+      width: (@w + @mr)*@num;
+      .item{
+        width: @w;
+        height: @h;
+        margin-right: @mr;
+        margin-bottom: 30px;
+        background: pink;
+        float: left;
+      }
+    }
+  }
+}
+// 调用混合 @box:inner 更改选择的名字
+.hideBox(@box:inner,@num:4,@w:200px,@h:300px,@mr:50px);
+
+
+
+
+// 定义混合，参数可以写成默认值 @w:500px  @h:300px
+.center(@w,@h,@bg){
+  position: absolute;
+  left: @zero;
+  right: @zero;
+  bottom: @zero;
+  top: @zero;
+  margin: auto;
+  width: @w;
+  height: @h;
+  background: @bg;
+}
+// .btn1(@w,@h,@bg,@color){
+//   display: block;
+//   border-radius: 5px;
+//   width: @w;
+//   height: @h;
+//   line-height: @h;
+//   color: @color;
+//   background: @bg;
+//   border: 1px solid #ccc;
+//   text-align: center;
+// }
+
+// 调用混合
+#wrap{
+    .center(@w:600px,@h:600px,@bg: pink);
+  .box1{
+    .center(@w:400px,@h: 400px,@bg: yellowGreen);
+  }
+  .box2{
+    .center(@w:300px,@h: 300px,@bg: skyblue);
+  }
+  .box3{
+    .center(@w:200px,@h: 200px,@bg: orange);
+  }
+}

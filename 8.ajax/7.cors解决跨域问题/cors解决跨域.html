@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="/5.ajax/7.cors解决跨域问题/public/js/jquery-1.12.4.js"></script>
+  <button id="btn"> 点我使用cors解决跨域问题 </button>
+  <script>
+
+    $('#btn').click(function(){
+      // 完整版写法
+      $.ajax({
+        url:'http://localhost:3000/test',
+        method:'get',
+        data:{name:'mike',age:40},
+        success:function(result){
+          console.log(result)
+        },
+        error:function(err){
+          console.log(err)
+        }
+      })
+
+    })
+
+
+  </script>
+</body>
+</html>

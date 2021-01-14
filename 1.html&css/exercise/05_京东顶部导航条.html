@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>京东顶部导航条</title>
+  <link rel="stylesheet" href="../06_font&background/fa/css/all.css">
+  <link rel="stylesheet" href="../02_CSS/reset.css">
+
+  <style>
+    body {
+      font: 12px/1.5 Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, "\5B8B\4F53", sans-serif
+    }
+
+    .clearfix::before,
+    .clearfix::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    /* 设置外围容器的样式 */
+    .top-bar-wrapper {
+      width:100%;
+      height: 30px;
+      line-height: 30px;
+      background-color: #E3E4E5;
+      border-bottom: 1px #dddddd solid;
+    }
+
+    /* 设置内部容器 */
+    .top-bar{
+      width: 1190px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* 设置字体样式 */
+    .top-bar li,
+    .top-bar span,
+    .top-bar a{
+      color: #999999;
+      text-decoration: none;
+    }
+
+    .top-bar a:hover,
+    .top-bar a.highlight{
+      color: red;
+    }
+
+    .location {
+      float: left;
+    }
+
+    /* 设置小图标的样式 */
+    .location .fas{
+      color: #f10215;
+      font-size: 13px;
+    }
+
+    /* 设置城市列表样式 */
+    .location .city-list{
+      display: none;
+      width: 320px;
+      height: 436px;
+      background-color: #fff;
+      border: 1px solid rgb(203, 204, 204);
+      /* 设置绝对定位，使其不占据页面的位置 */
+      position: absolute;
+      top: 31px;
+      z-index: 88;
+      box-shadow: 0 1px 2px rgb(0, 0, .3);
+    }
+
+    /* 这样写 鼠标移动北京后出现下拉框，但往下拉框移动又会消失，
+    那是因为hover给的是current-city，所以要给到current-city到上一层，才能传到整个city-list
+    .current-city:hover + .city-list{
+      display: block;
+    }  */
+
+    /* 当移动到location时，让city-list显示 */
+    .location:hover .city-list{
+      display: block;
+    }
+
+    /* 设置current-city样式 */
+    .current-city{
+      padding: 0 9px;  /* 设置current-city两边的白色边距 */
+
+      /* 鼠标移动到current-city字体会被撑大，因为hover那有border边块1px，所以直接把没有hover前的
+        样式也增加1px边块，就能保证不受影响*/
+      border: 1px solid transparent; 
+      border-bottom: none;
+
+      position: relative;
+      z-index: 99;
+    }
+
+
+    /* 设置current-city移入的样式，hover给谁一定要考虑清楚 */
+    .location:hover .current-city{
+      background-color: white;
+      border: 1px solid rgb(203, 204, 204); /* 加了1px边框会使导航条高度被撑起来*/
+      border-bottom: none;
+      padding-bottom: 1px;
+    }
+
+
+    .shortcut {
+      float: right;
+    }
+
+    /* 设置分割线 */
+    .shortcut .line{
+      height:10px;
+      border:.4px #999 solid;
+      /* margin-top: 10px; */
+      margin: 10px 12px 10px 12px;
+    }
+
+    /* 设置ul  li也向左浮动 */
+    .shortcut li {
+      float: left;
+    }
+
+  
+
+  </style>
+
+</head>
+
+<body>
+  <!-- 创建外围容器 -->
+  <div class="top-bar-wrapper clearfix">
+    <!-- 创建内部容器 -->
+    <div class="top-bar">
+      <!-- 创建左侧的菜单 -->
+      <div class="location">
+        <div class="current-city">
+          <i class="fas fa-map-marker-alt"></i>
+          <a href="javascript:;">北京</a>
+        </div>
+
+        <!-- 放置城市列表的div -->
+        <div class="city-list"></div>
+      </div>
+
+      <!-- 右侧的菜单 -->
+      <ul class="shortcut">
+        <li>
+          <a href="javascript:;">你好，请登录</a>
+          <a class='highlight' href="javascript:;">免费注册</a>
+        </li>
+
+        <!-- 分割线 -->
+        <li class="line"></li>
+        <li>
+          <a href="javascript:;">我的订单</a>
+        </li>
+
+        <li class="line"></li>
+        <li>
+          <a href="javascript:;">我的京东</a>
+          <i class="fas fa-angle-down"></i>
+        </li>
+
+        <li class="line"></li>
+        <li><a href="javascript:;">京东会员</a></li>
+
+        <li class="line"></li>
+        <li>
+          <a class='highlight' href="javascript:;">企业采购</a>
+          <i class="fas fa-angle-down"></i>
+        </li>
+
+        <li class="line"></li>
+        <li>
+          <span>客户服务</span>
+          <i class="fas fa-angle-down"></i>
+        </li>
+
+        <li class="line"></li>
+        <li>
+          <span>网站导航</span>
+          <i class="fas fa-angle-down"></i>
+        </li>
+
+        <li class="line"></li>
+        <li>
+          <span>手机京东</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

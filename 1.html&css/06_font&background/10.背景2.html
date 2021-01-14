@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .box {
+      width: 500px;
+      height: 500px;
+      background-color: #bfa;
+      background-image: url(../exercise/img/网易新闻.png);
+      background-repeat: no-repeat;
+      /* background-position: top center; */
+      background-position: 50px 50px;
+      background-origin:border-box；
+    }
+
+    /* 
+      background-clip  设置背景范围
+        可选值：
+          border-box 默认值 背景会出现在边框的下边
+          padding-box 背景不会出现在边框，只出现在内容区和内边距
+          content-box 背景只会出现在内容区
+      
+      background-origin 背景图片的偏移量计算的原点
+          padding-box 默认值 从内边距开始计算
+          content-box 背景图片的偏移量从内容区开始计算
+          border-box  从边框处开始计算
+
+      background-size  设置背景图片的大小
+        第一个值表示宽度 width
+        第二个值表示高度 height
+         如果只写一个，则第二个默认是 auto自动计算另一边
+
+        cover  图片的比例不变，将元素铺满
+        contain 图片比例不变，将图片在元素中完整显示
+
+      background-attachment  设置背景图片是否跟随元素移动
+          scroll  默认值 随元素移动（滚动）
+          fixed  固定在页面，不会随元素移动
+
+      background 背景相关的简写属性！
+      background-color
+      background-image
+      background-repeat
+      background-origin
+      background-position
+      background-size
+      background-clip
+      background-attachment
+        没有顺序要求，没有哪个属性必须写！
+
+        注意：
+          background-size 必须写在background-position的后边，并且使用/隔开
+          background-position/background-size
+
+          background-origin  background-clip两个样式，origin必须在clip前边
+    */
+
+    .box2{
+      width: 200px;
+      height: 200px;
+      background:#bfa 
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+  <div class="box2"></div>
+</body>
+
+</html>

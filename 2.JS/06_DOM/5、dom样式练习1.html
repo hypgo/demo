@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../reset.css">
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+
+    ul{
+      width: 150px;
+      height: 201.5px;
+      border: 1px solid blue;
+    }
+
+    ul>li{
+      width: 100%;
+      height: 40px;
+      border-bottom: 1px solid red;
+      text-align: center;
+      line-height: 40px;
+    }
+
+    ul>li:last-child{
+      border-bottom: none;  
+    }
+
+  </style>
+</head>
+<body>
+  <!-- 
+    1、导航鼠标移入高亮显示（对每个元素既加入移入又加移出）
+    2、导航隔行变色
+  -->
+  
+  <div class="nav">
+    <ul class="list">
+      <li>导航项目1</li>
+      <li>导航项目2</li>
+      <li>导航项目3</li>
+      <li>导航项目4</li>
+      <li>导航项目5</li>
+    </ul>
+  </div>
+
+  <script>
+    // 排他法：
+    var liList = document.querySelectorAll('ul>li');
+
+    // 隔行变色
+    for(var i = 0; i < liList.length; i++){
+      if(i % 2 == 0){
+        liList[i].style.backgroundColor = 'blue';
+      } else{
+        liList[i].style.backgroundColor = 'red';
+      }
+    }
+
+    var list = document.querySelector('.list');
+    for(var i = 0; i < liList.length; i++){
+
+      //添加事件代码而已，并不会执行，当鼠标点击的时候才会执行
+      liList[i].onmouseover = function(){
+        for(var j = 0; j < liList.length; j++){
+          liList[j].style.backgroundColor = 'transparent';
+        }
+        this.style.backgroundColor = 'green';
+      }
+    }
+
+    // 此时只要整个ul 鼠标移出来就行，不用遍历li
+    list.onmouseout = function(){
+      for(var j = 0; j < liList.length; j++){
+        liList[j].style.backgroundColor = 'transparent';
+      }
+    }
+
+
+  </script>
+
+</body>
+</html>

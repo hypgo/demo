@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        p{
+            font-size: 20px;
+        }
+
+        /* 
+            伪元素：表示页面中一些特殊的并不真实存在的元素（特殊的状态）
+                伪元素使用：：开头
+
+                ::first-letter 表示第一个字母
+                ::first-line 表示第一行
+                ::selection 表示选中的内容
+                ::before 元素的开始 <div>hello ，div括号后与h前之间的那个区域
+                ::after 元素的最后 world<div>,div括号前与d之间的区间（行内元素）
+                    before和after 必须结合content属性来使用
+
+        */
+
+        p::first-letter{
+            font-size: 50px;
+        }
+
+        p::first-line{
+            background-color: pink;
+        }
+
+        p::selection{
+            background-color:yellow;
+        }   /* 选中的内容设置样式*/
+
+        /* h2::before{
+            content:'abc';
+            color: red;
+        }
+
+        h2::after{
+            content: 'aaa';
+            color: blue;
+        } */
+
+        div::before{
+            content:'前';
+            color: red;
+        }
+
+        /* 为什么div用这2个会有重叠效果。不知道从哪里冒出来的*/
+        div::after{
+            content: '后';
+            color: blue;
+        }
+
+    </style>
+
+</head>
+<body>
+    
+    <div>hello who are  you </div>
+
+    <br>
+    <br>
+    <br>
+    <h2>hello world</h2>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae qui error repellat distinctio odio quia dolore assumenda vero temporibus, veniam vel alias expedita eius magni? At recusandae dignissimos aliquid rem?</p>
+
+</body>
+</html>

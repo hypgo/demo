@@ -1,0 +1,61 @@
+.inner {
+  width: 950px;
+  border: 1px solid #000;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.inner .hideBox {
+  width: 1000px;
+}
+.inner .hideBox .item {
+  width: 200px;
+  height: 300px;
+  margin-right: 50px;
+  margin-bottom: 30px;
+  background: pink;
+  float: left;
+}
+#wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 600px;
+  height: 600px;
+  background: pink;
+}
+#wrap .box1 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 400px;
+  height: 400px;
+  background: yellowGreen;
+}
+#wrap .box2 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 300px;
+  height: 300px;
+  background: skyblue;
+}
+#wrap .box3 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  width: 200px;
+  height: 200px;
+  background: orange;
+}

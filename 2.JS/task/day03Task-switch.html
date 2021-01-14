@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+// 针对switch case练习一个
+// 输入钱数，根据钱的多少决定午饭吃什么
+// 输入年龄 判定是少年青年中年老年
+
+
+    // var money = parseInt(prompt('how money you have?'))
+    var age = parseInt(prompt('how old are you?'));
+
+    switch(true){
+      // case money > 0 && money <= 20:
+      //  alert('叫外卖！');
+      // break;
+      //  case money > 20 && money <= 50:
+      // alert('吃麦当劳！');
+      //  break;
+      // case money > 50 && money <= 100:
+      //  alert('下管子！！');
+      //  break;
+      // case money > 100 && money <= 200:
+      //  alert('吃烧烤！');
+      //  break;
+      // default:
+      //  alert('你随意');
+      //  break;
+
+      case age > 0 && age <= 12:
+        alert('小孩子！');
+        break;
+      case age > 12 && age <= 18:
+        alert('青少年！');
+        break;
+      case age > 18 && age <= 30:
+        alert('成年人！！');
+        break;
+      case age > 30 && age <= 50:
+        alert('中年人！');
+        break;
+      case age > 50 && age <= 70:
+        alert('老年人！');
+        break;
+      case age > 70:
+        alert('老头子！');
+        break;
+      default:
+        alert('祝你长命百岁！！！');
+        break;
+
+    }
+
+
+
+
+  </script>
+</body>
+</html>

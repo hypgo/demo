@@ -1,0 +1,44 @@
+六  while和dowhile循环
+	While和do-while的区别（看执行*过程*）
+
+		do--while 又是由while演变而来的，
+		do--while和while区别在于：while循环先判断条件是否为真，再决定是否执行循环体
+    如果条件为真就执行，为假就不会执行循环体，一次都不执行；
+    
+		do--while是先执行一次循环体，再去判断条件，条件为真 继续执行循环体，条件为假不会执行循环体
+		但是do--while无论条件是否为真，都会至少执行一次循环体；
+
+	什么时候用for,什么时候用while
+		for循环一般有明显的循环次数，这时候用for循环比较容易，且真谛是条件三的自增自减；
+    while循环一般没有明显的次数，用它最合适；但while也能指定循环次数
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    // for循环能干的事情，while都能干
+
+    // var i = 1;
+    // while(i < 101){
+    //   console.log(i);
+    //   i++;
+    // }
+
+    // while循环先判断条件是否为真，再执行循环体。
+    // do-while 循环先执行一次循环体，再去判断条件。
+
+    var j = 10;
+    do{
+      console.log(j);
+      j++;
+    }while(j < 100);
+
+  </script>
+</body>
+</html>

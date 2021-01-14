@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../reset.css">
+  <style>
+    a{
+      text-decoration: none;
+    }
+
+    .navList{
+      position: relative;
+      width: 100px;
+      height: 150px;
+      background-color: #bfa;
+      /* border: 1px solid red; */
+    }
+
+    .navList>li{
+      width: 100px;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      border-bottom: 1px solid rgb(44, 43, 43);
+      box-sizing: border-box;
+    }
+    
+    .navList>li:first-child{
+      border-top: 1px solid  rgb(44, 43, 43);
+    }
+
+    .navList>li .navIn{
+      position: absolute;
+      top: 0;
+      left: 100px;
+      width: 150px;
+      height: 200px;
+      background-color: #bac;
+      /* 不可以占位 */
+      display: none;
+    }
+
+    .navList>li .navIn li{
+      width: 150px;
+      height: 50px;
+      text-align: center;
+      line-height: 40px;
+    }
+
+  </style>
+</head>
+<body>
+  <ul class="navList">
+    <li>
+      <a href="javascript:;">服装</a>
+      <ul class="navIn">
+        <li>短裤</li>
+        <li>短袖</li>
+        <li>外套</li>
+        <li>马夹</li>
+      </ul>
+    </li>
+    <li>
+      <a href="javascript:;">啤酒</a>
+      <ul class="navIn">
+        <li>哈啤</li>
+        <li>珠江</li>
+        <li>雪花</li>
+        <li>青岛</li>
+      </ul>
+    </li>
+    <li>
+      <a href="javascript:;">数码产品</a>
+      <ul class="navIn">
+        <li>手机</li>
+        <li>电脑</li>
+        <li>平板电脑</li>
+        <li>电视</li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    var navLists = document.querySelectorAll('.navList>li');
+    var navIns = document.querySelectorAll('.navList>li .navIn');
+    for(var i = 0; i < navLists.length; i++){
+      // navLists是数组，从数组中取数，加index变成对象，保存它相应的下标
+      navLists[i].index = i;
+      navLists[i].onmouseenter = function(){
+        for(var j = 0; j < navIns.length; j++){
+          navIns[j].style.display = 'none';
+        }
+        // 外边循环的下标是与里面的这层循环的下标是一致的！
+        // 这里的this=navLists[i]
+        navIns[this.index].style.display = 'block';
+      }
+
+      navLists[i].onmouseleave = function(){
+        navIns[this.index].style.display = 'none';
+      }
+    }
+
+  </script>
+</body>
+</html>

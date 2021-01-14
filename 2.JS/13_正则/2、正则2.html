@@ -1,0 +1,94 @@
+第二节:  字符串正则相关方法
+	正则对象的方法：
+		Reg.test() 
+      test() 方法用于检测一个字符串是否匹配某个模式，如果返回true，否则返回false。
+      
+      判断字符串当中是否含有数字  / \d/
+			判断字符串当中是否含有abcd /abcd/
+			判断字符串是否是一个11位的数字 /^\d{11}$/
+		
+		Reg.exec()
+			exec() 方法用于检索字符串中的正则表达式的匹配。
+			该函数返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为 null。
+			注意：此方法每次只会返回一个结果，如果要找到所有的，需要循环去调用必须全局匹配修饰；
+
+			找到字符串当中符合正则的子串
+			找到字符串当中所有符合正则的子串
+	
+	字符串方法使用正则
+      △str.match()：在字符串中搜索符合规则的内容，搜索成功就返回内容，格式为数组，失败就返回null。
+      如果不加g，那么返回第一次符合的结果，加g返回所有结果的数组。
+      找一个字符是详细进行展示，找多个字符只是在一个数组展示找到的内容子串。
+
+      str.search()：在字符串搜索符合正则的内容，搜索到就返回出现的位置（从0开始，
+      如果匹配的不只是一个字母，那只会返回第一个字母的位置），如果搜索失败就返回 -1，只能返回第一次；
+
+      注意：上面两个方法类似正则的方法 test和exec
+      Reg.exec()和str.match()     
+      当不使用全局匹配时，两者的匹配效果都是返回第一次匹配成功的结果；
+      
+      reg.test（）和str.search（）  前者返回的是true或者false，后者返回到的是匹配到的子串位置或者-1；
+
+      str.replace():查找符合正则的字符串，就替换成对应的字符串。返回替换后的内容。
+			这个方法象当于做了两件事，先查找匹配，然后再用新的串把匹配到的串替换掉。
+		
+  写正则要从第一位开始考虑！
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    //   给一个字符串，如果里面含有2个到10个连续就打印i love you!
+    var str = 'jflakdjkdddddj';
+    var pat = /\d{2,10}/;
+
+    if (pat.test(str)) {
+      console.log('i love you!');
+    } else{
+      console.log('nonono');
+    }
+
+  //  判断手机号码是否合法
+    var phoneNum = '18318213222';
+    var pat1 = /^1[3-9]\d{9}$/;     //要考虑很多个条件
+    console.log(pat1.test(phoneNum));
+    
+  //  判断邮箱是否合法:6-15位
+    var mail = 'huangyua_nping@oppo.com';
+    var pat2 = /^\w{6,20}@(qq|163|sina|gmail)\.(org|cn|com)$/;
+    console.log(pat2.test(mail));
+
+  //  将手机号的中间4位替换位****
+    var pat3 = /(\d{3})(\d{4})(\d{4})/;
+    console.log(phoneNum.match(pat3));
+    
+    var result = phoneNum.replace(phoneNum.match(pat3)[1],'****');
+    console.log(result);
+
+  //  将身份证中的最后4位替换位****	
+    var id = '441622199311145472'
+    var pat4 = /^\d{14}(\d{4})$/
+    var result1 = id.replace(id.match(pat4)[1],'****');
+    console.log(result1);
+
+
+  //  从一篇文章当中匹配所有的电话号码
+    var article = 'jsd000flafuwei1ouij放假18318213222啦ueuoj就离开就离开13567675432设计费欧';
+    var pat5 = /1[3-9]\d{9}/g;
+    console.log(article.match(pat5));
+
+  //  从一篇文章当中找到所有邮箱的位置
+  var article1 = 'jsd000huangyuping@oppo.comei1ouij放假18318@qq.com啦ueuoj就离开就离开13567675432@gmail.com设计费欧';
+  var pat2 = /\w{3,20}@(qq|163|sina|gmail)\.(org|cn|com)/g;
+  console.log(article1.match(pat2));
+
+
+  </script>
+</body>
+</html>

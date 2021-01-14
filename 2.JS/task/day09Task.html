@@ -1,0 +1,65 @@
+六： 强化练习（面试题）
+	1.字符串反转
+	3.数组、字符串的替换操作
+	2.打印字符串中出现字母最多的次数和索引位置
+
+晚习强化练习                      三要素：方法、参数、返回值
+	1.熟悉字符串的方法（三要素）
+	2.熟悉数组的方法（三要素）
+	3.字符串课上面试题
+  4.数组课上面试题
+  
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 字符串反转
+    var str = 'hello world!';
+    var strToArr = str.split('');
+    strToArr.reverse();
+    str = strToArr.join('')
+    console.log(str);
+
+    // 字符串替换
+    const str1 = 'apple12 huaweimate4';
+    console.log(str1.replace('apple','xiaomi'));
+    console.log(str1.search('p'));
+    // console.log(str1.match(/1/g));
+
+    const arr = [1,2,3,44,5,"apple"];
+    console.log(arr);
+    console.log(arr.pop());
+
+    console.log(arr.push('apple','huawei'));
+    console.log(arr);
+
+    // 数组替换操作
+    const arr2 = [1,'vivo',3,44,5,"apple"];
+    arr2.splice(4,2,'oppo');
+    console.log(arr2);
+
+    // 打印字符串中字符出现最多的次数和索引位置
+    var str3 = '7875109aaasexkjnx';
+    // 思路：
+    // 1、遍历每个子串，转换成对象来解，如果对象属性为真，则属性值++，如果不为真，则赋值为1
+    // 2、然后计算索引位置，字符名字加arr，以数组收集索引位置，如果对象中有+arr的值，则把索引值添加进去，如果没有，则创建数组，并把i赋值进去
+    // 3、定义max和，遍历对象，判断属性值是num，则开始比较，求出max。而key就是出现最多的字符
+    
+    // for( var i = 0; i < arr3.length-1; i++){
+    //   if(){
+
+    //   }
+    // }
+
+
+
+
+  </script>
+</body>
+</html>

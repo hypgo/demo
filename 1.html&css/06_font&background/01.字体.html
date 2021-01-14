@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 
+      font-face 可以将服务器中的字体直接提供给用户去使用
+        问题：
+          1、加载速度受网络影响
+          2、版权有争议
+          3、字体格式
+    */
+    @font-face {
+      /* 指定字体的名字 */
+      font-family:'飘逸字体' ;
+
+      /* 服务器中字体的路径 */
+      src: url('./jfaljfklj.ttf');
+    }
+
+    p{
+      /* 
+        字体相关样式：
+          color 设置字体颜色
+          font-size 字体的大小
+            相关单位：
+              em 当前元素的一个font-size
+              rem 根元素的一个font-size
+
+          font-family 字体族 =字体格式
+            可选值：
+              serif 衬线字体
+              sans-serif  非衬线字体
+              monospace  等宽字体：指定字体的类别，浏览器会自动使用该类别下的字体
+            
+            font-family 可以同时指定多个字体，多个字体间使用，隔开
+              字体生效时优先使用第一个，第一个无法使用则使用第二个，以此类推
+       */
+       color: red;
+       font-size: 300px;
+
+       /* font-family: serif; */
+       font-family:Microsoft YaHei,Heiti SC,tahoma,arial,Hiragino Sans GB,"\5B8B\4F53",sans-serif;
+    }
+
+  </style>
+
+</head>
+<body>
+  <p>
+    今天天气真不错，hello word
+  </p>
+</body>
+</html>

@@ -1,0 +1,78 @@
+第一节:  DOM概念和操作方式   ~~ 一切皆对象
+  1.DOM概念，作用，顶级对象
+      DOM 文档对象模型  
+      DOM是一个使程序和脚本有能力动态地访问和更新文档的内容、结构以及样式的平台和语言中立的接口。
+      DOM就是处理网页内容的方法和接口 
+    
+      window是浏览器窗口对象，所有的东西都被当作是window的子对象
+
+      文档对象：document，是window下的一个属性，代表整个DOM文档对象
+      根元素（root）、html标签
+      节点：元素、属性、文本、注释等等
+      元素：标签
+      
+      文档树(dom树)：
+        以HTML为根节点，形成的一棵倒立的树状结构，我们称作DOM树；
+        这个树上所有的东西都叫节点（dom对象），节点有很多类（元素、属性、文本、注释等等）；
+        这些节点如果我们通过DOM方法去获取或者其它的操作去使用的话，就叫DOM对象；
+    
+  2.window.onload  页面加载完成事件
+    一般情况我们都是等待页面加载完成之后才去操作dom元素
+    如果页面没有加载完成就去获取dom元素，有可能获取不到；
+    所有JS代码都在这里面写；
+
+      window.onload = function(){
+
+      }等待页面加载完成，执行函数当中的代码；
+
+
+  3.案例: 页面加载完毕，点击按钮弹出对话框。
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <header id = 'header'>
+    <h1><a href="javascript:;"><img src="" alt=""></a></h1>
+    <nav class="nav">
+      <ul class='list'>
+        <li>首页</li>
+        <li>个人</li>
+        <li>关于</li>
+        <li>招聘</li>
+      </ul>
+    </nav>
+  </header>   
+
+  <!-- 语句块 section  -->
+  <div class="content">
+    <p>jdfksljfk</p>
+    <p>jdfksljfk</p>
+    <p>jdfksljfk</p>
+  </div>
+
+  <div class="footer">
+    <a href="">百度</a>
+    <a href="">搜狐</a>
+    <a href="">谷歌</a>
+  </div>
+
+  <input type="button" id="btn">
+
+  <script>
+    // 页面加载完成；要获取事件源
+    window.onload = function(){
+      var btn = document.getElementById('btn');
+      btn.onclick = function() {
+        alert('加载事件完成点击。')
+      }
+    }
+
+  </script>
+</body>
+</html>

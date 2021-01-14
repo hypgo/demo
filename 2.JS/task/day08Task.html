@@ -1,0 +1,46 @@
+晚自习强化
+	对象的增删改查，构造函数
+
+	1、创建两个同一品牌的手机对象（要求品牌和方法在原型当中定义共享使用）;
+		 接下来把实例化对象的过程以及原型的原理图  每人画一遍；
+
+	2、封装自己的工具函数实现随机验证码功能，要求验证码的位数可以根据参数变化
+	3、函数传参如果传的是基本数据类型和传引用（对象）有什么区别；
+	4、把当天封装的随机数以及日期函数搞定
+	5、把值类型和引用类型面试题做一下，记得画图；
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Phone(model,color,size,money){
+			this.model = model;
+			this.color = color;
+			this.size = size;
+			this.money = money;
+		}
+		Phone.prototype.brand = '华为';
+		Phone.prototype.callPhone = function(){
+			console.log('call');
+		}
+		Phone.prototype.photo = function(){
+			console.log('take photo!');
+		}
+		Phone.prototype.playMusic = function(){
+			console.log('music!');
+		}
+
+		var phone1 = new Phone('P40','blue',6.3,4899);
+		phone1.playMusic();
+		console.log(phone1);
+
+	</script>
+</body>
+</html>

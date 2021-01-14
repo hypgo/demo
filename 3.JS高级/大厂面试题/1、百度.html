@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var obj = {n : 2}
+    function fn2(a) {
+      // var a = obj
+      // 接着a 的指向发生来了变化，变成{n：4}，原来的obj不会发生改变
+      a = {n : 4}
+    }
+    fn2(obj)
+    console.log(obj.n);  // 2
+
+
+    var a = {n : 1}
+    var b = a   // b = {n:1 , x:{n:2}}
+    a.x = a = {n : 2}
+    // a.x = {n : 2}
+    // a = {n : 2}
+    console.log(a.n , b.n); // 2 , 1
+    console.log(a.x , b,x); // undefined , n:2  按顺序执行，a.x已经被a={n:2}覆盖了
+
+
+    // 对象属性查找 ???
+    function A() {
+    }
+    A.prototype.n = 1
+    var b = new A()  // 构造函数
+
+    A.prototype = {
+      n : 2,
+      m : 3
+    }
+    var c = new A()
+
+    console.log(b.n , b.m , c.n , c.m);
+    // 1 , undefined  , 1 , undefined
+
+  </script>
+</body>
+</html>

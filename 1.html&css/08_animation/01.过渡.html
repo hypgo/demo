@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: #bfa;
+    }
+
+    .box:hover {
+      height: 200px;
+      width: 200px;
+      /* transition: all 2s; */
+
+      /* transition 过渡，简写。
+       - 指定一个属性发生变化时的切换方式，可提升用户体验
+       - 可以同时设置过渡相关的所有属性。
+       只有一个要求，要写延迟，两个时间中第一个是持续时间，第二个是**延迟** */
+
+      /* 规定过渡效果何时开始。默认是 0。 */
+      transition-delay: 1s;
+
+      /* transition-property:指定发生过渡的属性
+          选择单边，指定边先产生变化，其他边后变化，所有属性用all，用逗号隔开 */
+      transition-property: all; 
+
+      /* transition-duration:指定过渡效果的持续时间，单位s  ms */
+      transition-duration:2s; 
+
+      /* transition-timing-function: 过渡的时序函数（时间函数）
+          可选值：
+          ease  默认值，慢速开始，先加速，再减速
+          linear 线性，匀速移动。 
+          ease-in 加速运动
+          ease-out 减速运动
+          ease-in-out  先加速，后减速
+          变化原理就是贝塞尔曲线，cubic-bezier()
+
+          step(3) 分步走，1步，2步，3步
+
+          */
+      transition-timing-function:ease-in-out; 
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+</body>
+
+</html>

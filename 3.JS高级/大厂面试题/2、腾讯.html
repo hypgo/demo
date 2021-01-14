@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    //作用域、变量查找
+    var x  = 10
+    function fn() {
+      console.log(x);    // 10
+    }
+    function show(f) {
+      var x = 20
+      f()
+    }
+    show(fn)
+
+    
+    var name = 'world!'
+    ;(function (){
+      // var name
+      if (typeof name === 'undefined') {
+        var name = 'Jack'
+        console.log(name);   //Jack
+      } else {
+        console.log(name);
+      }
+    })()
+
+    // 配合堆栈内存图解题
+    function fn1() {
+      var a = 2
+      function fn2(){
+        a++ 
+        console.log(a);  
+      }
+      return fn2
+    }
+    var f = fn1()   // 2
+    f()   // 3
+    f()   // 4 
+    
+    // 使用闭包完后要及时清除，使函数变成垃圾对象
+    f = null;
+
+  </script>
+</body>
+</html>

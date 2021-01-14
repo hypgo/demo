@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>03_工厂模式</title>
+</head>
+<body>
+<!--
+方式三: 工厂模式
+  * 套路: 通过工厂函数动态创建对象并返回
+  * 适用场景: 需要创建多个对象
+  * 问题: 对象没有一个具体的类型, 都是Object类型
+-->
+<script type="text/javascript">
+  // 工厂函数: 返回一个需要的数据的函数
+  
+  function createPerson(name,age,gender) {
+    var obj = new Object();
+    obj.name = name;
+    obj.age = age;
+    obj.gender = gender;
+  }
+  var p1 = createPerson('xiaoming',11,'男')
+
+</script>
+</body>
+</html>

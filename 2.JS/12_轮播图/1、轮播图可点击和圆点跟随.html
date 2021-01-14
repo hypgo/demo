@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>轮播图</title>
+  <link rel="stylesheet" href="../reset.css">
+  <style>
+    .banner{
+      position: relative;
+      width: 600px;
+      height: 400px;  
+      margin: 50px auto;
+      overflow: hidden;
+    }
+
+    .banner .bannerList{
+      /* 代码没报错，说明js没问题，有问题的是CSS */
+      position: absolute;
+      width: 4200px;
+      height: 400px;
+    }
+
+    .banner .bannerList li{
+      float: left;
+      width: 600px;
+      height: 400px;
+    }
+
+    .banner .bannerList li img{
+      width: 100%;
+      height: 100%;
+    }
+
+    .banner .left , .banner .right{
+      /* 子绝对 父相对 */
+      position: absolute; 
+      /* 下两个没理解 */
+      top: 50%;
+      transform: translateY(-50%);
+      /* display: block; */
+      width: 50px;
+      height: 80px;
+      font-size: 40px;
+      /* 文本在盒子中居中 */
+      text-align: center;
+      line-height: 80px;
+      background-color: red;
+      /* 鼠标移入，发生透明度渐变，写成display：none不行，此时结构已经没了，无法渐变 */
+      opacity: 0;
+      /* 中间有值可以设置，才能起到作用 */
+      transition: opacity 2s;
+    }
+
+    .banner .left{
+      left: 0; 
+    }
+
+    .banner .right{
+      right: 0; 
+    }
+
+    .banner .iconList{
+      position: absolute;
+      /* overflow: hidden; */
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 15px;
+
+    }
+    
+    .banner .iconList li{
+      float: left;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: gray;
+      margin-left: 5px;
+    }
+
+    .banner .iconList li.current{
+      background-color:rgb(173, 44, 44);
+    }
+
+  </style>
+</head>
+<body>
+  <!-- 
+    轮播图结构就是先将很多图片水平平铺，然后将各图片隐藏到一张图底下
+   -->
+  <div class="banner">
+    <ul class="bannerList">
+      <li>
+        <img src="../06_DOM/img/5.jpg" alt="">
+      </li>
+      <li>
+        <img src="../06_DOM/img/1.jpg" alt="">
+      </li>
+      <li>
+        <img src="../06_DOM/img/2.jpg" alt="">
+      </li>
+      <li>
+        <img src="../06_DOM/img/3.jpg" alt="">
+      </li>
+      <li>
+        <img src="../06_DOM/img/4.jpg" alt="">
+      </li>
+      <li>
+        <img src="../06_DOM/img/5.jpg" alt="">
+      </li>
+      <li>
+        <img src="../06_DOM/img/1.jpg" alt="">
+      </li>
+    </ul>
+    <span class="left">  <  </span>
+    <span class="right"> >  </span>
+
+    <ul class="iconList">
+      <li class="current"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+
+  <script>
+    var box = document.querySelector('.banner');
+    var left = document.querySelector('.banner .left');
+    var right = document.querySelector('.banner .right');
+    var bannerList = document.querySelector('.banner .bannerList');
+    var icons = document.querySelectorAll('.banner .iconList li');
+
+    var timeAll = 600;  //走完一张图片所用时间
+    var timeStep = 30;  //走完一步的时间，其实就是定时器当中的时间 30ms走一步
+    var timer = null;
+    var isMove = false;  //默认没移动，专门针对多次点击
+
+    //无缝之后，轮播图默认显示的不再是第一张而是之前的最后一张
+    bannerList.style.left = -600 + 'px'; 
+
+    box.onmouseenter = function(){
+      left.style.opacity = 1;
+      right.style.opacity = 1;
+    }
+
+    box.onmouseleave = function(){
+      left.style.opacity = 0;
+      right.style.opacity = 0;
+    }
+    
+    right.onclick = function(){
+      move(true);
+    }
+
+    left.onclick = function(){
+      move(false);
+    }
+
+    // 点一下慢慢移动，而不是瞬变，所以要求每一次（步）走多少
+    function move(flag) {
+      // 处理连续点击，元素叠加移动的bug
+      // 要判断是否发生了move，发生了就不让点击。不然两次move叠加会乱。
+      // 第一次是false，进不到return，正常走。第二次变成true，正在移动，却执行return
+      if (isMove) {
+        return;  //如果元素正在移动，就不再移动直接返回，后面代码不执行。即使你快速点击，依然不会动
+      }
+      isMove = true;
+      setTimeout(function(){
+        isMove = false; 
+      },700);    //700ms以后，就可以移动了
+
+
+      if (typeof flag == 'boolean') {
+        if (flag) {
+          var dis = -600; //每点击一次，元素要走的距离。
+        } else{
+          var dis = 600; 
+        }
+      } else {
+        // 点击小圆点，传的是元素的最终位置，通过这个最终位置拿到*移动的距离*
+        var dis = flag - bannerList.offsetLeft;
+      }
+
+      // 向左移动是负数
+      var lastDis = bannerList.offsetLeft + dis; //元素最终的位置
+      var step = dis / (timeAll / timeStep);     //求每一步走的距离
+
+      timer = setInterval(function(){
+        var left = bannerList.offsetLeft + step;
+        if (left == lastDis) {
+          clearInterval(timer);
+          
+          // 加无缝逻辑
+          if (left == -3600) {
+            left = -600;
+          } else if( left == 0){
+            left = -3000;
+          }
+        }
+        bannerList.style.left = left + 'px';
+        
+      },timeStep);
+    
+      // 点击小圆点 跟随图片动起来
+      var index = Math.abs(lastDis / 600) - 1;
+      if (index < 0) {
+        index = 4;
+      } 
+
+      for(var i = 0; i < icons.length; i++){
+        icons[i].className = '';
+      }
+
+      icons[index%5].className = 'current';
+      
+    }
+   
+      // // 点击小圆点 排他作用
+      // var icons = document.querySelectorAll('.banner .iconList li');
+      
+      // for(var i = 0; i < icons.length; i++){
+      //   icons[i].onclick = function(){
+      //     for(var j = 0; j < icons.length ; j++){
+      //       icons[j].className = '';
+      //     }
+
+      //     this.className = 'current';
+      //   }
+      // }
+
+    
+    for(var i = 0; i < icons.length; i++){
+      icons[i].index = i;
+      icons[i].onclick = function(){
+        move((this.index+1)*-600);
+      }
+    }
+    
+
+    // 自动轮播：一定是个定时器
+    var autoIndex = 1;
+    setInterval(function(){
+      autoIndex++;
+      move(autoIndex*-600);
+      if (autoIndex == 6) {
+        autoIndex = 1;
+      }
+    },2000)
+
+
+
+  </script>
+</body>
+</html>

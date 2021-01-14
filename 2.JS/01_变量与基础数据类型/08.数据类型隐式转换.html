@@ -1,0 +1,99 @@
+三、 基本数据运算（表达式的值）
+	1、同种数据类型运算和比较    
+		数字和数字
+			小数运算的时候不准
+			数字能表示的最大值
+      1/0：Infinity   0/1：0   0/0：NaN
+      △ NaN 与任何数值进行运算与比较都不行，都是false
+      
+      比较：看大小
+							
+		字符串和字符串：字符串有数字型的字符串和不是数字型的，还有空字符串
+      只有+才有意义，其他 - * / % 先转化成数字，无法转化的话都是NaN。
+      console.log(a+b)
+      字符串相加的运算过程：先将字符串转化为数值，再运算。空字符串转化为数值等于0
+      
+      比较：字符串的Unicode码值
+
+		boolean和boolean
+      +  -  *  / ，转化成数字来运算。true=1，false=0
+      
+			比较：转化成数值比较（1与0比较）
+
+		Undefined和undefined
+      +  -  *  / ， 转为数值都是NaN
+
+			比较：NaN与NaN的大小比较，是false。NaN == NaN  >>> 结果是false
+
+		null和null
+      +  -  *  / ，转为数值都是0
+      0/0 0%0 都是NaN
+
+      比较：0与0的大小比较，是false。0 == 0 >>> 结果是true
+
+  2、不同数据类型运算和比较 字符串有数字型的字符串和不是数字型的
+
+    数字和字符串           + - * /  比较
+    数字和boolean          + - * /  比较
+    数字和undefined       + - * /  比较
+    数字和null            + - * /  比较
+
+    字符串和boolean       + - * /  比较(只要有字符串 相加 就一定是拼接)
+    字符串和undefined     + - * /  比较
+    字符串和null          + - * /  比较
+
+    Bool和undefined       + - * /  比较
+    Bool和null            + - * /  比较
+
+    Undefined和null       + - * /  比较
+
+    特殊情况：
+        当遇到null的时候;会有特殊情况发生;
+        特殊情况：空串和null不相等
+        特殊情况：false和null不相等
+        特殊情况: 0和null不相等
+        以上三种，都是可以转化为数值0的基本类型，结果为false
+
+        特殊情况：undefined 和 null 相等；官方解释这两个在某一个层面上都表达空的意思
+
+  在其余的情况下：只要是不同的基本数据类型进行运算和比较：
+    第一步：先看是不是 +
+      如果是+，看有没有字符串，如果有，就是拼接字符串
+
+    第二步：再看是不是比较
+      如果是比较，看是不是两边都是字符串，如果是，比较的是字符串的Unicode码
+
+    最后：全部转数字进行运算和比较。
+
+
+小面试题：怎么快速将一个字符串‘23’转化为数字23？
+答案：‘23’-0 。（为什么不用number转化，因为调用了函数会影响执行效率）
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  
+  <script>
+    var a = null;
+    var b = null;
+    console.log(a > b);
+    console.log(a < b);
+    console.log(a == b);
+
+    // var c = ' ';
+    // var c = false;
+    // var c = 0;
+    var c = undefined;
+    var d = null;
+    console.log(c == d);
+  
+
+  </script>
+</body>
+</html>

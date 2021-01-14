@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="box">
+    <button id="btn">测试</button>
+    <br/>
+  
+    <input type="text" name="msg1"/><br/>
+    <input type="text" name="msg2"/><br/>
+  
+  </div>
+
+  <script src="./js/jquery-1.10.1.js"></script>
+  <!--需求1. 点击按钮: 显示按钮的文本, 显示一个新的输入框-->
+  <!--需求2. 遍历输出数组中所有元素值-->
+  <!--需求3. 去掉"  my atguigu  "两端的空格-->
+  <script>
+    $(function(){
+      $('#btn').click(function(){
+        alert($(this).html());
+        $('<input type="text" name="msg3"/>').appendTo('div');
+      })
+
+      var arr = [1,2,3,4,5.5]
+      $.each(arr,function(i,v){
+        console.log(i,v);
+      })
+
+      var str = "  my atguigu  "
+      console.log($.trim(str));;
+
+    })
+
+    
+
+
+
+
+    
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var a = 2
+    function fn() {
+      console.log(a)
+      var a = 3
+    }
+    fn()   // undefined  当前作用域变量提升
+
+    function fn2() {
+      console.log(a);
+      a = 3
+    }
+    fn2()  // 2  当前作用域没有参数，没有var没有变量提升则默认为全局作用域
+
+    function b() {
+    }
+    var b
+    console.log(typeof b);   // function 同名的函数和变量 预解析，函数优先
+
+    // 变量和函数同名，预解析完一定是函数 c = function
+    var c = 1
+    function c(c) {
+      // var c
+      console.log(c);
+      var c = 3
+    }
+    console.log(c);  // 1
+    c(2)  // 报错  此时的c = 1，不能调用函数
+
+    var a = 5
+    setTimeout(() => {
+      console.log(0);  // 0
+      alert(a)  // 5
+      a = 666
+      // var a = 666 此时alert undefined
+    }, 0)
+    console.log(1);  // 1
+    a = 66
+
+    // 顺序
+    /** console.log(1);  // 1
+     *  console.log(0);  // 0
+     *  alert(a)  // 66
+     */
+
+    //  this  闭包
+    var name = "A"
+    var object = {
+      name: "B",
+      getNameFunc: function () {
+        return function () {
+          return this.name // this 是谁？ 是函数自调用，对象是window
+        }
+      }
+    }
+    console.log(object.getNameFunc()());  // A
+
+    var name2 = "A "
+    var object2 = {
+      name2: "b",
+      getNameFunc: function () {
+        var that = this    // 缓存this
+        return function () {
+          return that.name2  //这里的that是this，this指的是object2对象
+        }
+      }
+    }
+    console.log(object2.getNameFunc()());  // b
+
+
+
+    // 原型链，对象
+    function Person() {
+      getAge = function () {
+        console.log(10);
+      }
+      return this
+    }
+    Person.getAge = function () {
+      console.log(20);
+    }
+    Person.prototype.getAge = function () {
+      console.log(30);
+    }
+    var getAge = function () {
+      console.log(40);
+    }
+    function getAge() {
+      console.log(50);
+    }
+
+    Person.getAge()     // 20
+    getAge()  // 40 同名变量提升，代码从上往下 重新赋值了
+    Person().getAge() // 10   函数自调用Person()，return回来的是window，window.getAge()函数内部没有用var，则变量上升到全局，使得变量污染，变成了10
+    getAge() // 10  同上
+    // new的时候，要找一个离他最近的函数，找括号
+    new Person.getAge()   // 20，new的是Person.getAge 
+    new Person().getAge() // 30，new Person()是一个构造函数，生成一个实例，现在实例自身找，没有就去原型找，原型就是Person.prototype
+
+
+
+  </script>
+</body>
+
+</html>

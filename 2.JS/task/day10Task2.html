@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../reset.css">
+  <style>
+    #btn{
+      background-color: #bfa;
+    }
+
+    img{
+      display: block;
+      width: 500px;
+      height: 300px;
+      margin: 50px auto;
+    }
+
+    a{
+      text-decoration: none;
+    }
+
+    p{
+      background-color: hotpink;
+    }
+
+    p.blue{
+      background-color: blue;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- 
+  案例：
+      点击按钮实现一个数字增加 √
+      点击按钮修改图片的路径 √
+      点击按钮修改a标签的路径 √
+      点击按钮修改多选框选中 √
+      setAttribute和getAttribute的用法 ???
+      点击按钮修改p标签的背景颜色（通过改变类名实现）
+   -->
+  
+  <img src="../06_DOM/img/1.jpg" alt="heihei" id="img">
+  <a href="https://wwww.baidu.com" id="a">百度一下</a>
+  <input type="button" value="我是按钮" id="btn">
+  <input type="checkbox" name="javascript" id="check">
+   <p id="pp"> 我是一个p标签 </p>
+
+  <script>
+
+    window.onload = function(){
+      var btn = document.getElementById('btn');
+      var img = document.getElementById('img');
+      var aa = document.getElementById('a');
+      var check = document.getElementById('check');
+      var pp = document.getElementById('pp');
+      var num = 0;
+      btn.onclick = function(){
+        // num++;
+        // alert(num);
+        // img.src = '../06_DOM/img/2.jpg';
+        // aa.href = "https://wwww.taobao.com";
+        // check.checked = true;
+        // img.getAttribute('alt');
+        // console.log(img.getAttribute('alt'));
+        pp.className = 'blue';
+      }
+    } 
+
+  </script>
+
+</body>
+</html>

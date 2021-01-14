@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+
+    #box{
+      position: relative;
+      width: 300px;
+      height: 200px;
+      background-color: #fba;
+      text-align: center;
+      line-height: 200px;
+      margin: 50px auto;
+      font-size: 40px;
+      color: blue;
+      /* bgc 也可以加过渡，因为RGB数值是数字0-255 */
+      transition: 2s;
+    }
+    
+    #box .top , #box .bottom{
+      position:absolute;
+      width: 0;
+      height: 30px;
+      background-color: yellow;
+      transition: 2s;
+    }
+
+    #box .top{
+      /* 设置绝对定位时，left和right也决定着过渡的基点 */
+      left: 0;
+      top: 0;
+    }
+
+    #box .bottom{
+      right: 0;
+      bottom: 0;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- 一般做项目的时候，最外边那个叫div -->
+
+  <!-- 幽灵按钮：鼠标移入发生入场动画，一闪之间，字与背景颜色互相，称为幽灵 -->
+  <div id="box">
+    小乌龟
+    <div class="top"></div>
+    <div class="bottom"></div>
+  </div>
+
+  <script>
+    var box = document.getElementById('box');
+    var top1 = document.querySelector('#box .top');
+    var bottom1 = document.querySelector('#box .bottom');
+    
+    box.onmouseenter = function(){
+      top1.style.width = '300px';
+      bottom1.style.width = '300px';
+      this.style.color = '#fba';
+      this.style.backgroundColor = 'red';
+    }
+
+    box.onmouseleave = function(){
+      top1.style.width = '0';
+      bottom1.style.width = '0';
+      this.style.color = 'blue';
+      this.style.backgroundColor = '#fba';
+    }
+
+  </script>
+</body>
+</html>

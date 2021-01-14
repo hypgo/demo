@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 定义数组的方法：（4种）
+    // 字面量定义的时候没啥坑；
+    // 如果用的是构造函数或者省了new的构造函数（普通函数调用），
+    // 如果传的是多个参数，那么当以这么参数作为元素生成新数组 
+    var arr = [1,2,3];
+    console.log(arr);
+
+    var arr2 = new Array(3);
+    console.log(arr2);
+
+    // 不写new的普通函数
+    // 如果只传一个数字，这个数字将代表数组的长度，数组当中是这么多的undefined
+    var arr3 = Array(3);
+    console.log(arr3);
+
+    // ES6 创建函数
+    console.log(Array.of(3));
+
+  </script>
+</body>
+</html>

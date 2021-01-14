@@ -1,0 +1,58 @@
+三、数据类型
+
+1、数据类型（存储的数据的类型）
+
+  基本数据类型和对象(复杂)数据类型
+    基本数据类型（值类型）
+    number、string、boolean、undefined、null，主要关注undefined、null，理解清楚什么意思
+
+2、基本使用场景
+  数值类型：整数、小数、科学记数法、2进制(0b)、8进制(0)、16进制(0x)
+  字符串：单引号或者双引号包含（内外都有引号要以单双区分）、空字符串 和 空白字符串
+  布尔：true或者false
+  undefined：定义的变量没有赋值，虽然字面意思是未定义的意思，但是它代表的是定义了变量，没有赋值，此时，变量里面存储的是undefined
+  null：定义的变量赋值为null(一般是对对象进行初始化使用或者是删除一个*对象*的时候用到)
+
+3、数据类型的判断 
+typeof判断
+
+typeof的结果是什么类型
+  Typeof typeof 5  >>> string（2个及以上typeof打印出来的是字符串，因为第一个typeof的结果是以string呈现）
+
+typeof的判断基本数据类型的特殊情况
+  null 判断结果是  >>> object
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //var num = 1;
+    //var num = 0;
+    //var str = 'hello'; 
+    //var bool = true;  false
+    var a = undefined;
+    var b = null;
+    console.log(a);
+
+    // var name = 'huangyuanping';
+    console.log(typeof b);
+
+    // console.log(typeof num);
+
+    //  初始化。初始给变量的值，但是此时并不知道到后面要存储的值
+    var sum = 0;  // 代表以后存储的是数字
+    var carName = ''; // 代表以后存的是一个 字符串
+    var isClose = true; //代表以后要存储的是一个boolean 
+    // var a = undefined; 这种情况几乎不存在，因为初始化就是对一变量初始赋值，
+    // undefined本来就是定义变量，没有赋值，所以，不能叫做初始化
+    
+    var dog = null; // 代表这个dog变量以后要存储的是一个狗的对象
+
+  </script>
+</body>
+</html>

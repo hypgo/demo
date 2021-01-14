@@ -1,0 +1,105 @@
+/*cssreset*/
+html,body{height: 100%;overflow: hidden;}
+html,body,h1,h2,h3,h4,h5,h6,p,ul,li{margin: 0px;padding: 0px;font: 14px "微软雅黑";}
+a{text-decoration: none;display: block;}
+li{list-style: none;}
+img{display: block;}
+
+/*清除浮动*/
+.clearfix{*zoom: 1;}
+.clearfix:after{content: "";display: block;clear: both;}
+
+/*头部*/
+#header{
+  width: 100%;
+  height: 80px;
+  position: relative;
+}
+.headerMain{
+  margin: 0 auto;
+  width: 1100px;
+  height: 80px;
+  /* background-color: #bbffaa; */
+}
+#header .headerMain .logo{
+  float: left;
+  margin-top: 15px;
+}
+#header .headerMain .nav{
+  float: left;
+  margin-top: 50px;
+}
+#header .headerMain .nav{
+  float: right;
+}
+#header .headerMain .nav ul li{
+  position: relative;
+  float: left;
+  margin-left: 40px;
+}
+#header .headerMain .nav ul li .up{
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #000;
+  width: 0;  /*宽为0，文字会溢出？*/
+  overflow: hidden;
+  /* 如果写到.up上只会移入时显示，移出不显示*/
+  transition: 1s width; 
+}
+#header .headerMain .nav ul li:hover .up{
+  width: 100%;
+}
+#header .headerMain .arrow{
+  position: absolute;
+  left: 50%;
+  bottom: -11px;
+  width: 21px;
+  height: 11px;
+  background-image: url('/pc项目/00.头部/img/arrow.png');
+  background-repeat: no-repeat;
+  transition: 1s left;
+  z-index: 9;
+}
+#content{
+  position: relative;
+  width: 100%;
+  background-color: rgb(127, 127, 199);
+  overflow: hidden;
+}
+#content .list{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: 1s top;
+}
+#content .list li {
+  position: relative;
+}
+#content .list li>div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 1100px;
+  height: 520px;
+  background-color: #ccc;
+}
+#content .list li:nth-child(1){
+  background-image: url('/pc项目/00.头部/img/bg1.jpg');
+}
+#content .list li:nth-child(2){
+  background-image: url('/pc项目/00.头部/img/bg2.jpg');
+}
+#content .list li:nth-child(3){
+  background-image: url('/pc项目/00.头部/img/bg3.jpg');
+}
+#content .list li:nth-child(4){
+  background-image: url('/pc项目/00.头部/img/bg4.jpg');
+}
+#content .list li:nth-child(5){
+  background-image: url('/pc项目/00.头部/img/bg5.jpg');
+}

@@ -1,0 +1,42 @@
+函数传参：分为传基本数据类型和对象数据类型，两者不一样。
+基本数据类型传进去后，函数外和函数内操作的不是一个值，
+所以当传递时，函数内部运算后的结果我们需要返回return。
+
+但是，如果传的是对象类型（如数组），那么函数内部和外部操作的是同一个数据，（传的是内存地址，而不是对象本身堆内存中的value）
+因此，函数内部对数组所有的操作就相当于操作外部的一样，所以运算后不需要返回，外部一样看到发生了变化。
+
+冒泡排序：外层循环控制轮数（根据数组长度来定），内层循环控制次数进行比较。
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    function bubbleSort(arr) {
+      for (var i = 0; i < arr.length - 1; i++) {
+        // 内层循环每一轮肯定能得出一个最大的数，所以往后要减一轮
+        for (var j = 0; j < arr.length - 1 - i; j++) {
+          if (arr[j] > arr[j + 1]) {
+            var temp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = temp;
+          }
+        }
+      }
+    }
+
+    var arr = [5, 2, 4, 11, 9];
+    bubbleSort(arr);
+    console.log(arr);
+    
+  </script>
+</body>
+
+</html>

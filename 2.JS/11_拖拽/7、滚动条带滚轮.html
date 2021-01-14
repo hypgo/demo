@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      #warp {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      #wrap .content{
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      #wrap .scrollBar {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 20px;
+        height: 100%;
+        border-left: 1px solid grey;
+        border-right: 1px solid grey;
+        background-color: rgb(212, 207, 207);
+      }
+
+      #wrap .scrollBar .scrollIn {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 17px;
+        height: 40px;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <div class="content"></div>
+
+      <div class="scrollBar">
+        <div class="scrollIn"></div>
+      </div>
+    </div>
+
+    <script>
+      // 模拟内容区
+      var content = document.querySelector("#wrap .content");
+      var scrollIn = document.querySelector("#wrap .scrollBar .scrollIn");
+
+      for (var i = 0; i < 200; i++) {
+        content.innerHTML += i + "<br>";
+      }
+
+      // 滚动条的高度/屏幕的高度 = 屏幕的高度/内容的高度 = 滚动条的移动距离/内容的滚动距离
+      // 目前，屏幕和内容的高度是已知可求的。
+      var scale = document.documentElement.clientHeight / content.offsetHeight;
+      // 滚动条的高度
+      scrollIn.style.height =
+        scale * document.documentElement.clientHeight + "px";
+
+      // 拖动（拖拽）滚动条
+      scrollIn.onmousedown = function (event) {
+        event = event || window.event;
+        // 获取元素的初始位置，拿的是元素定位的left值
+        var eleY = scrollIn.offsetTop;
+        // 获取初始位置。垂直距离,相对的是视口的左上角（以视口左上角为原点）
+        var startY = event.clientY;
+        //当鼠标点击元素之后，把鼠标的后序事件全部捕获到该元素身上。（全局捕获）
+        scrollIn.setCapture && scrollIn.setCapture();
+        // 鼠标拖拽移动事件
+        document.onmousemove = function (event) {
+          event = event || window.event;
+          // 拿到鼠标结束位置
+          var endY = event.clientY;
+          // 求鼠标的距离差
+          var disY = endY - startY;
+          // 拿到元素最终的位置:元素初始位置+鼠标距离差
+          var lastY = eleY + disY;
+
+          // 元素超出视口临界值的判定
+          // 3、当元素在四周的时候，不能超出范围，做出范围界定；
+          if (lastY < 0) {
+            lastY = 0;
+          } else if (lastY >document.documentElement.clientHeight - scrollIn.offsetHeight
+          ) {
+            lastY =document.documentElement.clientHeight - scrollIn.offsetHeight;
+          }
+
+          scrollIn.style.top = lastY + "px";
+
+          var contentTop = -lastY / scale;
+          content.style.top = contentTop + "px";
+        }
+
+        // 解绑move事件
+        document.onmouseup = function () {
+          document.onmousemove = document.onmouseup = null;
+          // 鼠标的事件全局捕获，有添加就要有释放，否则后序点击任何地方都相当于在点击box
+          scrollIn.releaseCapture && scrollIn.releaseCapture();
+        };
+
+        // dom0取消默认行为:事件末尾加return false
+        // dom2取消默认行为:event.preventDefault()
+        return false;
+        
+      };
+
+      // 滚轮事件
+      var flag = true;
+      var step = 0;
+      document.addEventListener('mousewheel',scrollMove);
+      document.addEventListener('DOMMouseScroll',scrollMove);
+
+      function scrollMove(event) {
+        event = event || window.event;
+        if (event.wheelDelta) {
+          if (event.wheelDelta > 0) {
+            flag = true;
+            step = -20;
+          } else {
+            flag = false;
+            step = 20;
+          }
+        } else if(event.detail) {
+          if (event.detail < 0) {
+            flag = true;
+            step = -20;
+          } else {
+            flag = false;
+            step = 20;
+          }
+        }
+      
+
+        var scrollLastTop = scrollIn.offsetTop + step;
+        if (scrollLastTop < 0) {
+          scrollLastTop = 0;
+        } else if (scrollLastTop > document.documentElement.clientHeight - scrollIn.offsetHeight) {
+          scrollLastTop = document.documentElement.clientHeight - scrollIn.offsetHeight;
+        }
+
+        scrollIn.style.top = scrollLastTop + 'px';
+        var contentTop = -scrollLastTop / scale;
+        content.style.top = contentTop + 'px';
+      
+      }
+
+
+    </script>
+  </body>
+</html>
+  

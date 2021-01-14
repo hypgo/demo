@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* 原子化 */
+.color_grey{
+  color: #666;
+}
+
+.top_tab{
+  height: 40px;
+  background-color: red;
+  text-align: center;
+  /* 垂直塌陷 */
+  margin-bottom: 30px;
+}
+.fa2{
+  margin-top: 40px;
+}
+
+.txt{
+  /* margin: 0 auto; */
+  display: block;
+  width: 400px;
+  line-height: 40px;
+  text-align: center;
+  background-color: yellow;
+}

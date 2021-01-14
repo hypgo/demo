@@ -1,0 +1,99 @@
+<!-- 
+二、元素的大小和位置 △△△△△△△△△△△△
+		Offset系列    只读 
+			offsetWidth   拿的是盒子   内容 + padding + *border*的宽；
+			offsetHeight  拿的是盒子   内容 + padding + *border*的高；
+			offsetLeft    拿的是元素的偏移量：可以认为拿的是元素定位的left值  position:absolute
+      offsetTop     拿的是元素的偏移量：可以认为拿的是元素定位的top值
+      相对的也是离他最近的定位祖先元素的原点（左上角），
+      通常我们是依赖偏移量去读取元素的位置，只是用到offsetLeft或offsetTop就一定和定位相关。
+      设置元素的定位位置，还是要靠div.style.left去设置
+
+			案例：盒子左右摇摆
+		
+		Client系列    只读  没有边框border
+			clientWidth   拿的是盒子   内容 + padding的宽；
+			clientHeight  拿的是盒子   内容 + padding的高；
+			clientLeft    拿的是盒子左边框大小；
+			clientTop     拿的是盒子上边框大小；
+			
+			视口宽高求法 
+					document.documentElement.clientWidth
+					document.documentElement.clientHeight
+					document.body.clientHeight（一般不通过body）
+        
+    元素的大小：宽和高的获取；
+    以后我们拿元素的宽和高，先看元素有没有边框，如果没有边框，那么clientWidth和offsetWidth是一样的
+    如果有边框，需要边框的话就用offsetWidth，不需要就用clientWidth;
+
+		Scroll系列  
+			scrollWidth   只读 --几乎不用
+				当内容比盒子小的时候，拿的是盒子的clientWidth
+				当内容比盒子大的时候，拿的是内容的offsetWidth + 盒子的一侧内边距； 
+			scrollHeight  只读
+				当内容比盒子小的时候，拿的是盒子的clientHeight
+				当内容比盒子大的时候，拿的是内容的offsetHeight + 盒子的一侧内边距；
+
+			scrollTop     可写
+				拿的是盒子内容向上滚动的距离
+			scrollLeft    可写
+        拿的是盒子内容向左滚动的距离
+
+    overflow：scroll  （auto自动计算有无滚动条） 
+
+    系统滚动事件
+      案例：导航跟随 window下添加鼠标滚轮事件，var滚动事件，if滚动位置大于XX时，执行函数体，使div变成固定式
+      案例：盒子来回移动
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		
+		html,body{
+			height: 2000px;
+			/* overflow: auto; */
+		}
+
+		#box{
+			width: 100%;
+			height: 100px;
+			background-color: red;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+
+	<!-- 案例：导航跟随 
+		window下添加鼠标滚轮事件，var滚动事件，if滚动位置大于XX时，执行函数体，使div变成固定式 -->
+	<script>
+		var box = document.getElementById('box');
+		window.onscroll = function(){
+			// 系统滚动事件，滚动的距离根据浏览器不同而不同，有些人为是HTML的滚动距离，有些认为是body的滚动距离
+			var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+			if (scrollTop > 300) {
+				// 固定定位：属性值 fixed，也是一种绝对定位
+        // 大部分特点也跟绝对定位一样，是一种特殊的绝对定位：
+        // 唯一不同的是固定定位永远参照于浏览器的视口进行定位（可视窗口）
+				box.style.position = 'fixed';
+				box.style.left = '0px';
+				box.style.top = '0px';
+			}
+		}
+
+
+	</script>
+
+</body>
+</html>

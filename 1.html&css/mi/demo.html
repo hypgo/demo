@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box{
+      width: 200px;
+      background-color: yellow;
+      margin-bottom: 20px;
+    }
+    .span{
+      position: absolute;
+      width: 60px;
+    }
+    .people{
+      width: 30px;
+      height: 80px;
+      background-color: lightblue;
+    }
+    .sanjiao{
+      position: absolute;
+      /* content: ''; */
+      top: 202px;
+      left: 5px;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid yellow;
+    }
+    .box{
+      position: relative;
+    }
+
+    /* 伪元素会随着父元素一起变动 */
+    .box::after{
+      position: absolute;
+      content: '';
+      bottom: -10px;
+      left: 5px;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid yellow;
+    }
+  </style>
+</head>
+<body>
+  <div class="father" style="position: relative;">
+    <!-- <span class="sanjiao"></span> -->
+    <div class="box">Lorem ipsum dolor, sit amealksjdakljdlasdlajsdlkasdjlkasjdlkjdt consectetur tur dignissimos ullam voluptate veritatis tempora sapiente voluptatum vero magnam, numquam alias architecto laborum tempore.asldjalksdasjdlasjdlasjdlkasjdlkasjd</div>
+    <div class="people"></div>
+    <div class="text">阿斯兰的骄傲了可视对讲</div>
+    <img src="//placehold.it/100x100" alt="" class="img">
+  </div>
+
+</body>
+</html>

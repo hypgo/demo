@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //  原型与原型链，实例对象，构造函数 ，Object， Function的关系
+    var F = function () {
+      Object.prototype.a = function (){
+        console.log('a()');
+      }
+    }
+    Function.prototype.b = function (){
+      console.log('b()');
+    }
+    var f = new F()
+
+    F.a() // a()
+    F.b() // b() 先从自身找，自身没有，去其自身的构造函数(F = function)找，没有则去它的显示原型对象找，再没有就去原型对象的原型对象找
+    f.a() // a()
+    f.b() // f.b is not a function
+
+
+  </script>
+</body>
+
+</html>

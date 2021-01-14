@@ -1,0 +1,97 @@
+四、  数组
+	数组概念，作用，定义
+		数组：是一个具有相同类型或者不同类型的数据有序集合；
+
+		为什么：因为我们想要一次性拿到很多个数据，如果没有数组，就得定义很多的变量去存储
+
+	数组length，索引（下标）
+		只要定义一个数组，数组里面就会有一个默认的属性叫length,它代表着数组的长度
+		索引也被称作下标，知道了索引，就可以拿到这个数组对应索引的值		
+	
+	数组（数组的不同位置：增  删  改  查）
+		在数组的末尾加一个数
+		在数组的头部加一个数
+		在数组的中间加一个数
+
+		删也是三个位置
+
+		改和查知道了下标怎么都可以玩，但是不知道下标的情况下，我们需要去遍历以下数组；
+	
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 字面量定义数组(这两种的效果一样，但常用第一组)
+    var arr = [1,2,3,4,5,6];
+    // 构造函数定义数组
+    var arr1 = new Array(1,2,3,4,5,6);
+    console.log(arr);
+    console.log(arr1);
+    console.log(arr.length); // 长度为6
+    console.log(arr[2]);
+    
+    console.log(' ');
+    // 循环遍历数组，正向遍历，反向遍历用i--
+    for(var i = 0; i < arr.length; i++){
+      console.log(arr[i]);
+    }
+
+    // 在末尾加一个数
+    arr[arr.length] = 7;
+    console.log(arr);
+    console.log(arr.length);
+
+    // 从数组的头部加一个数：先把所有的数统统往后移一位，再在第一个位置去改值
+    // arr[0] = 7 ;
+    for(var i = arr.length - 1; i >= 0; i--){
+      arr[i+1] = arr[i]; //让数组第i个数移到它的下一个位置
+    }
+    arr[0] = 7;
+    console.log(arr);
+
+    // 从中间位置插入一个数字
+    for(var i = arr.length - 1; i >= 2; i--){
+      arr[i+1] = arr[i]; 
+    }
+    arr[2] = 9;
+
+    // 删除
+    // 数组末尾删除一个
+    arr.length--;
+    console.log(arr);
+
+    // 数组头部删除一个
+    for(var i = 1; i < arr.length; i++){
+      arr[i-1] = arr[i];
+    }
+    arr.length--;
+    console.log(arr);
+
+    // 数组中间删除一个 
+    for(var i = 2; i < arr.length; i++){
+      arr[i-1] = arr[i];
+    }
+    arr.length--;
+    console.log(arr);
+
+    // 改：不需要去移位，只要知道了下标，直接改相应下标的值
+
+    // 查：遍历或者输出某个值
+    for(var i = 0; i < arr.length; i++){
+      if(arr[i] == 1){
+        // arr[i] = 11;
+        console.log(arr[i]);
+      }
+    }
+    console.log(arr);
+
+
+  </script>
+</body>
+</html>

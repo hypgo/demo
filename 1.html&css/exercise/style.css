@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.w,
+.top-bar,
+.banner {
+  width: 17.325rem;
+  margin: 0 auto;
+}
+html {
+  font-size: 5.33333333vw;
+  background-color: #eff0f4;
+}
+a {
+  text-decoration: none;
+}
+.top-bar {
+  display: flex;
+  height: 4.375rem;
+  justify-content: space-between;
+  align-items: center;
+}
+a {
+  color: #24253d;
+  font-size: 30px;
+}
+a i {
+  color: #999999;
+  font-size: 16px;
+}
+.banner {
+  height: 7rem;
+  background-color: pink;
+  border: 0.5px pink solid;
+  border-radius: 3%;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" placeholder="输入你喜欢吃的食物">
+  <ul class="list">
+
+  </ul>
+
+  <script>
+    // 鼠标事件，空值判断，获取父元素与子元素
+    var inputNode = document.querySelector('input');
+    var ulNode = document.querySelector('.list');
+
+    // 事件委派处理
+    ulNode.onmouseover = function(event){
+      // 目标元素。在里面找发生事件的儿子。event.target通过ul去找li
+      // 通过父级元素去找发生事件的子元素（目标元素），也会有兼容性问题
+      var liNode = event.target || event.srcElement;
+      liNode.style.backgroundColor = 'blue';
+    }
+
+    ulNode.onmouseout = function(event){
+      var liNode = event.target || event.srcElement;
+      liNode.style.backgroundColor = 'transparent';
+    }
+
+    inputNode.onkeyup = function(event){
+      if(event.keyCode == 13){
+        var value = inputNode.value;
+        if(value.trim()){
+          var liNode = document.createElement('li');
+          liNode.innerText = value;
+          ulNode.appendChild(liNode);
+
+          // 为每一个输出的结果添加移入事件  坏处：如果li很长，那就要添加成千上万次。占用内存，效率很慢
+          // liNode.onmouseenter = function(){
+          //   this.style.backgroundColor = 'blue';
+          // }
+
+          // liNode.onmouseleave = function(){
+          //   this.style.backgroundColor = 'transparent';
+          // }
+
+        } else{
+          alert('please input right value!');
+        }
+        inputNode.value = '';
+      }
+    }
+
+
+
+
+   
+
+
+  </script>
+</body>
+</html>

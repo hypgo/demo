@@ -1,0 +1,64 @@
+一、定时器基本使用 + 案例 （定时器操作是异步的）
+	
+	单次定时器：setTimeout 一般用来做延迟效果   定时炸弹 
+	案例 求出结果延迟5秒打印
+		
+	多次定时器：setInterval 和循环类似
+	案例 每隔3秒打印  i love you!  加判断停止
+
+	清除定时器：
+		    清除单次定时器 clearTimeout
+		    清除多次定时器 clearInterval
+
+	强化案例：
+		年历：用封装好的时间函数，innerHTML 拼接字符串写进去
+		阅读协议：倒计时5秒后可以点
+
+        
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <button>按钮</button>
+  <script>
+    // 单次定时器
+    // setTimeout 是延时定时器，是window下的一个全局方法，两个参数
+    // 第一个:回调函数，也就是到时间你要干啥
+    // 第二个：时间，毫秒为单位
+    var btn = document.querySelector('button');
+    var timer = null;
+    var a = 10;
+    var b = 10;
+    var c = a + b;
+    
+    timer = setTimeout(function(){
+      console.log(c);
+    },3000)
+    
+    console.log('i love you');
+    // 同步与异步 同步只能干一件事，干完一件又一件；一步可以同时干很多件事
+    // 前面有定时器，但是发现后面这句i love you并没有在5秒后打印，证明定时器是一个异步操作；
+    // 如果是同步，必须等定时器执行完成之后，这句话才会打印；
+    // 现在相当于程序同时执行两段代码，设置定时器以及打印
+
+
+    // 清除延迟定时器
+    btn.onclick = function(){
+      clearTimeout(timer);
+      console.log('已关闭输出');
+    }
+
+    
+
+
+
+
+  </script>
+</body>
+</html>

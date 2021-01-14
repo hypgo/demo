@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>05_面试题</title>
+</head>
+<body>
+<script type="text/javascript">
+  /*
+   测试题1: 
+   解释1、先预处理函数, 后预处理变量, 如果已经存在变量就会被忽略
+   解释2、先执行变量提升，再执行函数提升
+   */
+
+  console.log(typeof a)  // function
+  var a;
+  function a() {}
+
+  /*
+   *测试题2: 变量预处理, in操作符
+   */
+  console.log(b);
+  if (!(b in window)) {
+    var b = 1;
+  }
+  console.log(b) // undefined
+  
+  
+  /*
+  测试题3: 预处理, 顺序执行
+   */
+  // 预解析结果 c = function(){}
+  var c = 1
+  function c(c) {
+    console.log(c) 
+    var c = 3
+  }
+  console.log(c);  // 1
+  c(2)   // 报错
+
+  // function c(c)
+  // var c 
+  // 函数体
+  // c = 1
+  // c(2)   c已经被赋值了，不能被调动，没机会执行了
+
+</script>
+</body>
+</html>

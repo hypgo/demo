@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  list-style: none;
+}
+#wrap {
+  width: 400px;
+  border: 1px red solid;
+  margin: 50px auto;
+}
+#wrap ul {
+  width: 100%;
+}
+#wrap ul li {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+}
+#wrap ul li:hover {
+  background-color: yellow;
+}
+#wrap ul li:nth-child(3) {
+  font-size: 40px;
+}

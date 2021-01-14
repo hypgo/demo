@@ -1,0 +1,158 @@
+<!-- 1、自制滚动条（布局）
+	我们的页面架构首先要清楚
+	页面的最外层是document,紧接着是初始包含块  html  body，其次是我们的元素
+	我们禁止了系统的滚动条，（因为各大浏览器的系统滚动条风格不一，有可能会影响我们的页面布局）
+	
+	所以在body当中我们一般会有最外的一个盒子模拟body区域，在这个盒子的右侧会定位一个盒子模拟滚动条
+  △△△△△△△△△△△
+	自定义滚动条的万能比例：
+    滚动条的高度 / 屏幕的高度 
+  = 屏幕的高度 / 内容的高度 
+  = 滚动条的移动距离 / 内容的滚动距离 
+  △△△△△△△△△△△
+
+2、鼠标滚轮事件
+	 	盒子滚动滚轮改变高度案例
+
+		ie/chrome : mousewheel(dom2的标准模式)
+			event.wheelDelta
+				上：120
+				下：-120
+
+		firefox : DOMMouseScroll(dom2的标准模式)
+			event.detail
+				上：-3
+				下：3
+		
+		return false阻止的是  dom0 所触发的默认行为
+		dom2 需要通过event下面的event.preventDefault();
+
+3、为滚动条添加滚轮事件（滚动条和内容的移动）
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      html,body {
+        height: 100%;
+        overflow: hidden;
+      }
+
+      #warp {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      #wrap .content{
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      #wrap .scrollBar {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 20px;
+        height: 100%;
+        border-left: 1px solid grey;
+        border-right: 1px solid grey;
+        background-color: rgb(212, 207, 207);
+      }
+
+      #wrap .scrollBar .scrollIn {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 17px;
+        height: 40px;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <div class="content"></div>
+
+      <div class="scrollBar">
+        <div class="scrollIn"></div>
+      </div>
+    </div>
+
+    <script>
+      // 模拟内容区
+      var content = document.querySelector("#wrap .content");
+      var scrollIn = document.querySelector("#wrap .scrollBar .scrollIn");
+
+      for (var i = 0; i < 200; i++) {
+        content.innerHTML += i + "<br>";
+      }
+
+      // 滚动条的高度/屏幕的高度 = 屏幕的高度/内容的高度 = 滚动条的移动距离/内容的滚动距离
+      // 目前，屏幕和内容的高度是已知可求的。
+      var scale = document.documentElement.clientHeight / content.offsetHeight;
+      // 滚动条的高度
+      scrollIn.style.height =
+        scale * document.documentElement.clientHeight + "px";
+
+      // 拖动（拖拽）滚动条
+      scrollIn.onmousedown = function (event) {
+        event = event || window.event;
+        // 获取元素的初始位置，拿的是元素定位的left值
+        var eleY = scrollIn.offsetTop;
+        // 获取初始位置。垂直距离,相对的是视口的左上角（以视口左上角为原点）
+        var startY = event.clientY;
+        //当鼠标点击元素之后，把鼠标的后序事件全部捕获到该元素身上。（全局捕获）
+        scrollIn.setCapture && scrollIn.setCapture();
+        // 鼠标拖拽移动事件
+        document.onmousemove = function (event) {
+          event = event || window.event;
+          // 拿到鼠标结束位置
+          var endY = event.clientY;
+          // 求鼠标的距离差
+          var disY = endY - startY;
+          // 拿到元素最终的位置:元素初始位置+鼠标距离差
+          var lastY = eleY + disY;
+
+          // 元素超出视口临界值的判定
+          // 3、当元素在四周的时候，不能超出范围，做出范围界定；
+          if (lastY < 0) {
+            lastY = 0;
+          } else if (lastY >document.documentElement.clientHeight - scrollIn.offsetHeight
+          ) {
+            lastY =document.documentElement.clientHeight - scrollIn.offsetHeight;
+          }
+
+          scrollIn.style.top = lastY + "px";
+
+          var contentTop = -lastY / scale;
+          content.style.top = contentTop + "px";
+        }
+
+        // 解绑move事件
+        document.onmouseup = function () {
+          document.onmousemove = document.onmouseup = null;
+          // 鼠标的事件全局捕获，有添加就要有释放，否则后序点击任何地方都相当于在点击box
+          scrollIn.releaseCapture && scrollIn.releaseCapture();
+        };
+
+        // dom0取消默认行为:事件末尾加return false
+        // dom2取消默认行为:event.preventDefault()
+        return false;
+        
+      };
+    </script>
+  </body>
+</html>

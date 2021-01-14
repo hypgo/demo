@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> ajax_jQuery </title>
+  <style>
+    #demo {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="./js/jquery-1.12.4.js"></script>
+
+  <h1> 该页面是测试ajax_jQuery的请求</h1>
+  <button id="btn1"> 点我使用jQuery发送ajax-get请求</button>
+  <button id="btn2"> 点我使用jQuery发送ajax-post请求</button>
+
+  <script>
+    let btn1 = $('#btn1')
+    let btn2 = $('#btn2')
+
+    btn1.click(function () {
+      // 用jQuery发送ajax-get请求------完整版写法
+      /*    $.ajax({
+           url:'http://localhost:3000/ajax_jq',
+           method:'get',   //发送请求的方式
+           data:{name:'kobe',age:41}, //发送请求携带的数据
+           // 成功的回调
+           succsee:function(result){
+             console.log(result);
+           },
+           // 失败的回调
+           error:function(err){
+             console.log(err);
+           }
+         }) */
+
+      // 用jQuery发送ajax-get请求------精简版写法
+      $.get('http://localhost:3000/ajax_jq', { name: 'huangyuanping', age: 28 }, (data) => {
+        console.log(data);
+      })
+    })
+
+    btn2.click(function () {
+      // 用jQuery发送ajax-post请求------完整版写法
+      $.ajax({
+        url: 'http://localhost:3000/ajax_jq',
+        method: 'post',   //发送请求的方式
+        data: { name: 'kobe', age: 41 }, //发送请求携带的数据
+        // 成功的回调
+        succsee: function (result) {
+          console.log(result);
+        },
+        // 失败的回调
+        error: function (err) {
+          console.log(err);
+        }
+      })
+
+      // 为什么完整版写法在console上没有打印出send的数据，是不是参数result和data的问题???
+
+      // 用jQuery发送ajax-post请求------精简版写法
+      /*  $.post('http://localhost:3000/ajax_jq',{name:'huangyuanping',age:28},(data)=>{
+         console.log(data);
+       }) */
+    })
+
+  </script>
+
+</body>
+
+</html>

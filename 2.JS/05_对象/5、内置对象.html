@@ -1,0 +1,173 @@
+四 内置对象JSON
+1.什么是json,json作用
+在前端json串的格式就是对象或者对象的数组；
+
+JSON是js当中的一个内置对象，里面封装了对json格式数据的操作方法；
+json是一种数据格式，是前后端目前数据交互的主要格式和手段。
+
+json通常情况下说的是字符串也叫json串；在前端json串的格式就是对象或者对象的数组，
+只不过要把这些数据抓化成字符串形式；
+
+2.JSON对象的方法: parse， stringify
+
+五 Math工具对象
+1.Math对象方式的使用: round, floor, radom, cell, max min PI pow
+2.案例：
+1.随机数点名
+2.随机生成验证码
+
+六、Date日期对象
+1.Date对象的方法
+var date = new Date();
+console.log(date);
+console.log(date.getFullYear());
+console.log(date.getMonth());
+console.log(date.getDate());
+console.log(date.getHours());
+console.log(date.getMinutes());
+console.log(date.getSeconds());
+console.log(date.getYear());//已经废弃
+console.log(date.toLocaleTimeString());
+console.log(date.toLocaleDateString());
+console.log(date.getTime());//1970 年 1 月 1 日之间的毫秒数
+
+2.案例：
+	1、格式化日期
+	2、封装函数实现格式化日期
+
+七、包装对象
+基本数据类型也可以使用，调用方法
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		var dataTest = {
+			name: 'dkj',
+			age: 20
+		}
+
+		var dataTestArr = [
+			{ name: 'dbj', age: 20 },
+			{ name: 'dlrb', age: 29 },
+			{ name: 'ym', age: 30 }
+		];
+
+		// 把对象json化，字符串化
+		var dataStr = JSON.stringify(dataTest);
+		console.log(dataStr);
+
+		var dataStr = JSON.stringify(dataTestArr);
+		console.log(dataStr);
+
+		// 从后端获得数据，解析数据
+		var data = JSON.parse(dataStr);
+		console.log(data);
+
+		// Math对象方式的使用: floor,round,ceil,radom | max，min，PI，pow
+
+		// 用来处理小数，把小数最终处理成整数
+		console.log(Math.floor(1.36));  //向下取整
+		console.log(Math.ceil(1.1));  //向上取整
+		console.log(Math.round(2.3)); //四舍五入
+
+		// 随机数就用random
+		console.log(Math.random());  //返回0-1之间的一个数，0 <= random < 1
+
+		console.log(Math.max(1, 2, 3, 4, 77, 90)); //返回多个数之间的最大数（不能传数组）
+		console.log(Math.min(1, 2, 3, 4, 77, 90)); //返回多个数之间的最小数（不能传数组）
+
+		// PI
+		console.log(Math.PI)   //圆周率，3.141592653589793
+
+		// pow 求数学当中的几次方
+		console.log(Math.pow(4, 3));  // 4的3次方
+
+		// 1.随机数点名 随机取1-100之间的整数
+		// 1   100    Math.floor(Math.random() * 100 + 1)
+		// 30  105		Math.floor(Math.random() * 76 + 30)
+		function getRandom(min, max) {
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+		var result = getRandom(1, 79);
+		console.log(result);
+
+
+		// 2.随机生成验证码。封装成函数：随时调用，传参验证码位数
+
+		function getRandomCode(len) {
+			// 准备码源
+			var str = 'QWERTOPHJKL1234567890plkjhgfdbnm';
+
+			var targetStr = '';
+
+			// 字符串也是有序的，所以字符串也有索引，可以和数组一样使用。但是字符串是值类型，是一个常量，无法更改
+			for (var i = 0; i < len; i++) {
+				targetStr += str[Math.floor(Math.random() * str.length)];
+			}
+			return targetStr;
+		}
+
+		var result = getRandomCode(10);
+		console.log(result);
+
+		// 1.Date对象的方法
+		var date = new Date();
+		console.log(date);
+		// Thu Oct 08 2020 16:24:09 GMT+0800 (中国标准时间)
+
+		console.log(date.getFullYear()); //年
+		console.log(date.getMonth() + 1); // 唯独月份在这里是0-11，需要+1
+		console.log(date.getDate()); // 日
+		console.log(date.getDay()); // 星期几
+		console.log(date.getHours()); // 时 
+		console.log(date.getMinutes()); // 分
+		console.log(date.getSeconds()); // 秒
+		console.log(date.toLocaleTimeString());   // Time：下午4:27:35
+		console.log(date.toLocaleDateString());		// Date：2020/10/8
+		console.log(date.getTime());              // 1970 年 1 月 1 日到现在为止的毫秒数
+
+		console.log(date.getYear());	//已经废弃
+
+		// 案例 1.格式化日期与封装成函数
+		function getDateAndTime() {
+			var date = new Date();
+			var year = date.getFullYear();
+			var month = date.getMonth() + 1;
+			var day = date.getDate();
+
+			var hour = date.getHours();
+			var min = date.getMinutes();
+			var sec = date.getSeconds();
+
+			return year + '年' + month + '月' + day + '日 ' + hour + ':' + min + ':' + sec;
+		}
+		var result = getDateAndTime();
+		console.log(result);
+
+
+		// 包装对象
+		var a = 'abcd';
+		console.log(a.split(''));	
+		console.log(a.toString());	
+
+		// a.toString() a显然是一个对象才能有方法调用，但是我们定义a的时候是一个基本数据类型，它是没有方法的。
+		// 但是js当中基本数据类型操作的时候有这么一个规定：当调用数字、布尔值、字符串的方法时，
+		// 会首先把这个值包装成临时的对象，然后进行调用包装对象的方法，调用完成之后，临时的包装对象会立即清除；
+
+
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,277 @@
+/* 主页样式 */
+
+/* 顶部导航条的容器 */
+.topbar-wrapper{
+  width: 100%;
+  height: 40px;
+  background-color: #333;
+  line-height: 40px;
+}
+
+/* 设置左侧导航条超链接样式 */
+.topbar a{
+  font-size: 12px;
+  color: #b0b0b0;
+  display: block;
+}
+
+/* 设置右侧导航条超链接样式 */
+.user-info{
+  display: block;
+}
+
+/* 设置超链接移入效果 */
+.topbar a:hover{
+  color: #fff;
+}
+
+/* 设置竖线的颜色效果 */
+.topbar .line{
+  color: #424242;
+  font-size: 12px;
+  margin: 0px 8px;
+}
+
+/* 设置左侧导航浮动*/
+.service, .topbar li{
+  float: left;
+}
+
+/* 设置下载APP下拉样式 */
+.app .qrcode{
+  display: none;
+  /* 解决二维码占据父元素位置的问题 */
+  position: absolute;
+  width: 124px;
+  height: 148px;
+  left: -42px;
+  /* span继承了topbar的line-height 40px，
+  使得自身往下挤，需要重置 */
+  line-height: 1; 
+  text-align: center;
+  background-color: fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+
+/* 设置二维码图片的格式 */
+.qrcode img{
+  width: 90px;
+  margin: 17px;
+  margin-bottom: 14px;
+}
+
+/* 设置二维码的文字 */
+.app .qrcode span{
+  font-size: 14px;
+  color: #000;
+}
+
+/* 设置移入下载APP的三角 */
+.app::after{
+  /* 三角消失，移入鼠标后显示 */
+  display: none;
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-bottom-color: #fff;
+  border-top:none;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin:auto ;
+  /* top: 33px;
+  left: 15px; */
+}
+
+.app{
+  position: relative;
+}
+
+/* 移入鼠标后显示二维码 */
+.app:hover .qrcode,
+/* 伪元素不能直接hover,可以给父元素app添加hover效果,然后改变伪元素样式 */
+.app:hover::after{
+  display: block;
+}
+
+/* 设置右侧导航浮动*/
+.shop-cart, .user-info{
+  float: right;
+}
+
+/* 设置购物车样式 */
+.shop-cart a{
+  width: 120px;
+  background-color: #424242;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* .shop-cart的外边距 */
+.shop-cart {
+  margin-left: 26px;
+  position: relative;
+}
+
+/* 购物车鼠标移入效果 */
+.shop-cart:hover a{
+  background-color: #fff;
+  color: #ff6700;
+}
+
+/* 设置购物侧图标字体 */
+.shop-cart i{
+  margin-right: 2px;
+}
+
+/* 移入购物车弹出样式 */
+.shop-cart span{
+  position: absolute;
+  right: 0px;
+  display: none;
+  width: 325px;
+  height: 60px;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, .2);
+  text-align: center;
+  padding-top: 22px;
+  border-top-color: transparent;
+}
+
+/* 购物车弹出hover */
+.shop-cart:hover span{
+  display: block;
+}
+
+
+.header{
+  line-height: 100px;
+  height: 100px;
+}
+
+/* 设置logo浮动 */
+.site-header .logo{
+  float: left;
+}
+
+
+
+/* 设置logo样式 */
+.header .logo a{
+  display: block;
+  width: 55px;
+  height: 55px;
+  margin-top: 22px;
+  background-color: rgb(255,103,0);
+  background-image: url(../img/mi-logo.png);
+  background-position:center;
+}
+
+
+.site-header .nav-wrapper{
+  float: left;
+  margin-left: 7px;
+  padding-left: 51px;
+}
+
+
+.nav li{
+  float: left;
+}
+
+.nav-wrapper .nav{
+  /* width: 850px; */
+  height: 100px;
+  line-height: 100px;
+  background-color: #fff;
+}
+
+.nav-wrapper li a{
+  display: block;
+  font: 16px;
+}
+
+.nav-wrapper li:hover,
+.nav-wrapper li a:hover{
+  color: #ff6700;
+}
+
+/* 隐藏全部商品文字 */
+.nav-wrapper .empty{
+  visibility:hidden;
+}
+
+.nav-wrapper .nav li{
+  padding: 0 15px;
+}
+
+/* 开启相对定位 */
+.site-header{
+  position: relative;
+}
+
+/* 商品弹出层 */
+.nav-wrapper .goods-info{
+  /* height: 228px; */
+  overflow: hidden;
+  height: 0;
+  width: 100%;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  transition: height 0.3s;
+}
+
+
+.nav .show-goods:hover ~ .goods-info,
+.goods-info:hover{
+  /* background-color: #bfa; */
+  height: 228px;
+  border: 1px solid rgb(244, 244, 244);
+  box-shadow: 0 5px 3px rgba(0, 0, 0, .2);
+}
+
+
+/* 设置搜索框样式 */
+.search-wrapper{
+  float:right;
+  width: 296px;
+  height: 50px;
+  margin-top: 25px;
+  background-color: #fff;
+  border: 1px solid rgb(224, 224, 224);
+}
+
+
+.search-wrapper .search-inp{
+  width: 242px;
+  height: 50px;
+  padding:0;
+  border: none;
+  float: left;
+  border-right: 1px solid rgb(224, 224, 224);
+}
+
+
+.search-wrapper .search-btn{
+  float: left;
+  width: 53px;
+  height: 50px;
+  border: none;
+  padding:0;
+  background-color: #fff;
+  color: #616161;
+  font-size: 16px;
+  
+}
+
+  
+
+
+
+
+
+/* 移入搜索边框变亮 */
+

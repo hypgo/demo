@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <span> 中国时间：</span>
+  <br>
+  <br>
+  <input type="button" disabled='disabled' value="阅读协议(5s)">
+
+  <script>
+    /*
+    var num = 0;
+    var timer = null;
+    timer = setInterval(function(){
+      num++;
+      console.log('i love you');
+      if(num == 5){
+        clearInterval(timer);
+      }
+    },2000) 
+    */
+
+    // 年历显示
+    var spanNode = document.querySelector('span');
+
+    function getDateAndTime() {
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth()+1;
+      var day = date.getDate();
+      var hour = date.getHours();
+      var min = date.getMinutes();
+      var sec = date.getSeconds();
+      
+      if(min < 10){
+        min = '0' + min;
+      }
+
+      if(sec < 10){
+        sec = '0' + sec;
+      }
+
+      return year + '年' + month + '月' + day + '日 ' + hour + ':' + min + ':' + sec;
+    }
+    setInterval(function(){
+      var str = getDateAndTime();
+      spanNode.innerHTML = '中国时间：' + str;
+    },1000)
+
+
+    // 阅读协议：倒计时5秒后可以点
+    var inputNode = document.querySelector('input');
+    var num = 5;
+    var timer = null;
+    timer = setInterval(function(){
+      num--;
+      inputNode.value = '阅读协议('+ num +'s)';
+      if( num == 0){
+        // 让他停止num--
+        clearInterval(timer);
+        
+        inputNode.value = '阅读协议';
+        inputNode.disabled = false;
+
+      }
+    },1000)
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+// 为box设置一个hover，& 就表示外层的父元素
+
+@w:200px;
+@h:200px;
+
+.box{
+  width: @w;
+  height: @h;
+  background-color: #bfa;
+  overflow: hidden;
+  .box1{
+    width: @w - 100px;
+    height: @h - 100px;
+    background-color: red;
+    margin: 50px auto;
+  }
+
+  & .box1:hover {
+    background-color: blue;
+  }
+}
+
+// extend（）对当前选择器扩展指定选择器的样式（选择器分组）
+
+// 可以直接对指定的样式进行引用，这里就相当于box的样式在这里进行了复制
+// 有点像变量可重复利用
+.p1{
+  .box();
+  margin-top: 100px;
+}
+
+// mixin 混合
+// 使用类选择器时可以在选择器后边添加一个括号，
+// 这时我们实际上就创建了一个mixins(混合函数)
+.p2(){
+  width: 200px;
+  height: 200px;
+  background-color: #000;
+}
+
+.p3{
+  .p2;
+}
+
+// 混合函数

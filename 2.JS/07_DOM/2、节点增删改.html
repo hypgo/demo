@@ -1,0 +1,90 @@
+第四节:  创建节点的三种方式
+	1、Documet.write()   根本不用
+    * 第一种创建节点的方式:document.write();
+    * document.write()只能在页面加载的过程中使用,如果当页面加载完后,再使用会将其它的dom干掉
+				
+  2、Obj.innerHtml  拼接字符串
+    会覆盖原来的标签内容，如果要新增，需要都把所有的标签都写上。
+
+	3、Document.createElement('想要创建的元素名') 
+    元素对象.appendChild(被追加的元素对象);
+
+    案例：使用第二种和第三种创建一个列表，并且隔行变色
+
+第五节:  节点常用方法
+	节点：  文档当中都是节点：元素  文本  属性  注释
+	节点的增删改查
+
+	* 以下方法都是父元素调用，操作子元素
+	* 插入节点: insertBefore(新节点,参照节点);
+	* 替换节点: replaceChild(新节点,被替换的节点);
+	* 删除节点: removeChild(被删除的节点);
+	* 追加节点：appendChild(被追加的节点)；
+	  节点.remove（pc端 ie不支持） 
+	  案例：使用列表演示节点的增删改查
+
+第六节:  案例
+  键盘事件，触发回车之后，把表单的内容动态创建li标签，所有的li标签移入变色
+
+晚自习强化练习
+  消化白天的所有方法和案例 
+  
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    
+    // 第二种方法：本质就是拼接字符串
+    // innerHTML 创建列表
+    var arr = ['啤酒','可乐','炸鸡','蛋糕','烧烤']
+    // var str = '<ul id="list">';
+    // for (var i = 0; i < arr.length; i++) {
+    //   str += '<li>' + arr[i] + '</li>';
+    // }
+    // str += '</ul>';
+    // document.body.innerHTML += str;
+    
+    // 创建好列表后，获取列表元素进行隔行变色
+    // var liNode = document.querySelectorAll('#list>li');
+    // for (var i = 0; i < liNode.length; i++) {
+    //   if(i % 2 == 0){
+    //     liNode[i].style.backgroundColor = 'red';
+    //   } else{
+    //     liNode[i].style.backgroundColor = 'blue';
+    //   }
+    // }
+
+    // 第三种方法：
+    // 先创建ul
+    var ulNode = document.createElement('ul');
+    // 追加li内容
+    for(var i = 0; i < arr.length; i++){
+      var liNode = document.createElement('li');
+      liNode.innerText = arr[i];
+      ulNode.appendChild(liNode);
+      // 设置隔行换色
+      if(i % 2 == 0){
+        liNode.style.backgroundColor = 'red';
+      } else{ 
+        liNode.style.backgroundColor = 'blue';
+      }
+
+    }
+    // 把ul追加到body，不追加不显示
+    document.body.appendChild(ulNode);
+
+
+    // △理解每一行代码！
+    // △反复敲代码联系！你的理解会变得不一样，
+    // 久而久之，脑袋就适应这种思维
+
+  </script>
+</body>
+</html>

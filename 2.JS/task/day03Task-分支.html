@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 分支嵌套
+		// 92汽油和95号汽油
+		// 92号汽油单价5元/L  如果加的超过30L就4元/L
+		// 95号汽油单价6元/L  如果加超过40L就5元/L
+    // 最后花了多少钱？汽油加多少键盘输入；
+    
+    var gasType = parseInt(prompt('你要加哪种汽油？92汽油还是95号汽油')) 
+    var gasCapacity = parseInt(prompt('你要加多少汽油？')) 
+    var gasMoney = 0
+
+    if(gasType == 92){
+      if(gasCapacity >0 && gasCapacity <= 30){
+        gasMoney = gasCapacity * 5;
+        alert('需要花费油钱：'+gasMoney+'元');
+      }else if(gasCapacity > 30){
+        gasMoney = gasCapacity * 4;
+        alert('需要花费油钱：'+gasMoney+'元');       
+      }else{
+        alert('请输入正确容量')
+      }
+    } else if(gasType == 95){
+        if(gasCapacity >0 && gasCapacity <= 30){
+          gasMoney = gasCapacity * 6;
+          alert('需要花费油钱：'+gasMoney+'元');
+        }else if(gasCapacity > 30){
+          gasMoney = gasCapacity * 5;
+          alert('需要花费油钱：'+gasMoney+'元');       
+        }else{
+          alert('请输入正确容量');
+    } 
+    } else{
+      alert('请输入正确的汽油种类');
+    }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 
+    form 的属性： action 表单要提交的服务器的地址
+   -->
+  <form action="baidu.com"></form>
+
+  <!-- 
+    文本框：text ，数据要提交到服务器中，必须要为元素指定一个name属性值。（表现在地址栏的变化）
+    autocomplete 关闭自动补全表单功能：on为开启，off关闭
+    readonly 表单设置为只读，数据会提交
+    disabled 表单项设置为禁用，数据不会提交
+    autofocus 设置表单项自动获取焦点
+   -->
+  文本框 <input type="text" name="hello" autocomplete="on">
+  <br><br>
+
+  <!-- 
+    密码框，写完后不是明文显示，必须要写name，不写不能提交到服务器
+   -->
+  密码框 <input type="password" name="password">
+  <br><br>
+
+  <!-- 
+    提交按钮，显示一个提交的按钮名字，可以改名
+   -->
+  <input type="submit">
+  <br><br>
+
+  <!-- 
+    单选框 radio 这种选择框，必须指定一个value属性，最终作为用户的填写的值，
+    checked 可以将单选按钮设置为默认选中
+   -->
+  单选按钮 <input type="radio" value="aaa" checked>
+  单选按钮 <input type="radio">
+  <br><br>
+
+  <!-- 
+    多选框 checked 可以将单选按钮设置为默认选中
+   -->
+  多选框
+  <input type="checkbox" name="TEST" value="1">
+  <br><br>
+
+  <!-- 下拉列表 -->
+  <select name="haha">
+    <option value="1">选项1</option>
+    <option value="2">选项2</option>
+    <option value="3">选项3</option>
+  </select>
+
+  <!--  其他列表 -->
+  <form action="服务器">
+    <input type="text" name="username" value="hello">
+
+    <!-- 重置按钮，点一下可以重置 -->
+    <input type="reset">
+
+    <!-- 普通按钮，没有什么意义的 -->
+    <input type="button" value="按钮">
+
+    <!-- 组合按钮 -->
+    <button type="submit">提交</button>
+    <button type="reset">重置</button>
+    <button type="button">按钮</button>
+  </form>
+
+  <!-- 了解一下：颜色列表，会弹出颜色选择框。 -->
+    <input type="color">
+
+  <!-- 了解一下：email，会检测email地址是否符合，避免使用。 -->
+  <input type="email">
+</body>
+
+</html>

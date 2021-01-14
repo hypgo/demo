@@ -1,0 +1,106 @@
+三、 强化练习
+△编写求和函数
+△编写函数求数组的最大值，最小值
+△编写函数打印个人简介
+△封装函数加工数组，每一项加10输出
+△根据用户输入的数值求1到该数值的累加和
+提示用户输入账号和密码，实现登录成功效果，如果失败，再次提示
+
+question：return和不return的区别与用法。看函數的目的，到底你要不要返回一個值。要返回就用return
+question：temp这种第三方变量该如何理解与使用。
+
+有return，在函数调用时，需要再定义个变量result去接收返回值。
+函数调用就像娶媳妇，参数就是彩礼、聘金，return是回礼。有的人有彩礼，有的人就不会回礼
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 编写求和函数
+    function add(a, b) {
+      return a + b;
+    }
+    var result = add(10, 20);
+    console.log(result);
+
+    // 编写函数求数组的最大值，最小值
+    function maxAndMin(arr) {
+      var max = arr[0];
+      var min = arr[0];
+
+      for (var i = 0; i < arr.length; i++) {
+        if (max < arr[i]) {
+          max = arr[i];   // 将后面的数与max不断比较，得出max
+        } else if (min > arr[i]) {
+          min = arr[i];
+        }
+      }
+      // return只能返回一个值，用数组可以返回多个值
+      return [max, min];
+    }
+
+    var arr = [1, 1, 1, 4, 5, 10, 90];
+    var result = maxAndMin(arr);
+    console.log(result);
+
+    // 编写函数打印个人简介
+    function resume(name, gender, age, province, salery) {
+      console.log('我的名字叫' + name + '，我的性别是' + gender + '，我的年龄是' + age + '，我来自' + province + '，我期望工资是' + salery + 'K。');
+    }
+
+    resume('Mike', 'male', '27', '广东', '13K');
+
+    // 封装函数加工数组，每一项加10输出
+    function marArr(arr) {
+      for (var i = 0; i < arr.length; i++) {
+        arr[i] += 10;  //会改变数组当中的值，而打印只改变呈现的结果，不改变arr
+        console.log(arr[i]);
+        // console.log(arr[i]+10);
+      }
+    }
+
+    marArr([1, 2, 3, 4, 5]);
+
+    // 根据用户输入的数值，求1到该数值的累加和
+    var sum = 0;
+    function addSum(a) {
+      for (var i = 1; i <= a; i++) {
+        sum += i;
+      }
+      // console.log(sum);
+      return sum;
+    }
+    var a = parseInt(prompt('请输入一个数值'));
+    var result = addSum(a);
+    console.log(result);
+
+
+    // 提示用户输入账号和密码，实现登录成功效果，如果失败，再次提示
+    // 这个案例没有参数。真正的环境账号密码是从数据库来的，需要传参数
+    var userName = 'yuanping';
+    var passWord = '123';
+
+    function verifyUser(){
+      var user = prompt('请输入你的用户名');
+      var pass = prompt('请输入你的密码');
+      if (userName == user && passWord == pass) {
+        alert('登录成功');
+      }else{ 
+        verifyUser();  // 如果没有登录成功，可以调用本身函数重新走一遍
+      }
+    }
+    verifyUser();
+
+
+  </script>
+</body>
+
+</html>

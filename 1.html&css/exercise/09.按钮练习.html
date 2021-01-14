@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>雪碧图</title>
+  <style>
+    .box1 a:link{
+      display: block;
+      width: 93px;
+      height: 29px;
+      background-image:url("按钮/btn.png");
+    }
+
+    .box1 a:hover{
+      background-image:url("按钮/btn.png");
+      background-position: -93px 0;
+    }
+
+    .box1 a:active{
+      background-image:url("按钮/btn.png");
+      background-position: -186px 0;
+    }
+
+    /* 
+    解决图片闪烁的问题：
+      可以将多个小图片统一保存到一个大图片中，然后通过调整background-position来显示
+      这样图片会同事加载到网页中 就可以有效的避免出现闪烁的问题
+      这个技术在网页中应用十分广泛，被称为CSS-Sprite,称为雪碧图
+
+    雪碧图使用步骤：
+      确定要使用的图标
+      测量使用图标的大小
+      根据测量结果来创建一个元素
+      将雪碧图设置为元素的背景图片
+      设置一个偏移量以显示正确的图片
+
+    雪碧图的特点：
+      一次性将多个图片加载进页面，降低请求的次数，加快访问速度，提升用户的体验
+    */
+
+    .box2 a:link{
+      display: block;
+      width: 80px;
+      height: 30px;
+      background-image: url('./img/amazon-sprite_.png');
+      background-position: -8px -81px;
+    }
+
+    .box2 a:hover{
+      width: 80px;
+      height: 30px;
+      background-image: url('./img/amazon-sprite_.png');
+      background-position: -8px -194px;
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <div class="box1">
+    <a href="javascript:;"></a>
+  </div>
+
+  <div class="box2">
+    <a href="javascript:;"></a>
+  </div>
+</body>
+</html>

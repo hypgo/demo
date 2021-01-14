@@ -1,0 +1,60 @@
+二维数组（了解）
+通过循环按行顺序为一个5x5的二维数组a 赋值1-25的自然数，然后输出该数组的左下半三角
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 二维数组
+    var arr = [1,2,3,4];  // 一维数组
+    var arr1 = [[1,2,3,4],[5,6,7,8]];
+    console.log(arr1);
+    console.log(arr1[0][1]);
+
+
+    // 二维数组的遍历
+    for(var i = 0; i < arr1.length; i++){
+      for(var j = 0; j < arr1[i].length; j++){
+        console.log(arr1[i][j]);
+      }
+    }
+
+
+    // 生成多维数组，赋值1-25 ，5x5
+    var arr2 = [
+      [],
+      [],
+      [],
+      [],
+      []
+    ]
+    for(var i = 0; i < 5; i++){
+      for(var j = 0; j < 5; j++){
+        arr2[i][j] = 5*i + j + 1;
+      }
+    }
+    console.log(arr2);
+
+    // 打印半三角
+    document.write('<br>');
+    for(var i = 0;i < arr2.length; i++){
+      for(var j = 0; j <= i; j++){
+        document.write(arr2[i][j] + '&nbsp&nbsp&nbsp');
+      }
+      document.write('<br>');
+    }
+    console.log(arr2);
+
+
+  </script>
+
+</body>
+</html>

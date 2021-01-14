@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <table>
+      <!-- 设置表头 -->
+      <tr>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>性别</th>
+        <th>操作</th>
+      </tr>
+      <!-- 设置表格内容 -->
+      <tr>
+        <td>张三</td>
+        <td>18</td>
+        <td>男生</td>
+        <td>
+          <a href="javascript:;">删除</a>
+        </td>
+      </tr>
+      <tr>
+        <td>李四</td>
+        <td>20</td>
+        <td>女生</td>
+        <td>
+          <a href="javascript:;">删除</a>
+        </td>
+      </tr>
+      <tr>
+        <td>老王</td>
+        <td>22</td>
+        <td>男生</td>
+        <td>
+          <a href="javascript:;">删除</a>
+        </td>
+      </tr>
+    </table>
+
+    <input type="text" placeholder="请输入姓名" />
+    <br />
+    <input type="text" placeholder="请输入年龄" />
+    <br />
+    <input type="text" placeholder="请r输入性别" />
+    <br />
+    <input type="button" id='btn' value="添加" />
+
+    <script>
+      // 处理添加逻辑
+      var inputNode = document.querySelectorAll('input[type="text"]'); //因为input标签共有4个，最下面的是btn，不可以拿
+      var btn = document.getElementById('btn');
+      var tBodyNode = document.querySelector('table tbody');
+
+      btn.addEventListener('click',function(){
+        var name = inputNode[0].value;
+        var age = inputNode[1].value;
+        var gender = inputNode[2].value;
+        if(name.trim() && age.trim() && gender.trim()){
+          // 用第三种创建方式
+          var trNode = document.createElement('tr');
+
+          var tdName = document.createElement('td');
+          tdName.innerHTML = name;
+          trNode.appendChild(tdName);
+
+          var tdAge = document.createElement('td');
+          tdAge.innerHTML = age;
+          trNode.appendChild(tdAge);
+
+          var tdGender = document.createElement('td');
+          tdGender.innerHTML = gender;
+          trNode.appendChild(tdGender);
+
+          var tdOperate = document.createElement('td');
+          tdOperate.innerHTML = '<a href="javascript:;">删除</a>';
+          trNode.appendChild(tdOperate);
+
+          tBodyNode.appendChild(trNode);
+
+        } else{
+          alert('输入正确文字')
+        }
+
+        // 重置输入框内容
+        inputNode[0].value = '';
+        inputNode[1].value = '';
+        inputNode[2].value = '';
+
+      });
+
+      // 处理删除逻辑
+      // 不用事件委派，默认的是可以删除，但是新增的是无法删除的。
+      // var aNode = document.querySelectorAll('a');
+      // // 让每个操作按钮都赋予点击事件
+      // for(var i = 0; i < aNode.length; i++){
+      //   aNode[i].onclick = function(){
+      //     // 通过a标签的父元素的父元素来删除
+      //     var trNode = this.parentElement.parentElement
+      //     tBodyNode.removeChild(trNode);
+      //   }
+      // }
+
+      // 用事件委派处理，就可以直接删除新添加的朋友。从父级元素去找儿子
+      tBodyNode.addEventListener('click',function(event){
+        event = event || window.event;
+        var aNode = event.target || event.srcElement;
+        var trNode = aNode.parentElement.parentElement;
+        tBodyNode.removeChild(trNode);
+      });
+
+    </script>
+  </body>
+</html>

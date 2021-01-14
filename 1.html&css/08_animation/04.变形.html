@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style> 
+    div
+    {
+    margin:100px;
+    width:200px;
+    height:100px;
+    background-color:yellow;
+    
+    /* transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。
+       变形不会影响页面布局。
+       transform，用来设置元素的变形效果
+       变形：
+        - translateX() 沿着X轴方向平移
+        - translateY() 沿着Y轴方向平移
+        - translateZ() 沿着Z轴方向平移
+         平移元素，百分比是相对自身计算的。
+         X Y轴并列写，空格隔开，分开写会覆盖
+     */
+    transform:translateX(100px)  translateY(100px);
+    /* transform:translateY(100px) ; */
+
+    /* Rotate div  deg是角度，顺时针偏移*/
+    /* transform:rotate(45deg); */
+    
+    /* 案例：hover点一下图片实现带阴影分出来的效果 /小米官网*/
+    }
+    </style>
+</head>
+<body>
+  <div>Hello World</div>
+</body>
+</html>

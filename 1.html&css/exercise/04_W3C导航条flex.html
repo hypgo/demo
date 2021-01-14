@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../02_CSS/reset.css">
+  <style>
+    .box{
+      /* 设置宽度*/
+      width: 1162px;
+      /* 设置背景颜色 */
+      background-color:rgb(232,231,227);
+      /* 将文字在父元素中垂直居中 */
+      line-height: 48px;
+      /* 设置水平居中 */
+      margin: 50px auto;
+      display: flex;
+    }
+
+    /* 设置弹性元素伸缩填满 */
+    .box div{
+      flex-grow:1 ;
+    }
+
+    /* 设置a的样式 */
+    .box a{  
+      display: block;
+      color:#777777;
+      /* 去掉超链接的下划线 */
+      text-decoration:none;
+      /* font-family: PingFangSC-Regular, Verdana, Arial, 微软雅黑, 宋体; */
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .box a:hover{
+      background: rgb(37, 36, 36);
+      color: #636363;
+    }
+
+  </style> 
+
+</head>
+<body>
+  <div class="box">
+    
+    <div class="box1">
+      <a href="#" title="HTML 系列教程">HTML/CSS</a>
+    </div>
+    <div class="box2">
+      <a href="#" title="浏览器脚本教程">Browser Slide</a>
+    </div>
+    <div class="box3">
+      <a href="#" title="服务器脚本教程">Server Side</a>
+    </div>
+    <div class="box4">
+      <a href="#" title="编程教程">Programming</a>
+    </div>
+    <div class="box5" title="XML 系列教程">
+      <a href="#">XML</a>
+    </div>
+    <div class="box6" title="建站手册">
+      <a href="#">Web Building</a>
+    </div>
+    <div class="box7" title="参考手册">
+      <a href="#">Reference</a>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+四、  for循环
+  1.	循环的意义（为什么要循环）
+// for后面的括号：一般初始化表达式；一般都是条件表达式；自增自减表达式
+		for(  ){
+			循环体（代码块）;
+		}
+
+		执行过程：
+			第一次循环：
+			   首先执行初始化表达式
+			   接着执行条件表达式
+			   然后再去执行循环体
+			   最后执行自增自减表达式
+
+			非第一次：
+			   执行条件表达式；
+			   执行循环体
+			   最后执行自增自减表达式		
+		一定注意：for循环初始化表达式只是在第一次循环的时候执行，后面的循环全部都不执行了；  
+		
+    for循环当中的循环变量i，有两个作用：
+    1、控制着循环的次数  2、变量同时也是有值的；
+	
+	2.循环的语法
+		打印1-100之间的数
+	3.案例练习
+		打印1-100之间的偶数
+		计算1到100的和
+    计算1-100之间所有偶数的和
+    
+	4.死循环： 在表达式里写true，跳不出来
+    for(;true;){
+
+    }
+
+五、  嵌套循环
+  1.嵌套循环的定义：
+      在一个循环当中又会出现另外一个循环。
+      外层循环控制行，内层循环控制列。
+
+  2.案例
+    打印矩形       每次只能打印一颗*
+    打印三角形
+    打印乘法口诀表
+
+
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //  循环变量控制着循环的次数，循环变量是有值的！
+      // for(var i = 0; i < 100; i++){
+        // console.log('baby');
+      //   document.write(i+1);
+      //   document.write('<br/>');
+      // } 
+
+      document.write('<br >');
+      document.write('<br >');
+
+      for(var i = 1; i <= 9; i++){
+
+        // 打印矩形,每次只能打印一颗*
+        // for(var j = 0; j <= 10; j++){
+        //   document.write('*');
+        //   document.write('&nbsp;&nbsp;&nbsp;');
+        // }
+
+        // 打印三角形
+        // for(var j = 1; j <= i; j++){
+        //   document.write('*');
+        // }
+
+        // 打印九九乘法表
+        for(var j = 1; j <= i; j++){
+          document.write(j + '*' + i + '=' + i*j);
+          document.write('&nbsp;&nbsp;&nbsp;');
+        }
+
+        document.write('<br >');
+      }
+
+
+    </script>
+  </body>
+  </html>
