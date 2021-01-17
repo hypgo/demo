@@ -23,16 +23,68 @@
 <div id="example">
 
   <h2>1. 绑定监听</h2>
+  <button @click="test1">绑定1</button>
+  <button @click="test2('aaa')">绑定2</button>
+  <!-- $event 代表发生的事件对象，只有事件回调函数的时候才能传 -->
+  <button @click="test3('hhh',$event)">绑定3</button>
 
   <h2>2. 事件修饰符</h2>
+  <!-- 阻止事件的默认行为，阻止链接跳转 -->
+  <a href="http://www.atguigu.com" @click.prevent="test4">go to learn</a>
+
+  <div style="height: 200px;width: 200px;background-color:red;" @click="test5">
+    <!-- 阻止事件冒泡 -->
+    <div style="height: 100px;width: 100px;background-color: #fbf;" @click.stop="test6"></div>
+  </div>
+  <button @click.once="test7">once-click</button>
+
 
   <h2>3. 按键修饰符</h2>
+  <!-- keyup 案件按起来的时候生效。使用最高的是enter键，其他的可以查文档-->
+  <input type="text" v-model="msg" @keyup.13='test8'>
+  <input type="text" v-model="msg" @keyup.enter='test8'>
 
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el: '#example',
+    data: {
+      msg: ''
+    },
+    methods: {
+      test1 (event) {
+        alert(event.target.innerHTML)
+      },
+      test2 (msg) {  // msg == 参数，提取参数
+        alert(msg)
+      },
+      test3 (msg,event) {
+        alert(msg + '---' + event.target.innerText)
+      },
 
+      test4 () {
+        alert('gogogo')
+      },
+      test5 () {
+        alert('test5')
+      },
+      test6 () {
+        alert('test6')
+      },
+      test7 () {
+        alert('click once')
+      },
+
+      // 原生是需要判断keycode，但在vue里面可以直接在@keyup里面判断 
+      test8 (event) {
+        // if (event.keyCode === 13) {
+          alert(this.msg)
+        // }
+      }
+    },
+  })
 </script>
 </body>
 </html>

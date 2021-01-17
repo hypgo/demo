@@ -1,3 +1,4 @@
+# /node_modules 写了/指标是指定根目录下的
 .idea
 .vscode
 node_modules

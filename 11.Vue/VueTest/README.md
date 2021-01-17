@@ -2,7 +2,7 @@
 	1). 一位华裔前Google工程师(尤雨溪)开发的前端js库
 	2). 作用: 动态构建用户界面
 	3). 特点:
-		* 遵循MVVM模式
+		* 遵循MVVM模式!!
 		* 编码简洁, 体积小, 运行效率高, 移动/PC端开发
 		* 它本身只关注UI, 可以轻松引入vue插件和其它第三库开发项目
 	4). 与其它框架的关联:
@@ -21,14 +21,27 @@
 # 2. 基本使用
 	1). 引入vue.js
 	2). 创建Vue实例对象(vm), 指定选项(配置)对象
-		el : 指定dom标签容器的选择器
-		data : 指定初始化状态数据的对象/函数(返回一个对象)
+		el : 指定dom标签容器的选择器，也可以通过 $mount来添加指定
+		data : 指定初始化状态数据的对象/函数(return一个对象)
+		```
+		data: {
+			a: 'xx'
+		}
+		data () {
+			return xxx
+		}
+		```
 	3). 在页面模板中使用{{}}或vue指令
+	4). MVVM模式
+		M: Model模型，vue中是data为view提供数据
+		V: view视图，vue中是模板页面显示data中的数据
+		VM: ViewModel视图模型，vue中是Vue实例对象（管理者：数据绑定/DOM监听）
 		
 # 3. Vue对象的选项
 ## 1). el
 	指定dom标签容器的选择器
 	Vue就会管理对应的标签及其子标签
+	也可以通过$mount()来处理
 
 ## 2). data
 	对象或函数类型
@@ -36,6 +49,12 @@
 	vm也会自动拥有data中所有属性
 	页面中可以直接访问使用
 	数据代理: 由vm对象来代理对data中所有属性的操作(读/写)
+	data数据监视的特点:
+			1. vue会监视data中所有层次的属性
+			2. 对象中的属性数据通过添加set方法来来实现监视
+			3. 数组中的元素也实现了监视: 重写数组一系列更新元素的方法
+					1). 调用原生对应的方法对元素进行处理
+					2). 去更新界面
 
 ## 3). methods
 	包含多个方法的对象
@@ -43,23 +62,29 @@
 	回调函数默认有event参数, 但也可以指定自己的参数
 	所有的方法由vue对象来调用, 访问data中的属性直接使用this.xxx
 
-## 4). computed
-	包含多个方法的对象
-	对状态属性进行计算返回一个新的数据, 供页面获取显示
-	一般情况下是相当于是一个只读的属性
-	利用set/get方法来实现属性数据的计算读取, 同时监视属性数据的变化
+## 4). computed △
+	包含多个计算属性的对象
+	根据已有属性进行计算返回一个新的数据, 供页面获取显示
+	如果同时还需要监视计算属性的变化, 需要使用getter/setter
+	计算属性有缓存, 内部使用对象容器缓存, 可以减少计算的次数
 	如何给对象定义get/set属性
-		在创建对象时指定: get name () {return xxx} / set name (value) {}
-	  	对象创建之后指定: Object.defineProperty(obj, age, {get(){}, set(value){}})
+			对象创建之后指定: Object.defineProperty(obj, age, {get(){}, set(value){}})
+			在创建对象时指定: get name () {return xxx} / set name (value) {}
+	弄清楚回调函数的3个问题?
+			什么时候回调执行?
+			它的作用是什么?
+			函数中的this是谁?
 
 ## 5). watch
 	包含多个属性监视的对象
 	分为一般监视和深度监视
+	  'xxx.yyy': function (value) {},
 		'xxx' : {
 			deep : true,
 			handler : fun(value)
 		}
 	另一种添加监视方式: vm.$watch('xxx', funn)
+	```vm.$watch('lastName', function (value) {}```
 
 # 4. 过渡动画
 	利用vue去操控css的transition/animation动画
@@ -110,7 +135,7 @@
 		* v-else : 与v-if一起使用, 如果value为false, 将当前标签输出到页面中
 		* v-show: 就会在标签中添加display样式, 如果vlaue为true, display=block, 否则是none
 	v-for : 遍历
-		* 遍历数组 : v-for="(person, index) in persons"   
+		* 遍历数组 : v-for="(person, index) in persons" :key="person.id"  key的值是唯一值，尽量不要用index，用能代表唯一的值   
 		* 遍历对象 : v-for="value in person"   $key
 	v-on : 绑定事件监听
 		* v-on:事件名, 可以缩写为: @事件名
@@ -118,17 +143,16 @@
 		* 停止事件的冒泡和阻止事件默认行为: @click.stop   @click.prevent
 		* 隐含对象: $event
 	v-bind : 强制绑定解析表达式  
-		* html标签属性是不支持表达式的, 就可以使用v-bind
+		* html标签属性是不支持表达式的, 就可以使用v-bind. 标签属性是一个动态的
 		* 可以缩写为:  :id='name'
 		* :class
 		  * :class="a"
-			* :class="{classA : isA, classB : isB}"
-			* :class="[classA, classB]"
+			* :class="{classA : isA, classB : isB}"  // 动态class的动态方式，类名确定，但不确定有没有
 		* :style
 			:style="{color : color}"
 	v-model
-		* 双向数据绑定
-		* 自动收集用户输入数据
+		* 双向数据绑定 ： 数据 -> 页面 ， 页面 -> 数据 用监视
+		* 自动收集用户输入数据 
 	ref : 标识某个标签
 		* ref='xxx'
 		* 读取得到标签对象: this.$refs.xxx

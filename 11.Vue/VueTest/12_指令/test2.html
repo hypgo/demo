@@ -11,7 +11,7 @@
   Vue.directive('my-directive', function(el, binding){
     el.innerHTML = binding.value.toupperCase()
   })
-2. 注册局部指令
+2. 注册局部指令，在vm中作为配置对象，只在当前的vm中有效
   directives : {
     'my-directive' : {
         bind (el, binding) {
@@ -19,18 +19,44 @@
         }
     }
   }
-3. 使用指令
+3. 使用指令 directive
   v-my-directive='xxx'
 -->
+
 <!--
 需求: 自定义2个指令
   1. 功能类型于v-text, 但转换为全大写
   2. 功能类型于v-text, 但转换为全小写
 -->
+  <div id="test"> 
+    <p v-upper-text="msg"></p>
+    <p v-lower-text="msg"></p>
+  </div>
+
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
 
+  Vue.directive('upper-text', function (el, binding) {
+    console.log('upper-text', binding);  //binding是一个对象
+    el.innerHTML = binding.value.toUpperCase()
+  })
+
+
+  new Vue({
+    el: '#test',
+    data() {
+      return {
+        msg: 'hello Hello'
+      }
+    },
+    
+    directives:{
+      'lower-text': function (el, binding) {
+        el.innerText = binding.value.toLowerCase() 
+      }
+    }
+  })
 </script>
 </body>
 </html>

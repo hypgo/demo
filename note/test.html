@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    // 传入参数，实现升序，降序；
+    var arr3 = [30,10,111,35,1899,50,45];
+    arr3.sort(function(a,b){
+      return a - b;
+    })
+    console.log(arr3);
+
+    var arr4 = [30,10,111,35,1899,50,45];
+    arr4.sort(function(a,b){
+      return b - a;
+    })
+    console.log(arr4);
+  </script>
+</body>
+</html>

@@ -42,11 +42,13 @@
         const {sortType, searchName, persons} = this
 
         // 2. 进行计算处理, 产生结果数据并返回
-        // 过滤
+        // 过滤:遍历过滤出一个新的子数组， 返回条件为true的值。 
+        // 下标:得到值在数组中的第一个下标，有下标则有值。 ???
         const arr = persons.filter(p => p.name.indexOf(searchName)>=0)
 
-        // 可能需要排序
+        // 可能需要排序。具有两个参数 a 和 b，其返回值：a-b升序 ； b-a降序
         if (sortType!==1) {
+          // 搞清楚p1  p2是什么???
           arr.sort((p1, p2) => {
             if (sortType===2) { // 升序
               return p1.age - p2.age 

@@ -26,7 +26,7 @@
 <div id="test">
   <button @click="destroyVM">destroy</button>
 
-  <p v-show="isShow">kjflkasjflkjs</p>
+  <p v-show="isShow" ref="content">{{isShow ? 'show..':'hide...' }}</p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
@@ -38,15 +38,43 @@
         isShow: true
       }
     }, 
+
     // 只要是vue控制的回调函数，this都是vm
+    beforeCreate() {
+      console.log('beforeCreate()', this.isShow);
+    },
+
+    created() {
+      console.log('created()',this.isShow);
+    },
+
+    beforeMount() {
+      console.log('beforeMount()');
+    },
+
     mounted() {
+      console.log('mounted()');
       this.intervalId = setInterval(() => {
+        console.log('---isShow---');
         this.isShow = !this.isShow
       },1000)
     },
 
+    beforeUpdate() {
+      console.log('beforeUpdate()', this.isShow, this.$refs.content.innerHTML);
+    },
+
+    updated() {
+      console.log('update()',this.isShow, this.$refs.content.innerHTML);
+    },
+
     beforeDestroy() {
+      console.log('beforeDestroy()');
       clearInterval(this.intervalId)
+    },
+
+    destroyed() {
+      console.log('destroyed()');
     },
 
     methods: {

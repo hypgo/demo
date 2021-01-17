@@ -14,9 +14,9 @@
   删除item
   替换item
 
-3. Vue的数据绑定如何实现 △面试惊喜
-  vue会监视data中所有层次的属性
-  对象中的属性数据通过添加set方法来来实现监视
+3. Vue的数据绑定如何实现 △面试惊喜，这些原理要看懂
+  vue会监视data中所有层次的属性(比如说，数组arr、对象persons和内层的键值对发生改变，即使是套娃都能监视到)
+  data对象中的属性数据通过添加set方法来实现监视
   data数组中的元素也实现了监视: 重写数组一系列更新元素的方法
     实现：调用原生对应的方法对元素进行处理 -> 去更新界面
 -->
@@ -30,12 +30,14 @@
       --<button @click="deleteP(index)">删除</button>
       --<button @click="updateP(index, {id: Date.now(), name: 'xxxx', age: 23})">更新</button>
     </li>
-
-    
   </ul>
 
   <h2>测试: v-for 遍历对象</h2>
-
+  <ul>
+    <li v-for="(value, key) in persons[0]" :key="key">
+      {{key}} = {{value}}
+    </li>
+  </ul>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
@@ -59,13 +61,14 @@
 
       updateP (index, newP) {
         console.log(this)
+        // 对象中的属性数据通过添加set方法来来实现监视
         // this.persons[index].name = newP.name
         // this.persons[index].age = newP.age
 
         // this.persons[index] = newP // 不会更新界面
 
         this.persons.splice(index, 1, newP) // vue重写后的splice方法
-        // this.persons = []
+        // this.persons = []  //vue会监视data中所有层次的属性 -> 通过_data 的 set方法来监视persons的变化
       }
     },
   })

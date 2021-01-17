@@ -3,6 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <title>10_过渡&动画1</title>
+  <style>
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+      opacity: 0;
+    }
+
+    .xxx-enter-active {
+      transition: all 1s;
+    }
+    .xxx-leave-active {
+      transition: all 3s;
+    }
+
+    .xxx-enter, .xxx-leave-to {
+      opacity: 1s;
+      transform: translateX(30px);
+    }
+  </style>
 </head>
 <body>
 <!--
@@ -20,9 +40,39 @@
   xxx-enter: 指定隐藏时的样式
 -->
 
+<div id="demo">
+  <button v-on:click="show = !show">
+    Toggle
+  </button>
+  <transition name="fade">
+    <p v-if="show">hello</p>
+  </transition>
+</div>
+
+<div id="demo2">
+  <button v-on:click="show = !show">
+    切换为demo2
+  </button>
+  <transition name="xxx">
+    <p v-if="show">hello</p>
+  </transition>
+</div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el: '#demo',
+    data: {
+      show: true
+    }
+  })
+
+  new Vue({
+    el: '#demo2',
+    data: {
+      show: true
+    }
+  })
 
 </script>
 </body>

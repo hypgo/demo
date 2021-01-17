@@ -6,7 +6,7 @@
 </head>
 <body>
 <!--
-常用内置指令
+常用内置指令  --- 所有的指令都是用来操作标签的！！！
   v:text : 更新元素的 textContent
   v-html : 更新元素的 innerHTML
   v-if : 如果为true, 当前标签才会输出到页面
@@ -20,12 +20,20 @@
   v-cloak : 使用它防止闪现表达式, 与css配合: [v-cloak] { display: none }
 -->
 <div id="example">
-
+  <p v-text="msg"></p>
+  <p v-html="msg"></p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-
+  new Vue({
+    el: '#example',
+    data() {
+      return {
+        msg: '<a href="http://www.baidu.com">去学习</a>'
+      }
+    },  
+  })
 </script>
 </body>
 </html>
