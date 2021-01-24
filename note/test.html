@@ -20,6 +20,16 @@
       return b - a;
     })
     console.log(arr4);
+
+    let a = {m:1}
+    let b = a
+    function fn (b) {
+      b = {m:3}
+      // b.m = 3
+    }
+    fn(b)  // 实参b是数据，从内存里拷贝出一份赋值给形参变量b。
+    console.log(a.m, b.m)    // 1  1 
+    // console.log(a.m, b.m)    // 3   3 
   </script>
 </body>
 </html>

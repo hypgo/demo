@@ -2,7 +2,7 @@
     1). 生成package.json
         yarn init -y
 
-    2). 创建入口js: src/index
+    2). 创建入口js: src/index.js
         console.log('Hello Webpack!')
         document.getElementById('root').innerHTML = '<h1>Hello222</h1>'
 
@@ -10,18 +10,14 @@
         <div id="root"></div>
 
 ## 2. webpack基本使用
-    1). 下载依赖包 webpack-cli(提供命令，干活的人)；html-webpack-plugin 打包html文件的
-        yarn add -D webpack webpack-cli  
+    1). 下载依赖包
+        yarn add -D webpack webpack-cli
         yarn add -D html-webpack-plugin
 
-    2). 创建webpack配置: webpack.config.js   放到根目录下
+    2). 创建webpack配置: webpack.config.js
         const path = require('path')
         const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-        /*
-        ES6: export  default  import
-        CommonJS: module.exports/exports
-        */
         module.exports = {
           // 模式: 生产环境
           mode: 'production',
@@ -61,13 +57,13 @@
     2). 下载依赖包
         yarn add -D webpack-dev-server
     
-    3). 配置开发服务器-实时更新自动打包，解决手动编译打包的问题
+    3). 配置开发服务器
         devServer: {
           open: true, // 自动打开浏览器
           quiet: true, // 不做太多日志输出
         },
     
-    4). 配置开启source-map调试   报错可以显示源文件
+    4). 配置开启source-map调试
         devtool: 'cheap-module-eval-source-map',
 
     5). 开发环境运行
@@ -80,9 +76,9 @@
             yarn add -D babel-loader @babel/core @babel/preset-env
         b. 配置
             {
-              test: /\.js$/,  //用于匹配文件（针对需要处理的文件）
-              //exclude: /(node_modules|bower_components)/, 
-              include: path.resolve(__dirname, 'src'),  // 只针对哪些文件来处理，比上面的排除法更加精准
+              test: /\.js$/,
+              //exclude: /(node_modules|bower_components)/,
+              include: path.resolve(__dirname, 'src'),
               use: {
                 loader: 'babel-loader',
                 options: {
@@ -97,20 +93,19 @@
         b. 配置
             {
               test: /\.css$/,
-              use: ['style-loader', 'css-loader'], // 多个loader从右到左处理，有顺序的
+              use: ['style-loader', 'css-loader'], // 多个loader从右到左处理
             }
 
     3). 处理图片
-        a. 下载依赖包 （要注意loader的版本，会导致打包图片报错）
+        a. 下载依赖包
             yarn add -D url-loader@2.3.0 file-loader@4.3.0
         b. 配置
             {
               test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
               loader: 'url-loader',
               options: {
-                limit: 8192,
-                // 相对于output.path。src图片的name
-                name: 'static/img/[name].[hash:7].[ext]' 
+                limit: 1000,
+                name: 'static/img/[name].[hash:7].[ext]' // 相对于output.path
               }
             }
     4). 测试
@@ -165,6 +160,19 @@
         src/App.vue
         src/index.js
         
-## 6. 依赖声明
-    1. devDenpendencies：开发时依赖：编译CSS
-    2. dependencies：依赖声明：去实现界面功能（项目效果）
+## 区分使用生产环境与开发环境
+    使用生产环境:
+        npm run build   ==> webpack
+        1). 在内存中进行编译打包, 生成内存中的打包文件
+        2). 保存到本地(在本地生成打包文件) ==> 此时还不能通过浏览器来访问, 需要启动服务器(运行serve)运行
+    使用开发环境
+        npm run dev   ==> webpack-dev-server
+        1). 在内存中进行编译打包, 生成内存中的打包文件
+        2). 调动服务器, 运行内存中的打包文件(不在本地生成文件) ===> 可以通过浏览器虚拟路径访问
+    对比的点：启动代码、本地生成文件，能不能通过浏览器访问
+
+## 问题记录
+1. vue样式不完全生效（局部生效）
+解决：不知道是啥问题，参考https://vvbug.blog.csdn.net/article/details/108148263?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control，修改css-loader源码，路径css-loader/dist/utils.js，源码esModule: typeof rawOptions.esModule === 'undefined' ? false : rawOptions.esModule //默认改成false
+
+2. 
