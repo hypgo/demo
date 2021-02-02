@@ -12,7 +12,7 @@
     props: {
       addTodo: {
         type: Function,
-        required: true
+        // required: true
       }
     },
 
@@ -35,7 +35,8 @@
         }
 
         // 调用更新的函数，向todos中添加一个todo。因为addTodo是在组件对象里面的，必须要加this才能调用
-        this.addTodo(todo)
+        // this.addTodo(todo)
+        this.$emit('addTodo', todo)
         this.title = ''
       }
     }

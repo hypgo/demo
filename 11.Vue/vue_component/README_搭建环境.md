@@ -160,6 +160,35 @@
         src/App.vue
         src/index.js
         
+## 6. 解决开发环境ajax请求跨域问题
+    1). 利用webpack-dev-server进行请求代理转发
+        webpack-dev-server内部利用http-proxy-middle包对特定请求进行转发操作
+    2). 配置:
+        devServer: {
+          proxy: {
+            // 处理以/api开头路径的请求
+            // '/api': 'http://localhost:4000'
+            '/api': {
+              target: 'http://localhost:4000', // 转发的目标地址
+              pathRewrite: {
+                '^/api' : ''  // 转发请求时去除路径前面的/api
+              },
+              changeOrigin: true, // 支持跨域
+            }
+          }
+        }
+
+## 7. 配置async/await的编译环境
+    1). 下载包
+        yarn add @babel/runtime-corejs2
+    2). 配置
+        presets: [
+          ['@babel/preset-env', {
+            useBuiltIns: 'usage',
+            'corejs': 2 // 处理一些新语法的实现
+          }]
+        ]
+               
 ## 区分使用生产环境与开发环境
     使用生产环境:
         npm run build   ==> webpack
@@ -173,6 +202,12 @@
 
 ## 问题记录
 1. vue样式不完全生效（局部生效）
-解决：不知道是啥问题，参考https://vvbug.blog.csdn.net/article/details/108148263?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control，修改css-loader源码，路径css-loader/dist/utils.js，源码esModule: typeof rawOptions.esModule === 'undefined' ? false : rawOptions.esModule //默认改成false
+> 解决：不知道是啥问题，  
+参考https://vvbug.blog.csdn.net/article/details/108148263?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-2.control，修改css-loader源码，路径css-loader/dist/utils.js，源码esModule: typeof rawOptions.esModule === 'undefined' ? false : rawOptions.esModule //默认改成false
 
-2. 
+2. vue中使用async和await报错：ReferenceError: regeneratorRuntime is not defined
+> 解决：
+npm i @babel/plugin-transform-runtime --save-dev 
+npm i @babel/runtime --save
+生成.babelrc文件，添加如下配置
+{"plugins":["@babel/plugin-transform-runtime"]}

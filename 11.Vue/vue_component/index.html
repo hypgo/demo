@@ -4,7 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./static/css/base.css">
+  <!-- Network发起请求时，由于./static/css/base.css属于相对路径，在/home页面下多了一层路径是无法解析出来，
+    导致找不到css的文件。Request URL: http://localhost:8000/home/static/css/base.css，
+  解决：去掉.   路径左边的/代表根路径
+  -->
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/bootstrap.css">
+  <style>
+    .router-link-active {
+      color: red !important
+    }
+  </style>
 </head>
 <body>
   <div id="root">

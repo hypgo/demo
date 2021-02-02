@@ -19,7 +19,6 @@
     // 声明属性的属性名和属性值的类型
     props: {
       todo: Object,
-      deleteTodo: Function,
       index: Number,
       updateTodo: Function
     },
@@ -58,7 +57,8 @@
       deleteItem () {
         if (window.confirm('确定删除吗?')) {
           // 通过标签属性props传过来
-          this.deleteTodo(this.index)
+          // this.deleteTodo(this.index)
+          this.$globalEventBus.$emit('deleteTodo', this.index)
         }
       }
     },

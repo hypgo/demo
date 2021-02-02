@@ -6,8 +6,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Search from './components/Search'
   import Main from './components/Main'
+  import Search from './components/Search'
   export default {
     components: {
       Main,
